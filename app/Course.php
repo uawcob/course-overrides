@@ -14,7 +14,6 @@ class Course extends Model
         'section',
         'title',
         'time',
-        'note',
     ];
 
     public function semester(Semester $semester)
