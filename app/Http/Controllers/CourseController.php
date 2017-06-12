@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use Illuminate\Http\Request;
+use App\Semester;
+use App\CourseApi\MockCourseApi as CourseApi;
 
 class CourseController extends Controller
 {
@@ -25,6 +27,15 @@ class CourseController extends Controller
     public function create()
     {
         return view('courses.create');
+    }
+
+    public function fetch(Request $request)
+    {
+        $semester = new Semester($request->term, $request->year);
+
+        $api = new CourseApi($semester);
+
+        return $api->get($request->number);
     }
 
     /**

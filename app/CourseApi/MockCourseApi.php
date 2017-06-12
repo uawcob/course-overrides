@@ -8,6 +8,13 @@ use App\CourseApi\Exceptions\CourseNotFound;
 
 class MockCourseApi implements CourseApi
 {
+    public function __construct(Semester $semester = null)
+    {
+        if (isset($semester)) {
+            $this->semester($semester);
+        }
+    }
+
     public function semester(Semester $semester = null) : Semester
     {
         return new Semester('summer', 2017);

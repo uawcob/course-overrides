@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('courses', 'CourseController');
+Route::name('courses.fetch')->post('/courses/fetch', 'CourseController@fetch');
