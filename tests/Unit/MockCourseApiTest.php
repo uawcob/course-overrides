@@ -14,4 +14,15 @@ class MockCourseApiTest extends TestCase
         $course = $api->get(6631);
         $this->assertInstanceOf(Course::class, $course);
     }
+
+    public function test_returns_course_title()
+    {
+        $expected = 'Intermediate Accounting I  (Sp, Fa)';
+
+        $api = new MockCourseApi;
+        $course = $api->get(6631);
+        $actual = $course->title;
+
+        $this->assertSame($expected, $actual);
+    }
 }
