@@ -11,9 +11,9 @@
             <label class="control-label col-sm-2" for="term">Semester:</label>
             <div class="col-sm-10">
                 <select class="form-control" id="term" name="term">
-                        <option>Spring</option>
-                        <option>Summer</option>
-                        <option>Fall</option>
+                    <option>Spring</option>
+                    <option>Summer</option>
+                    <option>Fall</option>
                 </select>
             </div>
         </div>
@@ -22,7 +22,8 @@
             <label class="control-label col-sm-2" for="year">Year:</label>
             <div class="col-sm-10">
                 <input id="year" name="year" class="form-control" required
-                    type="number" min="{{ date('Y') }}" value="{{ date('Y') }}"
+                    type="number" min="{{ date('Y') }}"
+                    value="{{ App\UpcomingTerm::get(date('Y-m-d'))['year'] }}"
                 >
             </div>
         </div>
