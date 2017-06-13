@@ -38,7 +38,7 @@
         <button type="submit" class="btn btn-primary">Fetch</button>
     </form>
 
-    <div style="margin:10px" id="course-return"></div>
+    <div style="margin:10px; display:none" id="course-return"></div>
 @endsection
 
 @section('scripts')
@@ -49,19 +49,22 @@ frm.submit(function (e) {
 
     e.preventDefault();
 
-    $('#course-return').html('');
+    var res = $('#course-return');
 
-    $.ajax({
-        type: frm.attr('method'),
-        url: frm.attr('action'),
-        data: frm.serialize(),
-        success: function (data) {
-            $('#course-return').html('<pre>'+JSON.stringify(data, undefined, 4)+'</pre>');
-        },
-        error: function (data) {
-            $('#course-return').html('<div class="alert alert-danger" role="alert">Error: Nothing returned.</div>');
-            console.log(data);
-        },
+    res.slideUp(400, function(){
+        $(this).html('');
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                res.html('<pre>'+JSON.stringify(data, undefined, 4)+'</pre>').slideDown();
+            },
+            error: function (data) {
+                res.html('<div class="alert alert-danger" role="alert">Error: Nothing returned.</div>').slideDown();
+                console.log(data);
+            },
+        });
     });
 });
 </script>
