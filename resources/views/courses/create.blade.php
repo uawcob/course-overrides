@@ -3,7 +3,7 @@
 @section('content')
     <h1>Add a Course</h1>
 
-    <form id="course" class="form-horizontal" method="POST"
+    <form id="course-form" class="form-horizontal" method="POST"
         action="{{ route('courses.fetch') }}"
     >
         {{ csrf_field() }}
@@ -37,24 +37,29 @@
 
         <button type="submit" class="btn btn-primary">Fetch</button>
     </form>
+
+    <div style="margin:10px" id="course-return"></div>
 @endsection
 
 @section('scripts')
 <script>
-var frm = $('#course');
+var frm = $('#course-form');
 
 frm.submit(function (e) {
 
     e.preventDefault();
+
+    $('#course-return').html('');
 
     $.ajax({
         type: frm.attr('method'),
         url: frm.attr('action'),
         data: frm.serialize(),
         success: function (data) {
-            console.log(data);
+            $('#course-return').html('<pre>'+JSON.stringify(data, undefined, 4)+'</pre>');
         },
         error: function (data) {
+            $('#course-return').html('<div class="alert alert-danger" role="alert">Error: Nothing returned.</div>');
             console.log(data);
         },
     });
