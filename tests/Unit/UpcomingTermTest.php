@@ -27,4 +27,22 @@ class UpcomingTermTest extends TestCase
         $actual = UpcomingTerm::get($date);
         $this->assertEquals($expected, $actual);
     }
+
+    public function upcomingTermOptionsDataProvider()
+    {
+        return [
+            ['2016-12-01', '<option selected>Spring</option><option>Summer</option><option>Fall</option>'],
+            ['2017-02-01', '<option>Spring</option><option selected>Summer</option><option>Fall</option>'],
+            ['2017-08-30', '<option>Spring</option><option>Summer</option><option selected>Fall</option>'],
+        ];
+    }
+
+    /**
+     * @dataProvider upcomingTermOptionsDataProvider
+     */
+    public function test_returns_term_options(string $date, string $expected)
+    {
+        $actual = UpcomingTerm::getTermOptions($date);
+        $this->assertEquals($expected, $actual);
+    }
 }

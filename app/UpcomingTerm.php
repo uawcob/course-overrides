@@ -42,4 +42,21 @@ class UpcomingTerm
 
         return $return;
     }
+
+    public static function getTermOptions(string $date) : string
+    {
+        $selected = static::get($date)['term'];
+
+        $options = '';
+
+        foreach (['Spring', 'Summer', 'Fall'] as $term) {
+            if (strtolower($term) === $selected) {
+                $options .= "<option selected>$term</option>";
+            } else {
+                $options .= "<option>$term</option>";
+            }
+        }
+
+        return $options;
+    }
 }
