@@ -46,24 +46,6 @@
             {{ csrf_field() }}
 
             <div class="form-group">
-                <label class="control-label col-sm-2" for="term">Strm:</label>
-                <div class="col-sm-10">
-                    <input id="strm" name="strm" class="form-control" required
-                        type="number" min="1176"
-                    >
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="number-post">Number:</label>
-                <div class="col-sm-10">
-                    <input id="number-post" name="number" class="form-control" required
-                        type="number" min="1"
-                    >
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label class="control-label col-sm-2" for="term">Course:</label>
                 <div class="col-sm-10">
                     <input id="code" name="code" class="form-control" type="text" required>
@@ -88,6 +70,24 @@
                 <label class="control-label col-sm-2" for="term">Times:</label>
                 <div class="col-sm-10">
                     <input id="time" name="time" class="form-control" type="text" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="term">Strm:</label>
+                <div class="col-sm-10">
+                    <input id="strm" name="strm" class="form-control" required
+                        type="number" min="1176"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="number-post">Number:</label>
+                <div class="col-sm-10">
+                    <input id="number-post" name="number" class="form-control" required
+                        type="number" min="1"
+                    >
                 </div>
             </div>
 

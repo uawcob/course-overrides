@@ -55,6 +55,7 @@ class CoursesApiClient
             'time' => $data[0]['Day/Time'],
         ]);
         $course->semester($this->semester());
+        $course->strm = $this->semester()->string();
 
         return $course;
     }
