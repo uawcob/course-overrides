@@ -3,7 +3,7 @@
 @section('content')
     <h1>Add a Course</h1>
 
-    <form id="course-form" class="form-horizontal" method="POST"
+    <form id="course-fetch" class="form-horizontal" method="POST"
         action="{{ route('courses.fetch') }}"
     >
         {{ csrf_field() }}
@@ -27,23 +27,85 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-2" for="number">Course Number:</label>
+            <label class="control-label col-sm-2" for="number-pre">Course Number:</label>
             <div class="col-sm-10">
-                <input id="number" name="number" class="form-control" required
+                <input id="number-pre" name="number" class="form-control" required
                     type="number" min="1"
                 >
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Fetch</button>
+        <button type="submit" class="btn btn-success">Fetch</button>
     </form>
 
-    <div style="margin:10px; display:none" id="course-return"></div>
+    <div style="margin:10px; display:none" id="course-return">
+        <div id="course-fetch-error" class="alert alert-danger" role="alert" style="display:none">Error: Nothing returned.</div>
+        <form id="course-form" class="form-horizontal" method="POST"
+            action=""
+        >
+            {{ csrf_field() }}
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="term">Strm:</label>
+                <div class="col-sm-10">
+                    <input id="strm" name="strm" class="form-control" required
+                        type="number" min="1176"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="number-post">Number:</label>
+                <div class="col-sm-10">
+                    <input id="number-post" name="number" class="form-control" required
+                        type="number" min="1"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="term">Course:</label>
+                <div class="col-sm-10">
+                    <input id="code" name="code" class="form-control" type="text" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="term">Section:</label>
+                <div class="col-sm-10">
+                    <input id="section" name="section" class="form-control" type="text" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="term">Title:</label>
+                <div class="col-sm-10">
+                    <input id="title" name="title" class="form-control" type="text" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="term">Times:</label>
+                <div class="col-sm-10">
+                    <input id="time" name="time" class="form-control" type="text" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
 @endsection
 
 @section('scripts')
 <script>
-var frm = $('#course-form');
+function populate(frm, data) {
+  $.each(data, function(key, value){
+    $('[name='+key+']', frm).val(value).show();
+  });
+}
+
+var frm = $('#course-fetch');
 
 frm.submit(function (e) {
 
@@ -52,18 +114,23 @@ frm.submit(function (e) {
     var res = $('#course-return');
 
     res.slideUp(400, function(){
-        $(this).html('');
+        $('#course-fetch-error').hide();
         $.ajax({
             type: frm.attr('method'),
             url: frm.attr('action'),
             data: frm.serialize(),
             success: function (data) {
-                res.html('<pre>'+JSON.stringify(data, undefined, 4)+'</pre>').slideDown();
+                $('#course-form').show();
+                populate('#course-form', data);
             },
             error: function (data) {
-                res.html('<div class="alert alert-danger" role="alert">Error: Nothing returned.</div>').slideDown();
+                $('#course-form').hide();
+                $('#course-fetch-error').show();
                 console.log(data);
             },
+            complete: function() {
+                res.slideDown();
+            }
         });
     });
 });
