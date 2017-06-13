@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY index.php courses /srv/
+COPY srv/ /srv
 
 WORKDIR /srv
 
