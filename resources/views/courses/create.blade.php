@@ -39,7 +39,15 @@
     </form>
 
     <div style="margin:10px; display:none" id="course-return">
-        <div id="course-fetch-error" class="alert alert-danger" role="alert" style="display:none">Error: Nothing returned.</div>
+        <div id="course-fetch-error" class="alert alert-danger" role="alert" style="display:none">
+            <button class="btn btn-warning pull-right"
+                onclick="$('#course-form').show()"
+            >
+                OK, let's do it manually.
+            </button>
+            Error: Nothing returned.
+        </div>
+
         <form id="course-form" class="form-horizontal" method="POST"
             action=""
         >
@@ -115,6 +123,7 @@ frm.submit(function (e) {
 
     res.slideUp(400, function(){
         $('#course-fetch-error').hide();
+        $('#course-form')[0].reset();
         $.ajax({
             type: frm.attr('method'),
             url: frm.attr('action'),
