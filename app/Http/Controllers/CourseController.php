@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use Illuminate\Http\Request;
 use App\Semester;
-use App\CourseApi\MockCourseApi as CourseApi;
+use App\CoursesApi\CoursesApiClient;
 
 class CourseController extends Controller
 {
@@ -33,7 +33,7 @@ class CourseController extends Controller
     {
         $semester = new Semester($request->term, $request->year);
 
-        $api = new CourseApi($semester);
+        $api = new CoursesApiClient($semester);
 
         return $api->get($request->number);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\CourseApi\Exceptions;
+namespace App\CoursesApi\Exceptions;
 
 use Exception;
 
