@@ -168,6 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         razorbacks\style\laravel\StyleServiceProvider::class,
+        StudentAffairsUwm\Shibboleth\ShibbolethServiceProvider::class,
 
         /*
          * Application Service Providers...

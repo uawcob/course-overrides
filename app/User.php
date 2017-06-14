@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use StudentAffairsUwm\Shibboleth\Entitlement;
 
 class User extends Authenticatable
 {
@@ -26,4 +27,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The entitlements that belong to the user.
+     */
+    public function entitlements()
+    {
+        return $this->belongsToMany(Entitlement::class);
+    }
 }

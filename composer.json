@@ -9,6 +9,7 @@
         "guzzlehttp/guzzle": "^6.2",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "razorbacks/laravel-shibboleth": "^2.0",
         "razorbacks/style": "^1.0"
     },
     "require-dev": {
