@@ -11,3 +11,9 @@
         </li>
     @endif
 @endsection
+
+@section('navbar')
+    @can('create', App\Course::class)
+        <li><a href="{{ route('courses.create') }}">Add</a></li>
+    @endcan
+@endsection

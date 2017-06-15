@@ -9,6 +9,11 @@ use App\CoursesApi\CoursesApiClient;
 
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Course::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,6 +36,8 @@ class CourseController extends Controller
 
     public function fetch(Request $request)
     {
+        $this->authorize('create', Course::class);
+
         $semester = new Semester($request->term, $request->year);
 
         $api = new CoursesApiClient($semester);

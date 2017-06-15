@@ -15,5 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('courses', 'CourseController');
-Route::name('courses.fetch')->post('/courses/fetch', 'CourseController@fetch');
+Route::name('login')->get('/idp', '\StudentAffairsUwm\Shibboleth\Controllers\ShibbolethController@login');
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::resource('courses', 'CourseController');
+    Route::name('courses.fetch')->post('/courses/fetch', 'CourseController@fetch');
+});

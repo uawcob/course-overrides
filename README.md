@@ -5,6 +5,17 @@ registrations.
 
 [![Build Status][1]][2] [![Codecov][3]][4] [![Code Climate][5]][6]
 
+## Installation
+
+Staff advisors and administrators must belong to a privileged security group in
+active directory. Find the Shibboleth entitlement name that matches the group
+and set the environment variable:
+
+    OVERRIDE_ADMIN_ENTITLEMENT='urn:mace:uark.edu:ADGroups:Walton College:Security Groups:WCOB-WebAdministrators'
+
+If you don't know the mapping, then you can find it in the `$_SERVER` variable
+after authenticating.
+
 ## Development
 
 There is a [Dockerfile][7] included for testing with the Courses API.

@@ -35,4 +35,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Entitlement::class);
     }
+
+    public function isAdmin() : bool
+    {
+        return Entitlement::has(config('admin.entitlement'));
+    }
 }
