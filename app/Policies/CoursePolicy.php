@@ -17,7 +17,7 @@ class CoursePolicy
      * @param  \App\Course  $course
      * @return mixed
      */
-    public function view(User $user, Course $course)
+    public function view(User $user, Course $course = null)
     {
         return true;
     }
