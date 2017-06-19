@@ -1373,16 +1373,16 @@
         },
         {
             "name": "razorbacks/laravel-shibboleth",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/razorbacks/laravel-shibboleth.git",
-                "reference": "df2750409cad3814a5b1378a4dd8d076d6487512"
+                "reference": "d623ee85b44151fde959ff2684d5a788b4e35fa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/razorbacks/laravel-shibboleth/zipball/df2750409cad3814a5b1378a4dd8d076d6487512",
-                "reference": "df2750409cad3814a5b1378a4dd8d076d6487512",
+                "url": "https://api.github.com/repos/razorbacks/laravel-shibboleth/zipball/d623ee85b44151fde959ff2684d5a788b4e35fa1",
+                "reference": "d623ee85b44151fde959ff2684d5a788b4e35fa1",
                 "shasum": ""
             },
             "require": {
@@ -1396,6 +1396,13 @@
                 "phpunit/phpunit": "^6.0"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "StudentAffairsUwm\\Shibboleth\\ShibbolethServiceProvider"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "StudentAffairsUwm\\Shibboleth\\": "src/StudentAffairsUwm/Shibboleth"
@@ -1421,7 +1428,7 @@
                 }
             ],
             "description": "Enable basic Shibboleth support for Laravel 5.x",
-            "time": "2017-06-15T17:20:36+00:00"
+            "time": "2017-06-19T16:07:05+00:00"
         },
         {
             "name": "razorbacks/style",

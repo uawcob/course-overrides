@@ -2,10 +2,10 @@
 
 @section('navbar-right')
     @if (Auth::guest())
-        <li><a href="/idp">Login</a></li>
+        <li><a href="/shibboleth-login">Login</a></li>
     @else
         <li>
-            <a href="/logout">
+            <a href="/shibboleth-logout">
                 Logout {{ Auth::user()->name }}
             </a>
         </li>
