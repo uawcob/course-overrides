@@ -49,7 +49,7 @@
         </div>
 
         <form id="course-form" class="form-horizontal" method="POST"
-            action=""
+            action="{{ route('courses.store') }}"
         >
             {{ csrf_field() }}
 
