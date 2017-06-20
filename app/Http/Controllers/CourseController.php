@@ -6,6 +6,7 @@ use App\Course;
 use Illuminate\Http\Request;
 use App\Semester;
 use App\CoursesApi\CoursesApiClient;
+use Datatables;
 
 class CourseController extends Controller
 {
@@ -22,6 +23,11 @@ class CourseController extends Controller
     public function index()
     {
         return view('courses.index');
+    }
+
+    public function indexData()
+    {
+        return Datatables::of(Course::query())->make(true);
     }
 
     /**

@@ -105,7 +105,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
 function populate(frm, data) {
   $.each(data, function(key, value){
@@ -144,4 +144,4 @@ frm.submit(function (e) {
     });
 });
 </script>
-@endsection
+@endpush
