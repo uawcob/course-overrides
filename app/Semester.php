@@ -4,7 +4,7 @@ namespace App;
 
 use App\Exceptions\InvalidSemester;
 
-class Semester
+class Semester implements \JsonSerializable
 {
     protected $term;
     protected $year;
@@ -74,6 +74,11 @@ class Semester
     }
 
     public function __toString()
+    {
+        return $this->string();
+    }
+
+    public function jsonSerialize()
     {
         return $this->string();
     }
