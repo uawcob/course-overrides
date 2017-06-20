@@ -20,6 +20,41 @@ class Semester implements \JsonSerializable
         }
     }
 
+    public static function createFromStrm(string $strm) : Semester
+    {
+        if (strlen($strm) !== 4) {
+            throw new InvalidSemester("strm must be 4 characters in length: $strm");
+        }
+
+        if (!is_numeric($strm)) {
+            throw new InvalidSemester("strm must be numeric: $strm");
+        }
+
+        $term = static::strmToTerm($strm);
+        $year = static::strmToYear($strm);
+
+        return new static($term, $year);
+    }
+
+    protected static function strmToTerm(string $strm) : string
+    {
+        switch(substr($strm, -1)) {
+            case 3:
+                return 'Spring';
+            case 6:
+                return 'Summer';
+            case 9:
+                return 'Fall';
+            default:
+                throw new InvalidSemester("invalid term: $strm");
+        }
+    }
+
+    protected static function strmToYear(string $strm) : int
+    {
+        return (int)substr($strm, 0, 3) + 1900;
+    }
+
     public function term(string $term = null) : string
     {
         if (!isset($term)) {

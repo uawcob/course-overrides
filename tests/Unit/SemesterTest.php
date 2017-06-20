@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Semester;
 
-class StrmTest extends TestCase
+class SemesterTest extends TestCase
 {
     public function strmDataProvider()
     {
@@ -46,5 +46,15 @@ class StrmTest extends TestCase
     public function test_invalidates_semester(string $term, int $year)
     {
         Semester::strm($term, $year);
+    }
+
+    /**
+     * @dataProvider strmDataProvider
+     */
+    public function test_creates_semester_from_strm(string $term, int $year, string $strm)
+    {
+        $semester = Semester::createFromStrm($strm);
+        $this->assertSame(strtolower($term), strtolower($semester->term()));
+        $this->assertSame($year, $semester->year());
     }
 }
