@@ -33,4 +33,26 @@ class CourseTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_creates_course()
+    {
+        $course = make('App\Course');
+        $data = array_merge(
+            $course->toArray(),
+            ['strm' => $course->semester->string()]
+        );
+
+        $response = $this
+            ->withServerVariables(['entitlement' => 'admin'])
+            ->signIn()
+            ->post('/courses', $data);
+
+        $response->assertStatus(302);
+
+        $this->get($response->headers->get('Location'))
+            ->assertJson($course->toArray());
+//             ->assertSee($course->number)
+//             ->assertSee($course->title)
+//             ->assertSee($course->code);
+    }
 }

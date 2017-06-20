@@ -28,3 +28,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Course::class, function (Faker\Generator $faker) {
+    return [
+        'number' => $faker->numberBetween(1000, 99999),
+        'code' => $faker->regexify('(WCOB|FINN|ISYS|ACCT|MGMT|SCMT|ECON|MKTG)[1-4]{4}'),
+        'section' => sprintf('%03d', $faker->numberBetween(1, 19)),
+        'title' => $faker->sentence(4),
+        'time' => "Mon, Wed, Fri 11:00 AM - 12:30 PM",
+        'semester' => new App\Semester('Fall', 2017),
+    ];
+});

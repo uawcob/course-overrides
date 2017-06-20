@@ -53,7 +53,11 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course = Course::make($request->all());
+        $course->semester = Semester::createFromStrm($request->strm);
+        $course->save();
+
+        return redirect(route('courses.show', $course));
     }
 
     /**
@@ -64,7 +68,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        return $course;
     }
 
     /**

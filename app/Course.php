@@ -20,4 +20,10 @@ class Course extends Model
     {
         $this->semester = $semester;
     }
+
+    // hack fix for SQL Server date format .000
+    protected function getDateFormat()
+    {
+        return 'Y-m-d H:i:s';
+    }
 }
