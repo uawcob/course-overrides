@@ -23,6 +23,8 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->string('time');
             $table->string('semester');
+
+            $table->unique(['number', 'semester']);
         });
     }
 
