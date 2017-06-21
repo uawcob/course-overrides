@@ -10,6 +10,7 @@
                 <th>Title</th>
                 <th>Section</th>
                 <th>Time</th>
+                <th>Cart</th>
             </tr>
         </thead>
     </table>
@@ -24,7 +25,8 @@ $(function() {
             { data: 'code', name: 'code' },
             { data: 'title', name: 'title' },
             { data: 'section', name: 'section' },
-            { data: 'time', name: 'time' }
+            { data: 'time', name: 'time' },
+            { data: 'add', name: 'add' },
         ]
     });
 });

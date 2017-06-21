@@ -29,7 +29,13 @@ class CourseController extends Controller
     {
         $this->authorize('view', Course::class);
 
-        return Datatables::of(Course::query())->make(true);
+        return Datatables::of(Course::query())
+            ->addColumn('add', function (Course $course) {
+                $link = '<a class="btn btn-success" href="%s">Add</a>';
+                return sprintf($link, route('courses.show', $course));
+            })
+            ->rawColumns(['add'])
+            ->make(true);
     }
 
     /**
