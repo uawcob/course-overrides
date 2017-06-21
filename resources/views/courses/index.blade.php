@@ -19,8 +19,6 @@
 <script>
 $(function() {
     $('#courses-table').DataTable({
-        processing: true,
-        serverSide: true,
         ajax: '{!! route('courses.data') !!}',
         columns: [
             { data: 'code', name: 'code' },
