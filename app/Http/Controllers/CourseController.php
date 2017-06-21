@@ -27,6 +27,8 @@ class CourseController extends Controller
 
     public function indexData()
     {
+        $this->authorize('view', Course::class);
+
         return Datatables::of(Course::query())->make(true);
     }
 
