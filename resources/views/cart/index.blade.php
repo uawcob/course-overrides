@@ -19,7 +19,9 @@
 @push('scripts')
 <script>
 $(function() {
-    $('#courses-table').DataTable({
+    var table = $('#courses-table');
+
+    table.DataTable({
         ajax: '{!! route('cart.data') !!}',
         columns: [
             { data: 'code', name: 'code' },
@@ -27,7 +29,21 @@ $(function() {
             { data: 'section', name: 'section' },
             { data: 'time', name: 'time' },
             { data: 'remove', name: 'remove' },
-        ]
+        ],
+        initComplete: function(settings, json) {
+            $('.btn-cart').click(function(){
+                var btn = $(this);
+                $.ajax({
+                    url: btn.data('url'),
+                    success: function(data) {
+                        table.DataTable()
+                            .row( btn.parents('tr') )
+                            .remove()
+                            .draw();
+                    }
+                });
+            });
+        }
     });
 });
 </script>

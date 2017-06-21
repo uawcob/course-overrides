@@ -30,7 +30,7 @@ class CartController extends Controller
                     return $item->model;
                 })
             )->addColumn('remove', function (Course $course) {
-                $link = '<a class="btn-cart btn btn-danger" href="%s">Remove</a>';
+                $link = '<button class="btn-cart btn btn-danger" data-url="%s">Remove</button>';
                 return sprintf($link, route('cart.remove', $course));
             })
             ->rawColumns(['remove'])

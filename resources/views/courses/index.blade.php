@@ -27,8 +27,20 @@ $(function() {
             { data: 'section', name: 'section' },
             { data: 'time', name: 'time' },
             { data: 'add', name: 'add' },
-        ]
+        ],
+        initComplete: function(settings, json) {
+            $('.btn-cart').click(function(){
+                var btn = $(this);
+                $.ajax({
+                    url: btn.data('url'),
+                    success: function(data) {
+                        btn.removeClass('btn-success');
+                    }
+                });
+            });
+        }
     });
+
 });
 </script>
 @endpush

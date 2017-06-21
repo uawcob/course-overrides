@@ -31,7 +31,7 @@ class CourseController extends Controller
 
         return Datatables::of(Course::query())
             ->addColumn('add', function (Course $course) {
-                $link = '<a class="btn-cart btn btn-success" href="%s">Add</a>';
+                $link = '<button class="btn-cart btn btn-success" data-url="%s">Add</button>';
                 return sprintf($link, route('cart.add', $course));
             })
             ->rawColumns(['add'])
