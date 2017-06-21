@@ -16,7 +16,12 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::name('courses.data')->get('/courses/data', 'CourseController@indexData');
+    Route::name('courses.data')->get('/courses/data', 'CourseController@data');
     Route::name('courses.fetch')->post('/courses/fetch', 'CourseController@fetch');
     Route::resource('courses', 'CourseController');
+
+    Route::name('cart.index')->get('/cart', 'CartController@index');
+    Route::name('cart.data')->get('/cart/data', 'CartController@data');
+    Route::name('cart.add')->get('/cart/add/{course}', 'CartController@add');
+    Route::name('cart.remove')->get('/cart/remove/{course}', 'CartController@remove');
 });

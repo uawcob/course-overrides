@@ -9,6 +9,7 @@
     @if (Auth::guest())
         <li><a href="/shibboleth-login">Login</a></li>
     @else
+        <li><a href="{{ route('cart.index') }}">Cart</a></li>
         <li>
             <a href="/shibboleth-logout">
                 Logout {{ Auth::user()->name }}

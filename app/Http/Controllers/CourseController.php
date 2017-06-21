@@ -25,14 +25,14 @@ class CourseController extends Controller
         return view('courses.index');
     }
 
-    public function indexData()
+    public function data()
     {
         $this->authorize('view', Course::class);
 
         return Datatables::of(Course::query())
             ->addColumn('add', function (Course $course) {
-                $link = '<a class="btn btn-success" href="%s">Add</a>';
-                return sprintf($link, route('courses.show', $course));
+                $link = '<a class="btn-cart btn btn-success" href="%s">Add</a>';
+                return sprintf($link, route('cart.add', $course));
             })
             ->rawColumns(['add'])
             ->make(true);
