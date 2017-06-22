@@ -55,4 +55,13 @@ class CourseTest extends TestCase
 //             ->assertSee($course->title)
 //             ->assertSee($course->code);
     }
+
+    public function test_view_courses_only_when_authenticated()
+    {
+        $this
+            ->withExceptionHandling()
+            ->get('/courses')
+            ->assertRedirect('/shibboleth-login')
+        ;
+    }
 }
