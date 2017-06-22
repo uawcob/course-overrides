@@ -3,7 +3,7 @@
 @section('content')
     <h1>Cart</h1>
 
-    <table class="table table-bordered" id="courses-table">
+    <table class="table table-bordered datatable" id="courses-table">
         <thead>
             <tr>
                 <th>Course</th>
@@ -22,6 +22,7 @@ $(function() {
     var table = $('#courses-table');
 
     table.DataTable({
+        responsive: true,
         ajax: '{!! route('cart.data') !!}',
         columns: [
             { data: 'code', name: 'code' },

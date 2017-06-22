@@ -1,7 +1,12 @@
 @extends('razorbacks::layout')
 
 @section('head')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"/>
+<style>
+.datatable {
+    width: 100% !important;
+}
+</style>
 @stack('head')
 @endsection
 
@@ -29,6 +34,6 @@
 @endsection
 
 @section('scripts')
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js"></script>
 @stack('scripts')
 @endsection

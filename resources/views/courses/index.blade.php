@@ -3,7 +3,7 @@
 @section('content')
     <h1>Courses</h1>
 
-    <table class="table table-bordered" id="courses-table">
+    <table class="table table-bordered datatable" id="courses-table">
         <thead>
             <tr>
                 <th>Course</th>
@@ -20,6 +20,7 @@
 <script>
 $(function() {
     $('#courses-table').DataTable({
+        responsive: true,
         ajax: '{!! route('courses.data') !!}',
         columns: [
             { data: 'code', name: 'code' },
