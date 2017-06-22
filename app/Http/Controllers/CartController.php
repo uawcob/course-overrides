@@ -46,6 +46,7 @@ class CartController extends Controller
     public function add(Course $course)
     {
         Cart::add($course->id, $course->code, 1, 0)->associate(Course::class);
+        return response(null, 204);
     }
 
     /**
@@ -63,5 +64,7 @@ class CartController extends Controller
         foreach ($items as $item) {
             Cart::remove($item->rowId);
         }
+
+        return response(null, 204);
     }
 }

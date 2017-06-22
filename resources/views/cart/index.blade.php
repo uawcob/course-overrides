@@ -34,6 +34,8 @@ $(function() {
             $('.btn-cart').click(function(){
                 var btn = $(this);
                 $.ajax({
+                    method: 'post',
+                    data: {'_token': '{{ csrf_token() }}'},
                     url: btn.data('url'),
                     success: function(data) {
                         table.DataTable()

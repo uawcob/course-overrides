@@ -22,6 +22,6 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::name('cart.index')->get('/cart', 'CartController@index');
     Route::name('cart.data')->get('/cart/data', 'CartController@data');
-    Route::name('cart.add')->get('/cart/add/{course}', 'CartController@add');
-    Route::name('cart.remove')->get('/cart/remove/{course}', 'CartController@remove');
+    Route::name('cart.add')->post('/cart/add/{course}', 'CartController@add');
+    Route::name('cart.remove')->post('/cart/remove/{course}', 'CartController@remove');
 });

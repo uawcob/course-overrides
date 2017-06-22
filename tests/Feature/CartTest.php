@@ -19,8 +19,8 @@ class CartTest extends TestCase
 
         $this
             ->signIn()
-            ->get("/cart/add/{$course->id}")
-            ->assertStatus(200)
+            ->post("/cart/add/{$course->id}")
+            ->assertStatus(204)
         ;
 
         $this
@@ -31,8 +31,8 @@ class CartTest extends TestCase
         ;
 
         $this
-            ->get("/cart/remove/{$course->id}")
-            ->assertStatus(200)
+            ->post("/cart/remove/{$course->id}")
+            ->assertStatus(204)
         ;
 
         $this
