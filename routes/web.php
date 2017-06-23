@@ -24,4 +24,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::name('cart.data')->get('/cart/data', 'CartController@data');
     Route::name('cart.add')->post('/cart/add/{course}', 'CartController@add');
     Route::name('cart.remove')->post('/cart/remove/{course}', 'CartController@remove');
+
+    Route::group(['middleware' => 'App\Http\Middleware\Admin'], function(){
+        Route::name('admin.index')->get('/admin', function(){
+            return view('admin.index');
+        });
+    });
 });

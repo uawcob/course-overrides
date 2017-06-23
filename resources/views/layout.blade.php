@@ -14,7 +14,9 @@
     @if (Auth::guest())
         <li><a href="/shibboleth-login">Login</a></li>
     @else
-        <li><a href="{{ route('cart.index') }}">Cart</a></li>
+        @if (Auth::user()->isAdmin())
+            <li><a href="{{ route('admin.index') }}">Admin</a></li>
+        @endif
         <li>
             <a href="/shibboleth-logout">
                 Logout {{ Auth::user()->name }}
@@ -24,13 +26,10 @@
 @endsection
 
 @section('navbar')
-    @can('view', App\Course::class)
+    @unless (Auth::guest())
         <li><a href="{{ route('courses.index') }}">Classes</a></li>
-    @endcan
-
-    @can('create', App\Course::class)
-        <li><a href="{{ route('courses.create') }}">Add</a></li>
-    @endcan
+        <li><a href="{{ route('cart.index') }}">Cart</a></li>
+    @endunless
 @endsection
 
 @section('scripts')
