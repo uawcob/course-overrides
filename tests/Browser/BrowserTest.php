@@ -24,7 +24,7 @@ class BrowserTest extends DuskTestCase
         });
     }
 
-    public function test_user_cannot_see_admin()
+    public function test_user_has_empty_cart()
     {
         $this->browse(function (Browser $browser) {
             $user = create(User::class);
@@ -34,6 +34,10 @@ class BrowserTest extends DuskTestCase
                     ->assertSee('Classes')
                     ->assertSee('Cart')
                     ->assertDontSee('Admin')
+                    ->clickLink('Cart')
+                    ->whenAvailable('#courses-table_wrapper', function($datatable){
+                        $datatable->assertSee('No data available in table');
+                    })
             ;
         });
     }
