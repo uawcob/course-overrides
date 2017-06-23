@@ -19,7 +19,7 @@
             </tr>
         </thead>
     </table>
-@stop
+@endsection
 
 @push('scripts')
 <script>
