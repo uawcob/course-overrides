@@ -25,7 +25,7 @@
 
 @section('navbar')
     @can('view', App\Course::class)
-        <li><a href="{{ route('courses.index') }}">Request</a></li>
+        <li><a href="{{ route('courses.index') }}">Classes</a></li>
     @endcan
 
     @can('create', App\Course::class)

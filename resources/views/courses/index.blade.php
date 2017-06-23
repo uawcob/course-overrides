@@ -1,10 +1,10 @@
 @extends('layout')
 
 @section('content')
-    <h1>Courses</h1>
+    <h1>Classes</h1>
 
     <div class="alert alert-info" role="alert">
-        Note that there are multiple sections for some classes.
+        Note that there are multiple sections for some courses.
         Select all sections for which you would be willing to accept an override.
     </div>
 
