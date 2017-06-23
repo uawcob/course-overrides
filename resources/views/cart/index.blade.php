@@ -32,14 +32,14 @@ $(function() {
             { data: 'remove', name: 'remove' },
         ],
         drawCallback: function(settings, json) {
-            removeCourseAjaxEventListener();
+            removeCourseAjaxEventListener('tr');
         }
     }).on( 'responsive-display', function ( e, settings, column, state ) {
-        removeCourseAjaxEventListener();
+        removeCourseAjaxEventListener('li');
     } );
 });
 
-function removeCourseAjaxEventListener()
+function removeCourseAjaxEventListener(tag)
 {
     $('.btn-cart').off('click').click(function(){
         var btn = $(this);
@@ -48,11 +48,11 @@ function removeCourseAjaxEventListener()
             data: {'_token': '{{ csrf_token() }}'},
             url: btn.data('url'),
             success: function(data) {
-                var table = $('#courses-table').DataTable();
-                table
-                    .row(btn.parents('tr')[0])
-                    .remove();
-                table.draw();
+                $('#courses-table')
+                    .DataTable()
+                    .row(btn.parents(tag)[0])
+                    .remove()
+                    .draw();
             }
         });
     });

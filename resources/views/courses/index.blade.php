@@ -30,15 +30,15 @@ $(function() {
             { data: 'add', name: 'add' },
         ],
         drawCallback: function(settings, json) {
-            addCourseAjaxEventListener();
+            addCourseAjaxEventListener('tr');
         }
     }).on( 'responsive-display', function ( e, settings, column, state ) {
-        addCourseAjaxEventListener();
+        addCourseAjaxEventListener('li');
     } );
 
 });
 
-function addCourseAjaxEventListener()
+function addCourseAjaxEventListener(tag)
 {
     $('.btn-cart').off('click').click(function(){
         var btn = $(this);
@@ -47,11 +47,11 @@ function addCourseAjaxEventListener()
             data: {'_token': '{{ csrf_token() }}'},
             url: btn.data('url'),
             success: function(data) {
-                var table = $('#courses-table').DataTable();
-                table
-                    .row(btn.parents('tr')[0])
-                    .remove();
-                table.draw();
+                $('#courses-table')
+                    .DataTable()
+                    .row(btn.parents(tag)[0])
+                    .remove()
+                    .draw();
             }
         });
     });
