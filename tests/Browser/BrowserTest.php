@@ -6,6 +6,7 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
+use App\Course;
 
 class BrowserTest extends DuskTestCase
 {
@@ -24,10 +25,13 @@ class BrowserTest extends DuskTestCase
         });
     }
 
-    public function test_user_has_empty_cart()
+    public function test_user_adds_course_to_cart()
     {
         $this->browse(function (Browser $browser) {
+
             $user = create(User::class);
+            $course = create(Course::class);
+
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertSee('Logout '.$user->name)
@@ -37,6 +41,19 @@ class BrowserTest extends DuskTestCase
                     ->clickLink('Cart')
                     ->whenAvailable('#courses-table_wrapper', function($datatable){
                         $datatable->assertSee('No data available in table');
+                    })
+                    ->clickLink('Classes')
+                    ->whenAvailable('#courses-table_wrapper', function($datatable)use($course){
+                        $datatable
+                            ->assertSee($course->code)
+                            ->press('Add')
+                            ->waitUntilMissing('.btn-cart', 1)
+                            ->assertDontSee($course->code)
+                        ;
+                    })
+                    ->clickLink('Cart')
+                    ->whenAvailable('#courses-table_wrapper', function($datatable)use($course){
+                        $datatable->assertSee($course->code);
                     })
             ;
         });
