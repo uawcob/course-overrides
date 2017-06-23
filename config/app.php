@@ -171,7 +171,6 @@ return [
         StudentAffairsUwm\Shibboleth\ShibbolethServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
