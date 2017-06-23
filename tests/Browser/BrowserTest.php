@@ -25,7 +25,7 @@ class BrowserTest extends DuskTestCase
         });
     }
 
-    public function test_user_adds_course_to_cart()
+    public function test_user_adds_and_removes_course_from_cart()
     {
         $this->browse(function (Browser $browser) {
 
@@ -53,7 +53,16 @@ class BrowserTest extends DuskTestCase
                     })
                     ->clickLink('Cart')
                     ->whenAvailable('#courses-table_wrapper', function($datatable)use($course){
-                        $datatable->assertSee($course->code);
+                        $datatable
+                            ->assertSee($course->code)
+                            ->press('Remove')
+                            ->waitUntilMissing('.btn-cart', 1)
+                            ->assertDontSee($course->code)
+                        ;
+                    })
+                    ->clickLink('Cart')
+                    ->whenAvailable('#courses-table_wrapper', function($datatable){
+                        $datatable->assertSee('No data available in table');
                     })
             ;
         });
