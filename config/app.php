@@ -170,7 +170,6 @@ return [
         razorbacks\style\laravel\StyleServiceProvider::class,
         StudentAffairsUwm\Shibboleth\ShibbolethServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
         /*
          * Application Service Providers...
