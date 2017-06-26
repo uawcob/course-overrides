@@ -15,7 +15,7 @@ if (isset($_GET['2'])) {
     $resource .= "/$_GET[2]";
 }
 
-$json = "$name/$resource.json";
+$json = __DIR__."/$name/$resource.json";
 
 if (!file_exists($json)) {
     die(json_encode([]));
