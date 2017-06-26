@@ -10,4 +10,4 @@ COPY srv/ /srv
 
 WORKDIR /srv
 
-CMD php -S 0.0.0.0:80 -t .
+CMD php -S 0.0.0.0:80 index.php
