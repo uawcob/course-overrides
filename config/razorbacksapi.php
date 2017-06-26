@@ -2,7 +2,7 @@
 
 return [
     'courses' => [
-        'endpoint' => env('RAZORBACKS_COURSES_API', 'http://localhost:8888/courses'),
+        'endpoint' => env('RAZORBACK_COURSES_API', 'http://localhost:8888/courses'),
     ],
     'plans' => [
         'endpoint' => env('RAZORBACK_PLANS_API', 'http://localhost:8888/plans'),

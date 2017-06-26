@@ -1,10 +1,10 @@
 <?php
 
-namespace App\CoursesApi;
+namespace App\RazorbackApi\Courses;
 
 use App\Semester;
 use App\Course;
-use App\CoursesApi\Exceptions\{CourseNotFound,BadStatusCode};
+use App\RazorbackApi\Courses\Exceptions\{CourseNotFound,BadStatusCode};
 
 class CoursesApiClient
 {

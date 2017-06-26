@@ -1,6 +1,6 @@
 <?php
 
-namespace App\CoursesApi\Exceptions;
+namespace App\RazorbackApi\Courses\Exceptions;
 
 use Exception;
 

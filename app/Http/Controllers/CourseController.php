@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use Illuminate\Http\Request;
 use App\Semester;
-use App\CoursesApi\CoursesApiClient;
+use App\RazorbackApi\Courses\CoursesApiClient;
 use Datatables;
 
 class CourseController extends Controller
