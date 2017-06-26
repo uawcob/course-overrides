@@ -29,7 +29,7 @@ class CourseController extends Controller
     {
         $this->authorize('view', Course::class);
 
-        return Datatables::of(Course::query())
+        return Datatables::collection(Course::all())
             ->addColumn('add', function (Course $course) {
                 $link = '<button class="btn-cart btn btn-success" data-url="%s">Add</button>';
                 return sprintf($link, route('cart.add', $course));
