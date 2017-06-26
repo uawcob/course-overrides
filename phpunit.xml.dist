@@ -37,5 +37,7 @@
         <env name="DB_DATABASE" value=":memory:"/>
         <env name="OVERRIDE_ADMIN_ENTITLEMENT" value="admin"/>
         <env name="TEST_SERVER_PORT" value="8942"/>
+        <env name="RAZORBACK_PLANS_API" value="http://localhost:8942/plans"/>
+        <env name="RAZORBACK_PLANS_TOKEN" value="AuthToken"/>
     </php>
 </phpunit>

@@ -33,7 +33,7 @@ class CoursesApiClient
             '2' => $number,
         ]);
 
-        $endpoint = config('coursesapi.endpoint')."?$query";
+        $endpoint = config('razorbacksapi.courses.endpoint')."?$query";
 
         $response = (new \GuzzleHttp\Client)->request('GET', $endpoint);
 

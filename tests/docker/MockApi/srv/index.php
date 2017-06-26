@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 
 $name = trim($_SERVER['SCRIPT_NAME'], '/');
 
-if (($name === 'majorminors') && (($_SERVER['HTTP_X_PASSWORD'] ?? null) !== 'AuthToken')) {
+if (($name === 'plans') && (($_SERVER['HTTP_X_PASSWORD'] ?? null) !== 'AuthToken')) {
     http_response_code(401);
     die();
 }

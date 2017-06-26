@@ -1,10 +1,10 @@
 <?php
 
-namespace App\MajorMinorsApi;
+namespace App\RazorbackApi\Plans;
 
 use Zttp\Zttp;
 
-class MajorMinorsApiClient
+class PlansApiClient
 {
     protected $endpoint = '';
     protected $token = '';
@@ -20,14 +20,14 @@ class MajorMinorsApiClient
         }
     }
 
-    public function endpoint(string $endpoint) : MajorMinorsApiClient
+    public function endpoint(string $endpoint) : PlansApiClient
     {
         $this->endpoint = $endpoint;
 
         return $this;
     }
 
-    public function token(string $token) : MajorMinorsApiClient
+    public function token(string $token) : PlansApiClient
     {
         $this->token = $token;
 

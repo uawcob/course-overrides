@@ -26,4 +26,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::name('cart.remove')->post('/cart/remove/{course}', 'CartController@remove');
 
     Route::name('admin.index')->get('/admin', 'AdminController@index');
+
+    Route::name('plans.index')->get('/plans', 'PlanController@index');
+
+    Route::name('requests.index')->get('/requests', 'PlanController@requests');
 });

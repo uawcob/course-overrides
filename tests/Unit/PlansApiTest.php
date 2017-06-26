@@ -3,19 +3,19 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\MajorMinorsApi\MajorMinorsApiClient;
+use App\RazorbackApi\Plans\PlansApiClient;
 
-class MajorMinorsApiTest extends TestCase
+class PlansApiTest extends TestCase
 {
     public function test_instantiates_class()
     {
-        $this->assertInstanceOf(MajorMinorsApiClient::class, new MajorMinorsApiClient);
+        $this->assertInstanceOf(PlansApiClient::class, new PlansApiClient);
     }
 
     public function test_returns_majors_and_minors()
     {
         $port = getenv('TEST_SERVER_PORT');
-        $endpoint = "http://localhost:$port/majorminors";
+        $endpoint = "http://localhost:$port/plans";
         $authtoken = 'AuthToken';
         $student_id = 900000001;
 
@@ -24,7 +24,7 @@ class MajorMinorsApiTest extends TestCase
             ['Minor' => 'Minor in Finance-Ins/Re'],
         ];
 
-        $actual = (new MajorMinorsApiClient($endpoint, $authtoken))->get($student_id);
+        $actual = (new PlansApiClient($endpoint, $authtoken))->get($student_id);
 
         $this->assertEquals($actual, $expected);
     }
