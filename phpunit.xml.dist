@@ -36,7 +36,5 @@
         <env name="DB_CONNECTION" value="sqlite"/>
         <env name="DB_DATABASE" value=":memory:"/>
         <env name="OVERRIDE_ADMIN_ENTITLEMENT" value="admin"/>
-        <const name="WEB_SERVER_HOST" value="localhost" />
-        <const name="WEB_SERVER_PORT" value="8989" />
     </php>
 </phpunit>

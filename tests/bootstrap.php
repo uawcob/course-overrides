@@ -3,32 +3,25 @@
 require_once __DIR__.'/../bootstrap/autoload.php';
 
 // http://tech.vg.no/2013/07/19/using-phps-built-in-web-server-in-your-test-suites/
+// https://github.com/kitetail/zttp/blob/ea4cb888ba6fc46d2bba5b56107afb09030e8131/tests/ZttpTest.php#L389
+new class {
+    public function __construct()
+    {
+        $server = './tests/docker/MockApi/srv/index.php';
 
-// Command that starts the built-in web server
-$command = sprintf(
-    'php -S %s:%d ./tests/docker/MockApi/srv/index.php >/dev/null 2>&1 & echo $!',
-    WEB_SERVER_HOST,
-    WEB_SERVER_PORT
-);
+        $port = getenv('TEST_SERVER_PORT') ?: 8765;
 
-// Execute the command and store the process ID
-$output = array();
-exec($command, $output);
-$pid = (int) $output[0];
+        $pid = exec("php -S localhost:$port $server > /dev/null 2>&1 & echo $!");
 
-echo sprintf(
-    '%s - Web server started on %s:%d with PID %d',
-    date('r'),
-    WEB_SERVER_HOST,
-    WEB_SERVER_PORT,
-    $pid
-) . PHP_EOL;
+        echo "starting pid $pid test server at localhost:$port\n";
 
-// let the server get ready
-sleep(1);
+        while (@file_get_contents("http://localhost:$port") === false) {
+            usleep(1000);
+        }
 
-// Kill the web server when the process ends
-register_shutdown_function(function() use ($pid) {
-    echo sprintf('%s - Killing process with ID %d', date('r'), $pid) . PHP_EOL;
-    exec('kill ' . $pid);
-});
+        register_shutdown_function(function () use ($pid, $port) {
+            exec("kill $pid");
+            echo "killed pid $pid test server at localhost:$port\n";
+        });
+    }
+};
