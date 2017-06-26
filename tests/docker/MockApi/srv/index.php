@@ -4,6 +4,11 @@ header('Content-Type: application/json');
 
 $name = trim($_SERVER['SCRIPT_NAME'], '/');
 
+if (($name === 'majorminors') && (($_SERVER['HTTP_X_PASSWORD'] ?? null) !== 'AuthToken')) {
+    http_response_code(401);
+    die();
+}
+
 $resource = $_GET['1'] ?? null;
 
 if (isset($_GET['2'])) {
