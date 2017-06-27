@@ -8,15 +8,13 @@ use Exception;
 
 class PlansRepository
 {
-    protected $plans = [];
-
     public function get() : array
     {
-        if (empty($this->plans)) {
+        if (empty(session('plans'))) {
             $this->refresh();
         }
 
-        return $this->plans;
+        return session('plans');
     }
 
     public function refresh()
@@ -25,10 +23,12 @@ class PlansRepository
         $endpoint = config('razorbacksapi.plans.endpoint');
         $token = config('razorbacksapi.plans.token');
 
-        $this->plans = (new PlansApiClient($endpoint, $token))->get($student_id);
+        $plans = (new PlansApiClient($endpoint, $token))->get($student_id);
 
-        if (is_null($this->plans)) {
-            throw new Exception("Plans API Client returned NULL response.");
+        if (is_null($plans)) {
+            throw new Exception('Plans API Client returned NULL response.');
         }
+
+        session(['plans' => $plans]);
     }
 }
