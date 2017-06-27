@@ -25,7 +25,7 @@ There is a [Dockerfile][7] included for testing with the Courses API.
 
 Then set the environment variable for your endpoint.
 
-    RAZORBACKS_COURSES_API=http://localhost:8888
+    RAZORBACK_COURSES_API=http://localhost:8888
 
 <p align="center">
     <a href="https://laravel.com/">
