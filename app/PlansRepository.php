@@ -5,6 +5,7 @@ namespace App;
 use App\RazorbackApi\Plans\PlansApiClient;
 use Auth;
 use Exception;
+use DB;
 
 class PlansRepository
 {
@@ -40,9 +41,7 @@ class PlansRepository
         }
 
         if (!empty($data)) {
-            foreach ($user->plans as $plan) {
-                $plan->delete();
-            }
+            DB::table('plans')->where('user_id', $user->id)->delete();
             $user->plans()->saveMany($data);
         }
 
