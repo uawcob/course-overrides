@@ -17,9 +17,17 @@ class PlanController extends Controller
         $this->plans = $plans;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->plans->get();
+        $plans = ($request->has('refresh'))
+            ? $this->plans->refresh()
+            : $this->plans->get();
+
+        if ($request->has('html')) {
+            return view('include.plans', ['plans' => $plans]);
+        }
+
+        return $plans;
     }
 
     public function requests()
