@@ -42,10 +42,11 @@ class PlansRepository
 
         if (!empty($data)) {
             DB::table('plans')->where('user_id', $user->id)->delete();
-            $user->plans()->saveMany($data);
-        }
 
-        session(['plans' => $plans]);
+            $user->plans()->saveMany($data);
+
+            session(['plans' => $plans]);
+        }
 
         return $plans;
     }
