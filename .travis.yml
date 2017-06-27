@@ -13,7 +13,7 @@ before_script:
     - sh -e /etc/init.d/xvfb start
     - ./vendor/laravel/dusk/bin/chromedriver-linux &
     - php -S localhost:8943 ./tests/docker/MockApi/srv/index.php > /dev/null 2>&1 &
-    - php artisan serve &
+    - php artisan serve > /dev/null 2>&1 &
 script:
   - ./vendor/bin/phpunit --coverage-clover=coverage.xml
   - php artisan dusk
