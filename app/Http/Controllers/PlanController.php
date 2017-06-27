@@ -2,25 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Plan;
+use App\{
+    Plan,
+    PlansRepository
+};
 use Illuminate\Http\Request;
-use App\RazorbackApi\Plans\PlansApiClient;
-use Auth;
 
 class PlanController extends Controller
 {
+    protected $plans;
+
+    public function __construct(PlansRepository $plans)
+    {
+        $this->plans = $plans;
+    }
+
     public function index()
     {
-        $student_id = Auth::user()->student_id;
-        $endpoint = config('razorbacksapi.plans.endpoint');
-        $token = config('razorbacksapi.plans.token');
-        return (new PlansApiClient($endpoint, $token))->get($student_id);
+        return $this->plans->get();
     }
 
     public function requests()
     {
         $data = [
-            'plans' => $this->index(),
+            'plans' => $this->plans->get(),
         ];
 
         return view('requests.index', $data);
