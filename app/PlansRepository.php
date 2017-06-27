@@ -10,16 +10,17 @@ class PlansRepository
 {
     public function get() : array
     {
-        if (empty(session('plans'))) {
-            $this->refresh();
+        if (empty($plans = session('plans'))) {
+            return $this->query();
         }
 
-        return session('plans');
+        return $plans;
     }
 
     public function refresh()
     {
-        $student_id = Auth::user()->student_id;
+        $user = Auth::user();
+        $student_id = $user->student_id;
         $endpoint = config('razorbacksapi.plans.endpoint');
         $token = config('razorbacksapi.plans.token');
 
@@ -29,6 +30,39 @@ class PlansRepository
             throw new Exception('Plans API Client returned NULL response.');
         }
 
+        foreach ($plans as $plan) {
+            foreach ($plan as $type => $name) {
+                $data []= new Plan([
+                    'type' => $type,
+                    'name' => $name,
+                ]);
+            }
+        }
+
+        if (!empty($data)) {
+            foreach ($user->plans as $plan) {
+                $plan->delete();
+            }
+            $user->plans()->saveMany($data);
+        }
+
         session(['plans' => $plans]);
+
+        return $plans;
+    }
+
+    protected function query()
+    {
+        $plans = Auth::user()->plans()->get()->map(function($plan){
+            return [$plan->type => $plan->name];
+        })->toArray();
+
+        if (empty($plans)) {
+            return $this->refresh();
+        }
+
+        session(['plans' => $plans]);
+
+        return $plans;
     }
 }

@@ -44,4 +44,49 @@ class PlansTest extends TestCase
             ])
         ;
     }
+
+    public function test_saves_to_database()
+    {
+        $user = make('App\User');
+        $user->student_id = '900000001';
+        $user->save();
+
+        $this->assertEmpty($user->plans()->get());
+
+        $this
+            ->signIn($user)
+            ->get('/requests')
+            ->assertStatus(200)
+        ;
+
+        $this->assertDatabaseHas('plans', [
+            'user_id' => $user->id,
+            'type' => 'Major',
+            'name' => 'Marketing',
+        ]);
+
+        $this->assertDatabaseHas('plans', [
+            'user_id' => $user->id,
+            'type' => 'Minor',
+            'name' => 'Minor in Finance-Ins/Re',
+        ]);
+
+        $this->assertNotEmpty($user->plans()->get());
+
+        // empty session to make sure it pulls from db
+        session()->forget('plans');
+        $this
+            ->get('/')
+            ->assertSessionMissing('plans')
+        ;
+
+        $this
+            ->get('/requests')
+            ->assertStatus(200)
+            ->assertSessionHas('plans', [
+                ['Major' => 'Marketing'],
+                ['Minor' => 'Minor in Finance-Ins/Re'],
+            ])
+        ;
+    }
 }
