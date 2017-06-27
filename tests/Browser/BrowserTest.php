@@ -67,4 +67,21 @@ class BrowserTest extends DuskTestCase
             ;
         });
     }
+
+    public function test_user_can_see_plans()
+    {
+        $this->browse(function (Browser $browser) {
+
+            $user = make(User::class);
+            $user->student_id = '900000005';
+            $user->save();
+
+            $browser->loginAs($user)
+                    ->visit('/requests')
+                    ->assertSee("Accounting")
+                    ->assertSee("Minor in Finance-Bank/Fin")
+                    ->assertSee("Political Science")
+            ;
+        });
+    }
 }
