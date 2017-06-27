@@ -13,7 +13,7 @@ class PlansTest extends TestCase
 
     public function test_user_gets_plans()
     {
-        $user = create('App\User');
+        $user = make('App\User');
         $user->student_id = '900000001';
         $user->save();
 
@@ -30,7 +30,7 @@ class PlansTest extends TestCase
 
     public function test_saves_to_session()
     {
-        $user = create('App\User');
+        $user = make('App\User');
         $user->student_id = '900000001';
         $user->save();
 
