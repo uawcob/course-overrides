@@ -4,8 +4,14 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\Course;
-use App\Policies\CoursePolicy;
+use App\{
+    Course,
+    Request
+};
+use App\Policies\{
+    CoursePolicy,
+    RequestPolicy
+};
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Course::class => CoursePolicy::class,
+        Request::class => RequestPolicy::class,
     ];
 
     /**

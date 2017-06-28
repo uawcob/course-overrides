@@ -29,5 +29,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::name('plans.index')->get('/plans', 'PlanController@index');
 
+    Route::resource('requests', 'RequestController', ['parameters' => [
+        'requests' => 'req',
+    ]]);
     Route::name('requests.index')->get('/requests', 'PlanController@requests');
 });

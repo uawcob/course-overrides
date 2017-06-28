@@ -21,6 +21,11 @@ class Course extends Model
         $this->semester = $semester;
     }
 
+    public function requests()
+    {
+        return $this->belongsToMany(Request::class);
+    }
+
     // hack fix for SQL Server date format .000
     protected function getDateFormat()
     {

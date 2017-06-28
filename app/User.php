@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->hasMany(Plan::class);
     }
 
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
+    }
+
     public function isAdmin() : bool
     {
         return Entitlement::has(config('admin.entitlement'));
