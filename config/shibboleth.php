@@ -14,7 +14,7 @@ return array(
 
     'idp_login'     => '/Shibboleth.sso/Login',
     'idp_logout'    => '/Shibboleth.sso/Logout?return=https%3A%2F%2Fidp.uark.edu%2Fidp%2Fexit.jsp',
-    'authenticated' => '/',
+    'authenticated' => '/requests',
 
     /*
     |--------------------------------------------------------------------------
