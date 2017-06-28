@@ -30,7 +30,16 @@ class RequestController extends Controller
      */
     public function create()
     {
-        //
+        foreach (session('cart') ?? [] as $course) {
+            $data[$course->code]['code'] = $course;
+            $data[$course->code]['sections'] []= $course;
+        }
+
+        $data = [
+            'courses' => current($data ?? []),
+        ];
+
+        return view('requests.create', $data);
     }
 
     /**

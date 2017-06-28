@@ -14,6 +14,12 @@
             </tr>
         </thead>
     </table>
+
+    @if(empty(session('cart')))
+        <a href="{{ route('courses.index') }}" class="btn btn-success">Add Some Classes</a>
+    @else
+        <a href="{{ route('requests.create') }}" class="btn btn-success">Checkout</a>
+    @endif
 @endsection
 
 @push('scripts')

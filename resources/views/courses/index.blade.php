@@ -3,10 +3,13 @@
 @section('content')
     <h1>Classes</h1>
 
-    <div class="alert alert-info" role="alert">
-        Note that there are multiple sections for some courses.
+    <p class="lead">
+        There are multiple sections for some courses.
         Select all sections for which you would be willing to accept an override.
-    </div>
+        When you are finished,
+        then review your <a href="{{ route('cart.index') }}">cart</a>,
+        and proceed to checkout.
+    </p>
 
     <table class="table table-bordered datatable" id="courses-table">
         <thead>

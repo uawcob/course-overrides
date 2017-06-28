@@ -37,4 +37,24 @@ class RequestTest extends TestCase
             ->assertSee((string)$course->number)
         ;
     }
+
+    public function test_views_course_request_form()
+    {
+        $course1 = create(Course::class, ['code' => 'WCOB2013']);
+        $course2 = create(Course::class, ['code' => 'WCOB2013']);
+        $course3 = create(Course::class, ['code' => 'FINN2013']);
+
+        $this
+            ->signIn()
+            ->withSession([
+                "cart.{$course1->id}" => $course1,
+                "cart.{$course2->id}" => $course2,
+                "cart.{$course3->id}" => $course3,
+            ])
+            ->get('/requests/create')
+            ->assertSee((string)$course1->number)
+            ->assertSee((string)$course2->number)
+            ->assertDontSee((string)$course3->number)
+        ;
+    }
 }
