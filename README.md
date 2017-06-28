@@ -35,6 +35,8 @@ Then set the environment variable for your endpoint.
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
+![browser stack logo][8]
+
 [1]:https://travis-ci.org/uawcob/course-overrides.svg?branch=master
 [2]:https://travis-ci.org/uawcob/course-overrides
 [3]:https://img.shields.io/codecov/c/github/uawcob/course-overrides/master.svg
@@ -42,3 +44,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 [5]:https://codeclimate.com/github/uawcob/course-overrides/badges/gpa.svg
 [6]:https://codeclimate.com/github/uawcob/course-overrides
 [7]:./tests/docker/MockApi/Dockerfile
+[8]:./docs/images/browser-stack-logo.png
