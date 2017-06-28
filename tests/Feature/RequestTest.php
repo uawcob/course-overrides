@@ -19,6 +19,9 @@ class RequestTest extends TestCase
 
         $response = $this
             ->signIn()
+            ->withSession([
+                "cart.{$course->id}" => $course,
+            ])
             ->post('/requests', [
                 'id' => [
                     '1' => $course->id,
@@ -28,6 +31,7 @@ class RequestTest extends TestCase
                 'comment' => 'my justification',
             ])
             ->assertRedirect()
+            ->assertSessionMissing("cart.{$course->id}")
         ;
 
         $redirect = $response->headers->get('Location');

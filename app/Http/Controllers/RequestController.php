@@ -60,6 +60,10 @@ class RequestController extends Controller
 
         $req->courses()->sync($courses);
 
+        foreach ($request->id as $course) {
+            session()->forget("cart.$course");
+        }
+
         return redirect(route('requests.show', $req));
     }
 
