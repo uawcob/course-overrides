@@ -25,6 +25,7 @@ class RequestTest extends TestCase
                 ],
                 'required' => '1',
                 'enrolled' => '0',
+                'comment' => 'my justification',
             ])
             ->assertRedirect()
         ;

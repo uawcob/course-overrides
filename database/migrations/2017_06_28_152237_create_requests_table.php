@@ -25,6 +25,7 @@ class CreateRequestsTable extends Migration
 
             $table->boolean('enrolled');
             $table->boolean('required');
+            $table->longText('comment')->nullable();
         });
     }
 
