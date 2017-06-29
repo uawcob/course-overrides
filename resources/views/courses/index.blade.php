@@ -22,6 +22,8 @@
             </tr>
         </thead>
     </table>
+
+    <a href="{{ route('cart.index') }}" class="btn btn-primary">Go to Cart</a>
 @endsection
 
 @push('scripts')
