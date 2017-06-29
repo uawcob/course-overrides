@@ -30,15 +30,6 @@ class PlanController extends Controller
         return $plans;
     }
 
-    public function requests()
-    {
-        $data = [
-            'plans' => $this->plans->get(),
-        ];
-
-        return view('requests.index', $data);
-    }
-
     /**
      * Show the form for creating a new resource.
      *

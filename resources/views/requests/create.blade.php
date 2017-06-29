@@ -3,6 +3,25 @@
 @section('content')
     <h1>Create Request</h1>
 
+    @unless (empty($plans))
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Academic Plans</h2>
+        </div>
+        <div id="div-plans" class="panel-body">
+            <div id="plans-fetch-error" class="alert alert-danger" role="alert" style="display:none">
+                Error: No plans found.
+            </div>
+            <ul id="ul-plans">
+                @include('include.plans')
+            </ul>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-default" onclick="refreshPlans()">Refresh</button>
+        </div>
+    </div>
+    @endunless
+
     @if (empty($courses))
         <a href="{{ route('courses.index') }}" class="btn btn-success">Add Some Classes</a>
     @else

@@ -8,25 +8,6 @@
             You have {{ count(session('cart')) }} items in your <a href="{{ route('cart.index') }}" class="btn btn-primary">Cart</a>
         </div>
     @endunless
-
-    @unless (empty($plans))
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h2 class="panel-title">Academic Plans</h2>
-        </div>
-        <div id="div-plans" class="panel-body">
-            <div id="plans-fetch-error" class="alert alert-danger" role="alert" style="display:none">
-                Error: No plans found.
-            </div>
-            <ul id="ul-plans">
-                @include('include.plans')
-            </ul>
-        </div>
-        <div class="panel-footer">
-            <button class="btn btn-default" onclick="refreshPlans()">Refresh</button>
-        </div>
-    </div>
-    @endunless
 @endsection
 
 @push('scripts')

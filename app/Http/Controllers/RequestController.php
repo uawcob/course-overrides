@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Request as Req;
 use Illuminate\Http\Request;
 use DB;
+use App\PlansRepository;
 
 class RequestController extends Controller
 {
-    public function __construct()
+    protected $plans;
+
+    public function __construct(PlansRepository $plans)
     {
+        $this->plans = $plans;
         $this->authorizeResource(Req::class, 'req');
     }
 
@@ -20,7 +24,7 @@ class RequestController extends Controller
      */
     public function index()
     {
-        //
+        return view('requests.index');
     }
 
     /**
@@ -37,6 +41,7 @@ class RequestController extends Controller
 
         $data = [
             'courses' => current($data ?? []),
+            'plans' => $this->plans->get(),
         ];
 
         return view('requests.create', $data);

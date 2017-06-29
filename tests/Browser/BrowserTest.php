@@ -75,7 +75,7 @@ class BrowserTest extends DuskTestCase
             $user = create(User::class, ['student_id' => '900000005']);
 
             $browser->loginAs($user)
-                    ->visit('/requests')
+                    ->visit('/requests/create')
                     ->assertSee("Accounting")
                     ->assertSee("Minor in Finance-Bank/Fin")
                     ->assertSee("Political Science")

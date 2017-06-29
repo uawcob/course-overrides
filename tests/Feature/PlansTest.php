@@ -36,7 +36,7 @@ class PlansTest extends TestCase
 
         $this
             ->signIn($user)
-            ->get('/requests')
+            ->get('/requests/create')
             ->assertStatus(200)
             ->assertSessionHas('plans', [
                 ['Major' => 'Marketing'],
@@ -55,7 +55,7 @@ class PlansTest extends TestCase
 
         $this
             ->signIn($user)
-            ->get('/requests')
+            ->get('/requests/create')
             ->assertStatus(200)
         ;
 
@@ -81,7 +81,7 @@ class PlansTest extends TestCase
         ;
 
         $this
-            ->get('/requests')
+            ->get('/requests/create')
             ->assertStatus(200)
             ->assertSessionHas('plans', [
                 ['Major' => 'Marketing'],
