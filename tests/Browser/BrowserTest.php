@@ -72,9 +72,7 @@ class BrowserTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
 
-            $user = make(User::class);
-            $user->student_id = '900000005';
-            $user->save();
+            $user = create(User::class, ['student_id' => '900000005']);
 
             $browser->loginAs($user)
                     ->visit('/requests')
