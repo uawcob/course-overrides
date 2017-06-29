@@ -6,6 +6,7 @@ use App\Request as Req;
 use Illuminate\Http\Request;
 use DB;
 use App\PlansRepository;
+use Auth;
 
 class RequestController extends Controller
 {
@@ -24,7 +25,21 @@ class RequestController extends Controller
      */
     public function index()
     {
-        return view('requests.index');
+        $requests = json_encode($this->data()->map(function($request){
+            $class = $request->courses->first();
+            return [
+                'class' => "{$class->code} {$class->title}",
+                'created_at' => "{$request->created_at}",
+                'updated_at' => "{$request->updated_at}",
+            ];
+        }));
+
+        return view('requests.index', ['requests' => $requests]);
+    }
+
+    public function data()
+    {
+        return Req::with('courses')->where('user_id', Auth::user()->id)->get();
     }
 
     /**
