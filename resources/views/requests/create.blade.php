@@ -16,15 +16,19 @@
                 <h2 class="panel-title">{{ $courses['code']->code }} : {{ $courses['code']->title }}</h2>
             </div>
             <div class="panel-body">
-                <ol>
+                <p class="lead">Drag and drop the sections in order of your preference.</p>
+                <ol id="sortable">
                     @foreach ($courses['sections'] as $course)
-                    <li>{{ $course->time }}, Section {{ $course->section }}, Number {{ $course->number }}</li>
-                    <input type="hidden" name="id[{{ $loop->iteration }}]" value="{{ $course->id }}">
+                    <li>
+                        <span class="btn btn-default">
+                            {{ $course->time }}
+                            <br>
+                            Section {{ $course->section }} : #{{ $course->number }}
+                        </span>
+                        <input type="hidden" name="id[{{ $loop->iteration }}]" value="{{ $course->id }}">
+                    </li>
                     @endforeach
                 </ol>
-            </div>
-            <div class="panel-footer">
-                <a class="btn btn-default" href="{{ route('cart.index') }}">Edit</a>
             </div>
         </div>
 
@@ -61,7 +65,7 @@
                 <label class="control-label" for="comment">Comment</label>
             </div>
             <div class="panel-body">
-                <p>
+                <p class="lead">
                     Add any additional comments regarding your override request below.
                     Include the most important details (i.e. athlete-name of sport, etc.)
                     in the first 10 words if possible.
@@ -74,3 +78,17 @@
     </form>
     @endif
 @endsection
+
+@push('scripts')
+<script>
+  $( function() {
+    $( "#sortable" ).sortable({
+        stop: function(event, ui) {
+            $( "#sortable input" ).each(function(k, v){
+                $(v).attr('name', 'id['+(k+1)+']');
+            });
+        }
+    });
+  } );
+</script>
+@endpush
