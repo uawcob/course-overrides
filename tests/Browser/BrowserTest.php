@@ -82,4 +82,43 @@ class BrowserTest extends DuskTestCase
             ;
         });
     }
+
+    public function test_drag_drop_course_priority()
+    {
+        $this->browse(function (Browser $browser) {
+
+            $class = 'ECON2013';
+            $course1 = create(Course::class, [
+                'code' => $class,
+                'section' => '001',
+            ]);
+            $course2 = create(Course::class, [
+                'code' => $class,
+                'section' => '002',
+            ]);
+
+            $browser->loginAs(create(User::class))
+                    ->visit('/courses')
+                    ->whenAvailable('#courses-table_wrapper', function ($datatable) use ($course1, $course2) {
+                        $datatable
+                            ->assertSee($course1->section)
+                            ->press("#btn-cart-add-{$course1->id}")
+                            ->waitUntilMissing("#btn-cart-add-{$course1->id}", 1)
+                            ->assertDontSee($course1->section)
+
+                            ->assertSee($course2->section)
+                            ->press("#btn-cart-add-{$course2->id}")
+                            ->waitUntilMissing("#btn-cart-add-{$course2->id}", 1)
+                            ->assertDontSee($course2->section)
+                        ;
+                    })
+                    ->visit('/requests/create')
+                    ->assertInputValue('id[1]', $course1->id)
+                    ->assertInputValue('id[2]', $course2->id)
+                    ->drag("#btn-priority-course-{$course1->id}", "#btn-priority-course-{$course2->id}")
+                    ->assertInputValue('id[1]', $course2->id)
+                    ->assertInputValue('id[2]', $course1->id)
+            ;
+        });
+    }
 }

@@ -20,7 +20,7 @@
                 <ol id="sortable">
                     @foreach ($courses['sections'] as $course)
                     <li>
-                        <span class="btn btn-default">
+                        <span id="btn-priority-course-{{ $course->id }}" class="btn btn-default">
                             {{ $course->time }}
                             <br>
                             Section {{ $course->section }} : #{{ $course->number }}
