@@ -78,10 +78,20 @@ class RequestController extends Controller
      * @param  \App\Req  $req
      * @return \Illuminate\Http\Response
      */
-    public function show(Req $req)
+    public function show(Req $req, Request $request)
     {
-        $req->courses;
-        return $req;
+        $req->courses = $req->courses()->orderBy('priority')->get();
+
+        if ($request->has('json')) {
+            return $req;
+        }
+
+        $data = [
+            'class' => $req->courses->first(),
+            'request' => $req,
+        ];
+
+        return view('requests.show', $data);
     }
 
     /**
