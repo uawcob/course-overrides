@@ -46,4 +46,8 @@
 
     <p>Created {{ $request->created_at }}</p>
     <p>Updated {{ $request->updated_at }}</p>
+
+    @unless(empty(session('cart')))
+        @include('include.cart-items')
+    @endunless
 @endsection
