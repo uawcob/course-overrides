@@ -25,14 +25,20 @@ class RequestController extends Controller
      */
     public function index()
     {
-        $requests = json_encode($this->data()->map(function($request){
+        $requests = $this->data()->map(function(Req $request){
             $class = $request->courses->first();
+            $link = '<a class="btn btn-default" href="%s">View</a>';
+            $link = sprintf($link, route('requests.show', $request));
             return [
-                'class' => "{$class->code} {$class->title}",
+                'class' => "{$class->code} - {$class->title}",
                 'created_at' => "{$request->created_at}",
                 'updated_at' => "{$request->updated_at}",
+                'link' => $link,
             ];
-        }));
+        });
+
+        // escape backslashes for embedding JS string in HTML
+        $requests = str_replace('\\', '\\\\', json_encode($requests));
 
         return view('requests.index', ['requests' => $requests]);
     }

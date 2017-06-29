@@ -15,6 +15,7 @@
         <thead>
             <tr>
                 <th>Class</th>
+                <th>Link</th>
                 <th>Created</th>
                 <th>Updated</th>
             </tr>
@@ -30,6 +31,7 @@ $(function() {
         data: JSON.parse('{!! $requests !!}'),
         columns: [
             { data: 'class', name: 'class' },
+            { data: 'link', name: 'link' },
             { data: 'created_at', name: 'created' },
             { data: 'updated_at', name: 'updated' },
         ],
