@@ -18,12 +18,15 @@ class ScheduleTest extends TestCase
 
     public function test_creates_schedule()
     {
+        $start = (new Carbon)->subMonth();
+        $finish = (new Carbon)->addMonth();
         $semester = new Semester('Fall', random_int( 2010, 2022 ));
+
         $data = [
             'term' => $semester->term(),
             'year' => $semester->year(),
-            'start' => (string)(new Carbon)->subMonth(),
-            'finish' => (string)(new Carbon)->addMonth(),
+            'start' => (string) $start->timezone('America/Chicago'),
+            'finish' => (string) $finish->timezone('America/Chicago'),
         ];
 
         $response = $this
@@ -35,8 +38,8 @@ class ScheduleTest extends TestCase
 
         $this->assertDatabaseHas('schedules', [
             'strm' => (string)$semester,
-            'start' => $data['start'],
-            'finish' => $data['finish'],
+            'start' => (string) $start->timezone('UTC'),
+            'finish' => (string) $finish->timezone('UTC'),
         ]);
 
         $this->get($response->headers->get('Location'))

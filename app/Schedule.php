@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Schedule extends Model
 {
@@ -16,5 +17,25 @@ class Schedule extends Model
     protected function getDateFormat()
     {
         return 'Y-m-d H:i:s';
+    }
+
+    public function getStartAttribute($value)
+    {
+        return (new Carbon($value))->timezone('America/Chicago');
+    }
+
+    public function setStartAttribute($value)
+    {
+        $this->attributes['start'] = (new Carbon($value, 'America/Chicago'))->setTimezone('UTC');
+    }
+
+    public function getFinishAttribute($value)
+    {
+        return (new Carbon($value))->timezone('America/Chicago');
+    }
+
+    public function setFinishAttribute($value)
+    {
+        $this->attributes['finish'] = (new Carbon($value, 'America/Chicago'))->setTimezone('UTC');
     }
 }
