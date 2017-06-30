@@ -4,8 +4,7 @@
     <h1>Admin</h1>
 
     <ul>
-        @can('create', App\Course::class)
-        <li><a href="{{ route('courses.create') }}" class="btn btn-default">Create New Course</a></li>
-        @endcan
+        <li><a href="{{ route('schedules.index') }}" class="btn btn-default">Schedules</a></li>
+        <li><a href="{{ route('courses.create') }}" class="btn btn-default">Create Course</a></li>
     </ul>
 @endsection
