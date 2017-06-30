@@ -1479,16 +1479,16 @@
         },
         {
             "name": "razorbacks/style",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/razorbacks/style.git",
-                "reference": "438a5da6973f2c649f33b477db949b5f917c37aa"
+                "reference": "6eb7f28f304603e30f20c867c4d2d73ae4654253"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/razorbacks/style/zipball/438a5da6973f2c649f33b477db949b5f917c37aa",
-                "reference": "438a5da6973f2c649f33b477db949b5f917c37aa",
+                "url": "https://api.github.com/repos/razorbacks/style/zipball/6eb7f28f304603e30f20c867c4d2d73ae4654253",
+                "reference": "6eb7f28f304603e30f20c867c4d2d73ae4654253",
                 "shasum": ""
             },
             "require": {
@@ -1499,6 +1499,13 @@
                 "phpunit/phpunit": "^6.2"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "razorbacks\\style\\laravel\\StyleServiceProvider"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "razorbacks\\style\\": "php/"
@@ -1521,7 +1528,7 @@
                 "style",
                 "uark"
             ],
-            "time": "2017-06-08T19:35:42+00:00"
+            "time": "2017-06-30T19:39:21+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -7,7 +7,6 @@
     width: 100% !important;
 }
 </style>
-@stack('head')
 @endsection
 
 @section('navbar-right')
@@ -40,5 +39,4 @@
   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
 <script src="/js/jquery.ui.touch-punch.min.js"></script>
-@stack('scripts')
 @endsection
