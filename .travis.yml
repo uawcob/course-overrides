@@ -1,6 +1,8 @@
 sudo: required
 dist: trusty
 language: php
+env:
+  - APP_ENV=testing
 php:
   - 7.1
   - 7.0
