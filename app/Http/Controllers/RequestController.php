@@ -25,6 +25,15 @@ class RequestController extends Controller
      */
     public function index()
     {
+        return view('requests.index', ['requests' => $this->getRequests()]);
+    }
+
+    public function getRequests(bool $cache = true)
+    {
+        if ($cache && !empty($requests = session('requests'))) {
+            return $requests;
+        }
+
         $requests = $this->data()->map(function(Req $request){
             $class = $request->courses->first();
             $link = '<a class="btn btn-default" href="%s">View</a>';
@@ -40,7 +49,9 @@ class RequestController extends Controller
         // escape backslashes for embedding JS string in HTML
         $requests = str_replace('\\', '\\\\', json_encode($requests));
 
-        return view('requests.index', ['requests' => $requests]);
+        session(['requests' => $requests]);
+
+        return $requests;
     }
 
     public function data()
@@ -89,6 +100,9 @@ class RequestController extends Controller
         foreach ($request->id as $course) {
             session()->forget("cart.$course");
         }
+
+        // refresh the cache
+        $this->getRequests($cache = false);
 
         return redirect(route('requests.show', $req));
     }
