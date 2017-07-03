@@ -34,6 +34,9 @@ class UpcomingTermTest extends TestCase
             ['2016-12-01', '<option selected>Spring</option><option>Summer</option><option>Fall</option>'],
             ['2017-02-01', '<option>Spring</option><option selected>Summer</option><option>Fall</option>'],
             ['2017-08-30', '<option>Spring</option><option>Summer</option><option selected>Fall</option>'],
+            ['spring', '<option selected>Spring</option><option>Summer</option><option>Fall</option>'],
+            ['summer', '<option>Spring</option><option selected>Summer</option><option>Fall</option>'],
+            ['Fall',   '<option>Spring</option><option>Summer</option><option selected>Fall</option>'],
         ];
     }
 

@@ -45,7 +45,13 @@ class UpcomingTerm
 
     public static function getTermOptions(string $date) : string
     {
-        $selected = static::get($date)['term'];
+        $date = strtolower($date);
+
+        if (in_array($date, ['spring', 'summer', 'fall'])) {
+            $selected = $date;
+        } else {
+            $selected = static::get($date)['term'];
+        }
 
         $options = '';
 
