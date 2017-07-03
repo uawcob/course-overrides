@@ -10,14 +10,14 @@ class SemesterTest extends TestCase
     public function strmDataProvider()
     {
         return [
-            ['spring', 2017, '1173'],
-            ['Summer', 2017, '1176'],
-            ['Fall',   2017, '1179'],
-            ['Fall',   2099, '1999'],
-            ['Fall',   2100, '2009'], // century boundary condition (not actual century)
-            ['Fall',   2101, '2019'],
-            ['fall', '2018', '1189'],
-            ['spring', 1999, '0993'],
+            ['spring', 2017, '1173', 'Spring 2017'],
+            ['Summer', 2017, '1176', 'Summer 2017'],
+            ['Fall',   2017, '1179', 'Fall 2017'],
+            ['Fall',   2099, '1999', 'Fall 2099'],
+            ['Fall',   2100, '2009', 'Fall 2100'], // century boundary condition (not actual century)
+            ['Fall',   2101, '2019', 'Fall 2101'],
+            ['fall', '2018', '1189', 'Fall 2018'],
+            ['spring', 1999, '0993', 'Spring 1999'],
         ];
     }
 
@@ -27,6 +27,16 @@ class SemesterTest extends TestCase
     public function test_returns_strm_for_semester(string $term, int $year, string $expected)
     {
         $actual = Semester::strm($term, $year);
+
+        $this->assertSame($expected, $actual);
+    }
+
+    /**
+     * @dataProvider strmDataProvider
+     */
+    public function test_given_strm_returns_canonical(string $term, int $year, string $strm, string $expected)
+    {
+        $actual = (Semester::createFromStrm($strm))->canonical();
 
         $this->assertSame($expected, $actual);
     }

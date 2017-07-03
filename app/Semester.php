@@ -109,6 +109,11 @@ class Semester implements \JsonSerializable
         }
     }
 
+    public function canonical() : string
+    {
+        return "{$this->term()} {$this->year()}";
+    }
+
     public function __toString()
     {
         return $this->string();
