@@ -18,6 +18,16 @@ class Schedule extends Model
         return (Semester::createFromStrm($this->strm))->canonical();
     }
 
+    public function term() : string
+    {
+        return (Semester::createFromStrm($this->strm))->term();
+    }
+
+    public function year() : int
+    {
+        return (Semester::createFromStrm($this->strm))->year();
+    }
+
     // hack fix for SQL Server date format .000
     protected function getDateFormat()
     {

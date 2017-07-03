@@ -92,7 +92,7 @@ class ScheduleController extends Controller
      */
     public function edit(Schedule $schedule)
     {
-        //
+        return view('schedules.edit', compact('schedule'));
     }
 
     /**
@@ -104,7 +104,15 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        //
+        $semester = new Semester($request->term, $request->year);
+
+        $data = array_merge($request->all(), ['strm' => (string)$semester]);
+
+        $schedule->update($data);
+
+        Cache::forget('schedules');
+
+        return redirect(route('schedules.show', $schedule));
     }
 
     /**
@@ -115,6 +123,6 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
-        //
+        Cache::forget('schedules');
     }
 }
