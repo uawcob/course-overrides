@@ -13,6 +13,11 @@ class Schedule extends Model
         'finish',
     ];
 
+    public function semester() : string
+    {
+        return (Semester::createFromStrm($this->strm))->canonical();
+    }
+
     // hack fix for SQL Server date format .000
     protected function getDateFormat()
     {
