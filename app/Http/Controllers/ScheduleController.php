@@ -8,6 +8,7 @@ use App\{
 };
 use Illuminate\Http\Request;
 use App\Http\Middleware\Admin;
+use Cache;
 
 class ScheduleController extends Controller
 {
@@ -23,7 +24,24 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return view('schedules.index');
+        $schedules = Cache::rememberForever('schedules', function(){
+            $schedules = Schedule::all()->map(function($schedule){
+                $link = '<a class="btn btn-default" href="%s">View</a>';
+                $row['link'] = sprintf($link, route('schedules.show', $schedule));
+
+                $row['start'] = "{$schedule->start}";
+                $row['finish'] = "{$schedule->finish}";
+
+                $semester = Semester::createFromStrm($schedule->strm);
+                $row['semester'] = $semester->term();
+                $row['year'] = $semester->year();
+
+                return $row;
+            });
+            return str_replace('\\', '\\\\', json_encode($schedules));
+        });
+
+        return view('schedules.index', ['schedules' => $schedules]);
     }
 
     /**
@@ -49,6 +67,8 @@ class ScheduleController extends Controller
         $data = array_merge($request->all(), ['strm' => (string)$semester]);
 
         $schedule = Schedule::create($data);
+
+        Cache::forget('schedules');
 
         return redirect(route('schedules.show', $schedule));
     }
