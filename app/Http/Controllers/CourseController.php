@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Semester;
 use App\RazorbackApi\Courses\CoursesApiClient;
 use Datatables;
+use Cache;
 
 class CourseController extends Controller
 {
@@ -29,13 +30,15 @@ class CourseController extends Controller
     {
         $this->authorize('view', Course::class);
 
-        return Datatables::collection(Course::all())
+        return Cache::rememberForever('courses', function(){
+            return Datatables::collection(Course::all())
             ->addColumn('add', function (Course $course) {
                 $link = '<button id="btn-cart-add-%u" class="btn-cart btn btn-success" data-url="%s">Add</button>';
                 return sprintf($link, $course->id, route('cart.add', $course));
             })
             ->rawColumns(['add'])
             ->make(true);
+        });
     }
 
     /**
@@ -70,6 +73,8 @@ class CourseController extends Controller
         $course = Course::make($request->all());
         $course->semester = Semester::createFromStrm($request->strm);
         $course->save();
+
+        Cache::forget('courses');
 
         return redirect(route('courses.show', $course));
     }

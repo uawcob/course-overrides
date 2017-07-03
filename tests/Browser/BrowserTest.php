@@ -7,10 +7,17 @@ use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 use App\Course;
+use Cache;
 
 class BrowserTest extends DuskTestCase
 {
     use DatabaseMigrations;
+
+    public function setUp()
+    {
+        parent::setUp();
+        Cache::flush();
+    }
 
     public function test_anonymous_welcome()
     {
