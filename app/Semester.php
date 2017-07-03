@@ -65,6 +65,7 @@ class Semester implements \JsonSerializable
             case 'spring':
             case 'summer':
             case 'fall':
+                $term[0] = strtoupper($term[0]);
                 return $this->term = $term;
             default:
                 throw new InvalidSemester("invalid term: $term");
@@ -99,11 +100,11 @@ class Semester implements \JsonSerializable
         }
 
         switch($this->term) {
-            case 'spring':
+            case 'Spring':
                 return "{$prefix}3";
-            case 'summer':
+            case 'Summer':
                 return "{$prefix}6";
-            case 'fall':
+            case 'Fall':
                 return "{$prefix}9";
         }
     }
