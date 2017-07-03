@@ -123,6 +123,10 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
+        $schedule->delete();
+
         Cache::forget('schedules');
+
+        return redirect(route('schedules.index'));
     }
 }
