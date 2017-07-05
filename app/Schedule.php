@@ -13,6 +13,19 @@ class Schedule extends Model
         'finish',
     ];
 
+    public static function isOpen(string $datetime = null) : bool
+    {
+        if (empty($datetime)) {
+            $datetime = Carbon::now();
+        }
+
+        $schedules = static::where('finish', '>', $datetime)
+            ->where('start', '<', $datetime)
+            ->get();
+
+        return !$schedules->isEmpty();
+    }
+
     public function semester() : string
     {
         return (Semester::createFromStrm($this->strm))->canonical();
