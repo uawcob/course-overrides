@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::name('courses.data')->get('/courses/data', 'CourseController@data');
