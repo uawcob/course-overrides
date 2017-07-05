@@ -34,6 +34,8 @@ class BrowserTest extends DuskTestCase
 
     public function test_user_adds_and_removes_course_from_cart()
     {
+        openSchedule();
+
         $this->browse(function (Browser $browser) {
 
             $user = create(User::class);
@@ -77,6 +79,8 @@ class BrowserTest extends DuskTestCase
 
     public function test_user_can_see_plans()
     {
+        openSchedule();
+
         $this->browse(function (Browser $browser) {
 
             $user = create(User::class, ['student_id' => '900000005']);
@@ -92,6 +96,8 @@ class BrowserTest extends DuskTestCase
 
     public function test_drag_drop_course_priority()
     {
+        openSchedule();
+
         $this->browse(function (Browser $browser) {
 
             $class = 'ECON2013';

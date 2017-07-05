@@ -13,7 +13,7 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => ['auth', 'open']], function(){
     Route::name('courses.data')->get('/courses/data', 'CourseController@data');
     Route::name('courses.fetch')->post('/courses/fetch', 'CourseController@fetch');
     Route::resource('courses', 'CourseController');

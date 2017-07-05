@@ -15,6 +15,8 @@ class RequestTest extends TestCase
 
     public function test_makes_request_for_course()
     {
+        openSchedule();
+
         $course = create(Course::class);
 
         $response = $this
@@ -45,6 +47,8 @@ class RequestTest extends TestCase
 
     public function test_views_course_request_form()
     {
+        openSchedule();
+
         $course1 = create(Course::class, ['code' => 'WCOB2013']);
         $course2 = create(Course::class, ['code' => 'WCOB2013']);
         $course3 = create(Course::class, ['code' => 'FINN2013']);

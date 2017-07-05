@@ -18,7 +18,7 @@ class AdminTest extends TestCase
         $this
             ->signIn()
             ->get('/admin')
-            ->assertStatus(403)
+            ->assertRedirect('/')
         ;
     }
 

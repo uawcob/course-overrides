@@ -17,6 +17,8 @@ class CourseTest extends TestCase
     {
         $this->withExceptionHandling();
 
+        openSchedule();
+
         $response = $this
             ->signIn()
             ->get('/courses/create');

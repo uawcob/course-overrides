@@ -15,6 +15,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->disableExceptionHandling();
+        \App\Schedule::flushCache();
     }
 
     protected function signIn($user = null)

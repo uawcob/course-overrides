@@ -8,6 +8,9 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 use App\Course;
+use App\Semester;
+use App\Schedule;
+use Carbon\Carbon;
 
 class CartTest extends TestCase
 {
@@ -15,7 +18,11 @@ class CartTest extends TestCase
 
     public function test_adds_and_removes_course_from_cart()
     {
-        $course = create(Course::class);
+        openSchedule();
+
+        $course = make(Course::class);
+        $course->semester(Semester::createFromStrm('1179'));
+        $course->save();
 
         $this
             ->signIn()
