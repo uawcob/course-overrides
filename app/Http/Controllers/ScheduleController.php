@@ -24,22 +24,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $schedules = Cache::rememberForever('schedules', function(){
-            $schedules = Schedule::all()->map(function($schedule){
-                $link = '<a class="btn btn-default" href="%s">View</a>';
-                $row['link'] = sprintf($link, route('schedules.show', $schedule));
-
-                $row['start'] = "{$schedule->start}";
-                $row['finish'] = "{$schedule->finish}";
-
-                $semester = Semester::createFromStrm($schedule->strm);
-                $row['semester'] = $semester->term();
-                $row['year'] = $semester->year();
-
-                return $row;
-            });
-            return str_replace('\\', '\\\\', json_encode($schedules));
-        });
+        $schedules = Schedule::jsDatatable();
 
         return view('schedules.index', ['schedules' => $schedules]);
     }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Cache;
 
 class Schedule extends Model
 {
@@ -37,6 +38,26 @@ class Schedule extends Model
     public static function flushCache()
     {
         static::$cache = null;
+    }
+
+    public static function jsDatatable()
+    {
+        return Cache::rememberForever('schedules', function(){
+            $schedules = Schedule::all()->map(function(Schedule $schedule){
+                $link = '<a class="btn btn-default" href="%s">View</a>';
+                $row['link'] = sprintf($link, route('schedules.show', $schedule));
+
+                $row['start'] = "{$schedule->start}";
+                $row['finish'] = "{$schedule->finish}";
+
+                $semester = Semester::createFromStrm($schedule->strm);
+                $row['semester'] = $semester->term();
+                $row['year'] = $semester->year();
+
+                return $row;
+            });
+            return str_replace('\\', '\\\\', json_encode($schedules));
+        });
     }
 
     public function semester() : string
