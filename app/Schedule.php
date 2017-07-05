@@ -60,6 +60,26 @@ class Schedule extends Model
         });
     }
 
+    public static function upcomingWelcomeLis()
+    {
+        return Cache::rememberForever('upcomingWelcomeLis', function(){
+            return Schedule::where('finish', '>', new Carbon)
+                ->orderBy('start')
+                ->get()
+                ->map(function(Schedule $schedule){
+                    $semester = Semester::createFromStrm($schedule->strm);
+                    $semester = "{$semester->term()} {$semester->year()}";
+
+                    $start  = $schedule->start ->format('l, F jS Y, g:i:s A');
+                    $finish = $schedule->finish->format('l, F jS Y, g:i:s A');
+
+                    $li = '<li>%s<br>Open %s<br>Close %s</li>';
+                    return sprintf($li, $semester, $start, $finish);
+                })
+                ->implode('');
+        });
+    }
+
     public function semester() : string
     {
         return (Semester::createFromStrm($this->strm))->canonical();

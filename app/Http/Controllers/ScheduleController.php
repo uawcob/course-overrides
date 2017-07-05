@@ -54,6 +54,7 @@ class ScheduleController extends Controller
         $schedule = Schedule::create($data);
 
         Cache::forget('schedules');
+        Cache::forget('upcomingWelcomeLis');
 
         return redirect(route('schedules.show', $schedule));
     }
@@ -96,6 +97,7 @@ class ScheduleController extends Controller
         $schedule->update($data);
 
         Cache::forget('schedules');
+        Cache::forget('upcomingWelcomeLis');
 
         return redirect(route('schedules.show', $schedule));
     }
@@ -111,6 +113,7 @@ class ScheduleController extends Controller
         $schedule->delete();
 
         Cache::forget('schedules');
+        Cache::forget('upcomingWelcomeLis');
 
         return redirect(route('schedules.index'));
     }

@@ -10,10 +10,10 @@
     <table class="table table-bordered datatable" id="schedules-table">
         <thead>
             <tr>
-                <th>Start</th>
-                <th>Finish</th>
                 <th>Semester</th>
                 <th>Year</th>
+                <th>Open</th>
+                <th>Close</th>
                 <th>View</th>
             </tr>
         </thead>
@@ -27,12 +27,13 @@ $(function() {
         responsive: true,
         data: JSON.parse('{!! $schedules !!}'),
         columns: [
-            { data: 'start', name: 'start' },
-            { data: 'finish', name: 'finish' },
             { data: 'semester', name: 'semester' },
             { data: 'year', name: 'year' },
+            { data: 'start', name: 'start' },
+            { data: 'finish', name: 'finish' },
             { data: 'link', name: 'link' },
         ],
+        "order": [[ 2, "asc" ]],
     });
 });
 </script>

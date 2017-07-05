@@ -44,7 +44,7 @@ class ScheduleTest extends TestCase
 
         $this->get($response->headers->get('Location'))
             ->assertSee($semester->canonical())
-            ->assertSee($start->timezone('America/Chicago')->format('l, F jS Y, h:i:s A'))
-            ->assertSee($finish->timezone('America/Chicago')->format('l, F jS Y, h:i:s A'));
+            ->assertSee($start->timezone('America/Chicago')->format('l, F jS Y, g:i:s A'))
+            ->assertSee($finish->timezone('America/Chicago')->format('l, F jS Y, g:i:s A'));
     }
 }
