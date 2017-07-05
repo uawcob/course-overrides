@@ -7,6 +7,7 @@ use Carbon\Carbon;
 
 class Schedule extends Model
 {
+    protected static $cache;
     protected $fillable = [
         'strm',
         'start',
@@ -15,15 +16,27 @@ class Schedule extends Model
 
     public static function isOpen(string $datetime = null) : bool
     {
+        return is_string(static::openStrm($datetime ?? ''));
+    }
+
+    public static function openStrm(string $datetime = null)
+    {
+        $key = "$datetime";
         if (empty($datetime)) {
             $datetime = Carbon::now();
+            $key = 'now';
         }
 
-        $schedules = static::where('finish', '>', $datetime)
-            ->where('start', '<', $datetime)
-            ->get();
+        return static::$cache[$key] ?? static::$cache[$key] =
+            static::where('finish', '>', $datetime)
+                ->where('start', '<', $datetime)
+                ->first()
+                ->strm ?? false;
+    }
 
-        return !$schedules->isEmpty();
+    public static function flushCache()
+    {
+        static::$cache = null;
     }
 
     public function semester() : string
