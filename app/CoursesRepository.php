@@ -7,9 +7,9 @@ use Datatables;
 
 class CoursesRepository
 {
-    public function dtJson(string $strm = null)
+    public function dtJson($strm = null)
     {
-        if (is_null($strm)) {
+        if (empty($strm)) {
             $strm = Schedule::openStrm();
         }
 

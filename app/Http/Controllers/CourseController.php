@@ -23,16 +23,18 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($strm = null)
     {
-        return view('courses.index');
+        $route = route('courses.data')."?strm=$strm";
+
+        return view('courses.index', compact('route'));
     }
 
-    public function data()
+    public function data(Request $request)
     {
         $this->authorize('view', Course::class);
 
-        return $this->courses->dtJson();
+        return $this->courses->dtJson($request->strm);
     }
 
     /**

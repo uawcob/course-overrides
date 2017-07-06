@@ -31,7 +31,7 @@
 $(function() {
     $('#courses-table').DataTable({
         responsive: true,
-        ajax: '{!! route('courses.data') !!}',
+        ajax: '{!! $route !!}',
         columns: [
             { data: 'code', name: 'code' },
             { data: 'title', name: 'title' },
