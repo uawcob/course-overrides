@@ -7,6 +7,7 @@ use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 use App\Course;
+use App\Semester;
 use Cache;
 
 class BrowserTest extends DuskTestCase
@@ -28,6 +29,31 @@ class BrowserTest extends DuskTestCase
                     ->assertDontSee('Classes')
                     ->assertDontSee('Cart')
                     ->assertDontSee('Admin')
+            ;
+        });
+    }
+
+    public function test_user_only_sees_this_term_courses()
+    {
+        openSchedule();
+
+        $this->browse(function (Browser $browser) {
+
+            $course1 = make(Course::class);
+            $course1->semester(new Semester('Spring', 2017));
+            $course1->save();
+
+            $course2 = create(Course::class);
+
+            $user = create(User::class);
+
+            $browser
+                ->loginAs($user)
+                ->visit('/courses')
+                ->whenAvailable('#courses-table_wrapper', function ($datatable) use ($course1, $course2) {
+                    $datatable->assertDontSee($course1->title);
+                    $datatable->assertSee($course2->title);
+                })
             ;
         });
     }

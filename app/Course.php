@@ -14,11 +14,12 @@ class Course extends Model
         'section',
         'title',
         'time',
+        'semester',
     ];
 
     public function semester(Semester $semester)
     {
-        $this->semester = $semester;
+        $this->attributes['semester'] = $semester->string();
     }
 
     public function requests()

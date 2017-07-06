@@ -15,8 +15,8 @@ class CoursesRepository
 
         $key = "courses$strm";
 
-        return Cache::rememberForever($key, function(){
-            return Datatables::collection(Course::all())
+        return Cache::rememberForever($key, function () use ($strm) {
+            return Datatables::collection(Course::where('semester', $strm)->get())
             ->addColumn('add', function (Course $course) {
                 $link = '<button id="btn-cart-add-%u" class="btn-cart btn btn-success" data-url="%s">Add</button>';
                 return sprintf($link, $course->id, route('cart.add', $course));
