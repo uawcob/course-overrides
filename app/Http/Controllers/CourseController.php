@@ -6,14 +6,17 @@ use App\Course;
 use Illuminate\Http\Request;
 use App\Semester;
 use App\RazorbackApi\Courses\CoursesApiClient;
-use Datatables;
 use Cache;
+use App\CoursesRepository;
 
 class CourseController extends Controller
 {
-    public function __construct()
+    protected $courses;
+
+    public function __construct(CoursesRepository $courses)
     {
         $this->authorizeResource(Course::class);
+        $this->courses = $courses;
     }
 
     /**
@@ -30,15 +33,7 @@ class CourseController extends Controller
     {
         $this->authorize('view', Course::class);
 
-        return Cache::rememberForever('courses', function(){
-            return Datatables::collection(Course::all())
-            ->addColumn('add', function (Course $course) {
-                $link = '<button id="btn-cart-add-%u" class="btn-cart btn btn-success" data-url="%s">Add</button>';
-                return sprintf($link, $course->id, route('cart.add', $course));
-            })
-            ->rawColumns(['add'])
-            ->make(true);
-        });
+        return $this->courses->dtJson();
     }
 
     /**
