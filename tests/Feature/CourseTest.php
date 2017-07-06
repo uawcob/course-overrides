@@ -52,10 +52,9 @@ class CourseTest extends TestCase
         $response->assertStatus(302);
 
         $this->get($response->headers->get('Location'))
-            ->assertJson($course->toArray());
-//             ->assertSee($course->number)
-//             ->assertSee($course->title)
-//             ->assertSee($course->code);
+            ->assertSee("{$course->number}")
+            ->assertSee($course->title)
+            ->assertSee($course->code);
     }
 
     public function test_view_courses_only_when_authenticated()
