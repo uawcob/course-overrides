@@ -11,6 +11,29 @@
         and proceed to checkout.
     </p>
 
+    @if (Auth::user()->isAdmin())
+    <div class="semesterSelector" style="padding:10px">
+        <form class="form-inline" action="{{ route('courses.term') }}">
+            <div class="form-group">
+                <label for="semester">Semester:</label>
+                <select class="form-control" id="semester" name="semester" required>
+                    {!! $semesterOptions !!}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input id="year" name="year" class="form-control" required
+                    type="number"
+                    value="{{ $year }}"
+                >
+            </div>
+
+            <button type="submit" class="btn btn-default">Filter</button>
+        </form>
+    </div>
+    @endif
+
     <table class="table table-bordered datatable" id="courses-table">
         <thead>
             <tr>

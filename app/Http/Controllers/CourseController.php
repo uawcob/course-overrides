@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Semester;
 use App\RazorbackApi\Courses\CoursesApiClient;
 use App\CoursesRepository;
+use App\UpcomingTerm;
 
 class CourseController extends Controller
 {
@@ -23,11 +24,33 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($strm = null)
+    public function index()
     {
-        $route = route('courses.data')."?strm=$strm";
+        $data = [
+            'route' => route('courses.data'),
+            'year' => UpcomingTerm::get(date('Y-m-d'))['year'],
+            'semesterOptions' => UpcomingTerm::getTermOptions(date('Y-m-d')),
+        ];
 
-        return view('courses.index', compact('route'));
+        return view('courses.index', $data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function term(Request $request)
+    {
+        $strm = new Semester($request->semester, $request->year);
+
+        $data = [
+            'route' => route('courses.data')."?strm=$strm",
+            'year' => $request->year,
+            'semesterOptions' => UpcomingTerm::getTermOptions($request->semester),
+        ];
+
+        return view('courses.index', $data);
     }
 
     public function data(Request $request)

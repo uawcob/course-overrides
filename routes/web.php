@@ -14,7 +14,7 @@
 Route::get('/', 'WelcomeController@index');
 
 Route::group(['middleware' => ['auth', 'open']], function(){
-    Route::name('courses.strm')->get('/courses/strm/{strm}', 'CourseController@index')->middleware('admin');
+    Route::name('courses.term')->get('/courses/term', 'CourseController@term')->middleware('admin');
     Route::name('courses.data')->get('/courses/data', 'CourseController@data');
     Route::name('courses.fetch')->post('/courses/fetch', 'CourseController@fetch');
     Route::resource('courses', 'CourseController');

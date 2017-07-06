@@ -10,7 +10,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="term">Semester:</label>
             <div class="col-sm-10">
-                <select class="form-control" id="term" name="term">
+                <select class="form-control" id="term" name="term" required>
                     {!! App\UpcomingTerm::getTermOptions(date('Y-m-d')) !!}
                 </select>
             </div>
