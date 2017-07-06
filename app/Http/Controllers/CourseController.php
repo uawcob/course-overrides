@@ -6,7 +6,6 @@ use App\Course;
 use Illuminate\Http\Request;
 use App\Semester;
 use App\RazorbackApi\Courses\CoursesApiClient;
-use Cache;
 use App\CoursesRepository;
 
 class CourseController extends Controller
@@ -69,7 +68,7 @@ class CourseController extends Controller
         $course->semester = Semester::createFromStrm($request->strm);
         $course->save();
 
-        Cache::forget('courses');
+        $this->courses->refresh($request->strm);
 
         return redirect(route('courses.show', $course));
     }
