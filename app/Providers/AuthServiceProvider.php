@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\{
     Course,
-    Request
+    Request,
+    Note
 };
 use App\Policies\{
     CoursePolicy,
-    RequestPolicy
+    RequestPolicy,
+    NotePolicy
 };
 
 class AuthServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Course::class => CoursePolicy::class,
         Request::class => RequestPolicy::class,
+        Note::class => NotePolicy::class,
     ];
 
     /**

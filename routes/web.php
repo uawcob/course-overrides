@@ -33,4 +33,6 @@ Route::group(['middleware' => ['auth', 'open']], function(){
     Route::resource('requests', 'RequestController', ['parameters' => [
         'requests' => 'req',
     ]]);
+
+    Route::resource('notes', 'NoteController');
 });
