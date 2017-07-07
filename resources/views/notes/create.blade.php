@@ -23,6 +23,20 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
+                <label class="control-label" for="context">Context</label>
+            </div>
+            <div class="panel-body">
+                <select class="form-control" id="context" name="context[]" multiple required>
+                    <option disabled></option>
+                    @foreach ($contexts as $context)
+                        <option value="{{ $context }}">{{ $context }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
                 <label class="control-label" for="sensitivity">Sensitivity</label>
             </div>
             <div class="panel-body">

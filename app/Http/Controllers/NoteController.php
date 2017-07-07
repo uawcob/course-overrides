@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Note;
 use App\Context;
+use App\Course;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -32,7 +33,13 @@ class NoteController extends Controller
      */
     public function create()
     {
-        return view('notes.create');
+        $contexts = Course::distinct()->pluck('code')->merge([
+            'Spring',
+            'Summer',
+            'Fall',
+        ]);
+
+        return view('notes.create', compact('contexts'));
     }
 
     /**
