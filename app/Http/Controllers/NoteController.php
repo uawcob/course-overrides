@@ -19,7 +19,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::all();
+        $notes = Note::withTrashed()->orderBy('deleted_at')->get();
 
         return view('notes.index', compact('notes'));
     }
@@ -53,8 +53,10 @@ class NoteController extends Controller
      * @param  \App\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function show(Note $note)
+    public function show($note)
     {
+        $note = Note::withTrashed()->find($note);
+
         return view('notes.show', compact('note'));
     }
 
@@ -83,6 +85,21 @@ class NoteController extends Controller
         return redirect(route('notes.show', $note));
     }
 
+    public function disable($note)
+    {
+        $note = Note::withTrashed()->find($note);
+
+        $this->authorize('delete', $note);
+
+        if ($note->trashed()) {
+            $note->restore();
+        } else {
+            $note->delete();
+        }
+
+        return redirect(route('notes.show', $note));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -91,6 +108,8 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $note->forceDelete();
+
+        return redirect(route('notes.index'));
     }
 }

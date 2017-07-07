@@ -7,7 +7,5 @@
         <a href="{{ route('notes.create') }}" class="btn btn-success">Add</a>
     </p>
 
-    @foreach ($notes as $note)
-        @include ('notes.ui')
-    @endforeach
+    @include ('notes.ui')
 @endsection

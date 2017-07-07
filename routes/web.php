@@ -34,5 +34,6 @@ Route::group(['middleware' => ['auth', 'open']], function(){
         'requests' => 'req',
     ]]);
 
+    Route::name('notes.disable')->delete('/notes/disable/{note}', 'NoteController@disable');
     Route::resource('notes', 'NoteController');
 });
