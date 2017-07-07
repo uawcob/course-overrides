@@ -15,6 +15,7 @@ class Note extends Model
 
     protected $fillable = [
         'body',
+        'sensitivity',
     ];
 
     // hack fix for SQL Server date format .000

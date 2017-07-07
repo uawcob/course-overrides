@@ -40,7 +40,9 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $note = Note::create($request->all());
+
+        return redirect(route('notes.show', $note));
     }
 
     /**
@@ -51,7 +53,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        //
+        return $note;
     }
 
     /**

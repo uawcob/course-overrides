@@ -40,3 +40,11 @@ $factory->define(App\Course::class, function (Faker\Generator $faker) {
         'semester' => new App\Semester('Fall', 2017),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Note::class, function (Faker\Generator $faker) {
+    return [
+        'body' => $faker->paragraph(),
+        'sensitivity' => $faker->regexify('(success|info|warning|danger)'),
+    ];
+});

@@ -34,4 +34,20 @@ class NoteTest extends TestCase
             ->assertStatus(200)
         ;
     }
+
+    public function test_creates_note()
+    {
+        $note = make(Note::class);
+
+        $response = $this
+            ->signInAdmin()
+            ->post('/notes', $note->toArray())
+        ;
+
+        $response->assertStatus(302);
+
+        $this->get($response->headers->get('Location'))
+            ->assertSee($note->body)
+        ;
+    }
 }
