@@ -23,4 +23,19 @@ class Note extends Model
     {
         return 'Y-m-d H:i:s';
     }
+
+    public function getSensitivityOptions() : string
+    {
+        $html = '';
+
+        foreach (['success', 'info', 'warning', 'danger'] as $sensitivity) {
+            $selected = ($this->attributes['sensitivity'] === $sensitivity)
+                ? ' selected'
+                : '';
+
+            $html .= "<option value=\"$sensitivity\"$selected>$sensitivity</option>";
+        }
+
+        return $html;
+    }
 }

@@ -66,7 +66,7 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        //
+        return view('notes.edit', compact('note'));
     }
 
     /**
@@ -78,7 +78,9 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        //
+        $note->update($request->all());
+
+        return redirect(route('notes.show', $note));
     }
 
     /**
