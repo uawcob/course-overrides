@@ -3,6 +3,10 @@
 @section('content')
     <h1>Create Note</h1>
 
+    <p class="lead">
+        <a href="{{ route('notes.index') }}" class="btn btn-default">Index</a>
+    </p>
+
     <form class="form-horizontal" method="POST"
         action="{{ route('notes.store') }}"
     >
