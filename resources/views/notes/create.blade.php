@@ -1,5 +1,9 @@
 @extends('layout')
 
+@push('head')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+@endpush
+
 @section('content')
     <h1>Create Note</h1>
 
@@ -26,7 +30,12 @@
                 <label class="control-label" for="context">Context</label>
             </div>
             <div class="panel-body">
-                <select class="form-control" id="context" name="context[]" multiple required>
+                <select id="context" name="context[]"
+                    class="js-example-basic-multiple"
+                    style="width:100%"
+                    multiple
+                    required
+                >
                     <option disabled></option>
                     @foreach ($contexts as $context)
                         <option value="{{ $context }}">{{ $context }}</option>
@@ -52,3 +61,12 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script>
+$(function(){
+    $('#context').select2();
+});
+</script>
+@endpush

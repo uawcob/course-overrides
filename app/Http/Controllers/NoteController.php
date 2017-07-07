@@ -84,7 +84,16 @@ class NoteController extends Controller
     {
         $note = Note::withTrashed()->with('contexts')->find($note);
 
-        return view('notes.edit', compact('note'));
+        $contexts = Course::distinct()->pluck('code')->merge([
+            'Spring',
+            'Summer',
+            'Fall',
+        ])->diff($note->contexts->pluck('key'));
+
+        return view('notes.edit', [
+            'contexts' => $contexts,
+            'note' => $note,
+        ]);
     }
 
     /**
@@ -97,6 +106,13 @@ class NoteController extends Controller
     public function update(Request $request, Note $note)
     {
         $note->update($request->all());
+
+        if ($request->has('context')) {
+            Context::where('note_id', $note->id)->delete();
+            foreach ($request->context as $context) {
+                $note->contexts()->save(new Context(['key' => $context]));
+            }
+        }
 
         return redirect(route('notes.show', $note));
     }
