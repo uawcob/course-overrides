@@ -27,6 +27,14 @@ abstract class TestCase extends BaseTestCase
         return $this;
     }
 
+    protected function signInAdmin($user = null)
+    {
+        return $this
+            ->signIn($user)
+            ->withServerVariables(['entitlement' => 'admin'])
+        ;
+    }
+
     // Hat tip, @adamwathan.
     protected function disableExceptionHandling()
     {
