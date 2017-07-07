@@ -38,4 +38,9 @@ class Note extends Model
 
         return $html;
     }
+
+    public function contexts()
+    {
+        return $this->hasMany(Context::class);
+    }
 }

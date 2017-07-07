@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Note;
+use App\Context;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -19,7 +20,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::withTrashed()->orderBy('deleted_at')->get();
+        $notes = Note::withTrashed()->with('contexts')->orderBy('deleted_at')->get();
 
         return view('notes.index', compact('notes'));
     }
@@ -44,6 +45,12 @@ class NoteController extends Controller
     {
         $note = Note::create($request->all());
 
+        if ($request->has('context')) {
+            foreach ($request->context as $context) {
+                $note->contexts()->save(new Context(['key' => $context]));
+            }
+        }
+
         return redirect(route('notes.show', $note));
     }
 
@@ -55,7 +62,7 @@ class NoteController extends Controller
      */
     public function show($note)
     {
-        $note = Note::withTrashed()->find($note);
+        $note = Note::withTrashed()->with('contexts')->find($note);
 
         return view('notes.show', compact('note'));
     }
@@ -66,8 +73,10 @@ class NoteController extends Controller
      * @param  \App\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function edit(Note $note)
+    public function edit($note)
     {
+        $note = Note::withTrashed()->with('contexts')->find($note);
+
         return view('notes.edit', compact('note'));
     }
 

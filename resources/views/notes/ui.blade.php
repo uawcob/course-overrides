@@ -12,6 +12,12 @@
             @include ('include.note')
         </div>
 
+        <ul>
+            @foreach ($note->contexts as $context)
+                <li>{{ $context->key }}</li>
+            @endforeach
+        </ul>
+
         <div class="panel-footer">
             <a href="{{ route('notes.show', $note) }}" class="btn btn-default">View</a>
             <a href="{{ route('notes.edit', $note) }}" class="btn btn-primary">Edit</a>

@@ -50,4 +50,28 @@ class NoteTest extends TestCase
             ->assertSee($note->body)
         ;
     }
+
+    public function test_creates_note_with_contexts()
+    {
+        $note = make(Note::class);
+        $context = [
+            str_random(16),
+            str_random(16),
+        ];
+
+        $data = array_merge($note->toArray(), ['context' => $context]);
+
+        $response = $this
+            ->signInAdmin()
+            ->post('/notes', $data)
+        ;
+
+        $response->assertStatus(302);
+
+        $this->get($response->headers->get('Location'))
+            ->assertSee($note->body)
+            ->assertSee($context[0])
+            ->assertSee($context[1])
+        ;
+    }
 }
