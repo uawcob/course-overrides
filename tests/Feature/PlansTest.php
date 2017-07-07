@@ -6,6 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
+use App\Course;
 
 class PlansTest extends TestCase
 {
@@ -34,12 +36,14 @@ class PlansTest extends TestCase
     {
         openSchedule();
 
-        $user = make('App\User');
-        $user->student_id = '900000001';
-        $user->save();
+        $user = create(User::class, ['student_id' => '900000001']);
+        $course = create(Course::class);
 
         $this
             ->signIn($user)
+            ->withSession([
+                "cart.{$course->id}" => $course,
+            ])
             ->get('/requests/create')
             ->assertStatus(200)
             ->assertSessionHas('plans', [
@@ -53,14 +57,16 @@ class PlansTest extends TestCase
     {
         openSchedule();
 
-        $user = make('App\User');
-        $user->student_id = '900000001';
-        $user->save();
+        $user = create(User::class, ['student_id' => '900000001']);
+        $course = create(Course::class);
 
         $this->assertEmpty($user->plans()->get());
 
         $this
             ->signIn($user)
+            ->withSession([
+                "cart.{$course->id}" => $course,
+            ])
             ->get('/requests/create')
             ->assertStatus(200)
         ;
