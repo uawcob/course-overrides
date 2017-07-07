@@ -8,6 +8,8 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 use App\Note;
+use App\Course;
+use App\Context;
 
 class NoteTest extends TestCase
 {
@@ -72,6 +74,28 @@ class NoteTest extends TestCase
             ->assertSee($note->body)
             ->assertSee($context[0])
             ->assertSee($context[1])
+        ;
+    }
+
+    public function test_note_appears_on_request_page()
+    {
+        openSchedule();
+
+        $course = create(Course::class);
+        $expected = create(Note::class);
+        $expected->contexts()->save(new Context(['key' => $course->code]));
+
+        $unexpected = create(Note::class);
+        $unexpected->contexts()->save(new Context(['key' => str_random(16)]));
+
+        $this
+            ->signIn()
+            ->withSession([
+                "cart.{$course->id}" => $course,
+            ])
+            ->get('/requests/create')
+            ->assertSee($expected->body)
+            ->assertDontSee($unexpected->body)
         ;
     }
 }

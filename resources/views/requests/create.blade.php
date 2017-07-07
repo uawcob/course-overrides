@@ -3,6 +3,10 @@
 @section('content')
     <h1>Create Request</h1>
 
+    @foreach ($notes as $note)
+        @include ('include.note')
+    @endforeach
+
     @unless (empty($plans))
     <div class="panel panel-default">
         <div class="panel-heading">

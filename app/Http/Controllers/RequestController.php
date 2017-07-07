@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\PlansRepository;
 use Auth;
+use App\Note;
 
 class RequestController extends Controller
 {
@@ -66,14 +67,20 @@ class RequestController extends Controller
      */
     public function create()
     {
-        foreach (session('cart') ?? [] as $course) {
+        if (empty(session('cart'))) {
+            return redirect(route('courses.index'));
+        }
+
+        foreach (session('cart') as $course) {
             $data[$course->code]['code'] = $course;
             $data[$course->code]['sections'] []= $course;
         }
 
         $data = [
-            'courses' => current($data ?? []),
+            'courses' => current($data),
             'plans' => $this->plans->get(),
+            'notes' => Note::join('contexts', 'notes.id', '=', 'contexts.note_id')
+                ->where('key', current($data)['code']->code)->get(),
         ];
 
         return view('requests.create', $data);
