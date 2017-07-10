@@ -22,6 +22,7 @@ class CreateContextsTable extends Migration
                 ->references('id')
                 ->on('notes')
                 ->onDelete('cascade');
+            $table->unique(['note_id', 'key']);
         });
     }
 
