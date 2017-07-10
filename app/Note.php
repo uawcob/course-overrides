@@ -43,4 +43,10 @@ class Note extends Model
     {
         return $this->hasMany(Context::class);
     }
+
+    public static function forContext(string $key)
+    {
+        return static::join('contexts', 'notes.id', '=', 'contexts.note_id')
+            ->where('key', $key)->get();
+    }
 }

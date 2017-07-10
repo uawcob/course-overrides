@@ -79,8 +79,7 @@ class RequestController extends Controller
         $data = [
             'courses' => current($data),
             'plans' => $this->plans->get(),
-            'notes' => Note::join('contexts', 'notes.id', '=', 'contexts.note_id')
-                ->where('key', current($data)['code']->code)->get(),
+            'notes' => Note::forContext(current($data)['code']->code),
         ];
 
         return view('requests.create', $data);

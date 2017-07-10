@@ -12,8 +12,7 @@ class WelcomeController extends Controller
     {
         $data = [
             'schedules' => Schedule::upcomingWelcomeLis(),
-            'notes' => Note::join('contexts', 'notes.id', '=', 'contexts.note_id')
-                ->where('key', 'welcome')->get(),
+            'notes' => Note::forContext('welcome'),
         ];
 
         return view('welcome', $data);
