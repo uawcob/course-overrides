@@ -108,7 +108,12 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return $course;
+        $data = [
+            'notes' => Note::forContext($course->code),
+            'course' => $course,
+        ];
+
+        return view('courses.show', $data);
     }
 
     /**
