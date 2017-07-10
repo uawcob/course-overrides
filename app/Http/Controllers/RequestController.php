@@ -79,7 +79,7 @@ class RequestController extends Controller
         $data = [
             'courses' => current($data),
             'plans' => $this->plans->get(),
-            'notes' => Note::forContext(current($data)['code']->code),
+            'notes' => Note::forContext(current($data)['code']->code, 'request'),
         ];
 
         return view('requests.create', $data);
