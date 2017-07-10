@@ -5,6 +5,9 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Request;
+use Auth;
+use Mail;
 
 class Handler extends ExceptionHandler
 {
@@ -32,6 +35,20 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if ( Reporter::wants($exception) ) {
+            $data = [
+                'exception' => $exception,
+                'user'      => Auth::user() . PHP_EOL . Request::ip(),
+                'request'   => Request::fullUrl() . PHP_EOL
+                            . print_r(Request::all(), true),
+            ];
+
+            Mail::send('email.exception', $data, function ($message) {
+                $message->to(config('mail.err'))
+                        ->subject('THROWN '.config('app.name'));
+            });
+        }
+
         parent::report($exception);
     }
 

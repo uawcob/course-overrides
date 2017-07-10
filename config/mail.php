@@ -120,4 +120,5 @@ return [
         ],
     ],
 
+    'err' => env('MAIL_ERROR_TO_ADDRESS', 'jpucket@uark.edu'),
 ];
