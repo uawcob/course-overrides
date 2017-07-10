@@ -14,4 +14,11 @@ class Context extends Model
     {
         return $this->belongsTo(Note::class);
     }
+
+    public static function common()
+    {
+        return [
+            'welcome',
+        ];
+    }
 }

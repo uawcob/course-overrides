@@ -33,11 +33,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $contexts = Course::distinct()->pluck('code')->merge([
-            'Spring',
-            'Summer',
-            'Fall',
-        ]);
+        $contexts = Course::distinct()->pluck('code')->merge(Context::common());
 
         return view('notes.create', compact('contexts'));
     }
@@ -84,11 +80,10 @@ class NoteController extends Controller
     {
         $note = Note::withTrashed()->with('contexts')->find($note);
 
-        $contexts = Course::distinct()->pluck('code')->merge([
-            'Spring',
-            'Summer',
-            'Fall',
-        ])->diff($note->contexts->pluck('key'));
+        $contexts = Course::distinct()
+            ->pluck('code')
+            ->merge(Context::common())
+            ->diff($note->contexts->pluck('key'));
 
         return view('notes.edit', [
             'contexts' => $contexts,

@@ -98,4 +98,15 @@ class NoteTest extends TestCase
             ->assertDontSee($unexpected->body)
         ;
     }
+
+    public function test_note_appears_on_welcome()
+    {
+        $note = create(Note::class);
+        $note->contexts()->save(new Context(['key' => 'welcome']));
+
+        $this
+            ->get('/')
+            ->assertSee($note->body)
+        ;
+    }
 }
