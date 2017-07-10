@@ -8,6 +8,7 @@ use App\Semester;
 use App\RazorbackApi\Courses\CoursesApiClient;
 use App\CoursesRepository;
 use App\UpcomingTerm;
+use App\Note;
 
 class CourseController extends Controller
 {
@@ -27,6 +28,7 @@ class CourseController extends Controller
     public function index()
     {
         $data = [
+            'notes' => Note::forContext('courses'),
             'route' => route('courses.data'),
             'year' => UpcomingTerm::get(date('Y-m-d'))['year'],
             'semesterOptions' => UpcomingTerm::getTermOptions(date('Y-m-d')),

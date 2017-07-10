@@ -11,6 +11,12 @@
         and proceed to checkout.
     </p>
 
+    @unless (empty($notes))
+        @foreach ($notes as $note)
+            @include ('include.note')
+        @endforeach
+    @endunless
+
     @if (Auth::user()->isAdmin())
     <div class="semesterSelector" style="padding:10px">
         <form class="form-inline" action="{{ route('courses.term') }}">

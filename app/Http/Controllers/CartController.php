@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use Illuminate\Http\Request;
 use Datatables;
+use App\Note;
 
 class CartController extends Controller
 {
@@ -15,7 +16,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart.index');
+        $data = [
+            'notes' => Note::forContext('cart'),
+        ];
+
+        return view('cart.index', $data);
     }
 
     public function data()

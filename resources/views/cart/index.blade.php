@@ -3,6 +3,12 @@
 @section('content')
     <h1>Cart</h1>
 
+    @unless (empty($notes))
+        @foreach ($notes as $note)
+            @include ('include.note')
+        @endforeach
+    @endunless
+
     <table class="table table-bordered datatable" id="courses-table">
         <thead>
             <tr>

@@ -99,13 +99,33 @@ class NoteTest extends TestCase
         ;
     }
 
-    public function test_note_appears_on_welcome()
+    public function commonContextDataProvider()
     {
+        return [
+            ['welcome', '/'],
+            ['courses', '/courses'],
+            ['cart',    '/cart'],
+            ['request', '/requests/create'],
+        ];
+    }
+
+    /**
+     * @dataProvider commonContextDataProvider
+     */
+    public function test_note_appears_on_context_page($key, $uri)
+    {
+        openSchedule();
+
+        $course = create(Course::class);
         $note = create(Note::class);
-        $note->contexts()->save(new Context(['key' => 'welcome']));
+        $note->contexts()->save(new Context(['key' => $key]));
 
         $this
-            ->get('/')
+            ->signIn()
+            ->withSession([
+                "cart.{$course->id}" => $course,
+            ])
+            ->get($uri)
             ->assertSee($note->body)
         ;
     }

@@ -19,6 +19,9 @@ class Context extends Model
     {
         return [
             'welcome',
+            'courses',
+            'cart',
+            'request',
         ];
     }
 }
