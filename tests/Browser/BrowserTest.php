@@ -9,6 +9,7 @@ use App\User;
 use App\Course;
 use App\Semester;
 use Cache;
+use Tests\Browser\Pages\Courses;
 
 class BrowserTest extends DuskTestCase
 {
@@ -112,6 +113,8 @@ class BrowserTest extends DuskTestCase
             $user = create(User::class, ['student_id' => '900000005']);
 
             $browser->loginAs($user)
+                    ->visit(new Courses)
+                    ->addToCart()
                     ->visit('/requests/create')
                     ->assertSee("Accounting")
                     ->assertSee("Minor in Finance-Bank/Fin")
