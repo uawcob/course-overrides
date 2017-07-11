@@ -26,9 +26,9 @@
 
 @section('navbar')
     @unless (Auth::guest())
-        <li><a href="{{ route('courses.index') }}">Classes</a></li>
+        <li><a href="{{ route('courses.index') }}">Search</a></li>
         <li><a href="{{ route('cart.index') }}">Cart</a></li>
-        <li><a href="{{ route('requests.index') }}">Requests</a></li>
+        <li><a href="{{ route('requests.index') }}">My Requests</a></li>
     @endunless
 @endsection
 

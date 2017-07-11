@@ -27,7 +27,7 @@ class BrowserTest extends DuskTestCase
             $browser->visit('/')
                     ->assertSee('Override')
                     ->assertSee('Login')
-                    ->assertDontSee('Classes')
+                    ->assertDontSee('Search')
                     ->assertDontSee('Cart')
                     ->assertDontSee('Admin')
             ;
@@ -71,14 +71,14 @@ class BrowserTest extends DuskTestCase
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertSee('Logout '.$user->name)
-                    ->assertSee('Classes')
+                    ->assertSee('Search')
                     ->assertSee('Cart')
                     ->assertDontSee('Admin')
                     ->clickLink('Cart')
                     ->whenAvailable('#courses-table_wrapper', function($datatable){
                         $datatable->assertSee('No data available in table');
                     })
-                    ->clickLink('Classes')
+                    ->clickLink('Search')
                     ->whenAvailable('#courses-table_wrapper', function($datatable)use($course){
                         $datatable
                             ->assertSee($course->code)
