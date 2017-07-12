@@ -1529,16 +1529,16 @@
         },
         {
             "name": "razorbacks/style",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/razorbacks/style.git",
-                "reference": "6eb7f28f304603e30f20c867c4d2d73ae4654253"
+                "reference": "53853a35ebae5c41d7a7aef64e02363defaacb46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/razorbacks/style/zipball/6eb7f28f304603e30f20c867c4d2d73ae4654253",
-                "reference": "6eb7f28f304603e30f20c867c4d2d73ae4654253",
+                "url": "https://api.github.com/repos/razorbacks/style/zipball/53853a35ebae5c41d7a7aef64e02363defaacb46",
+                "reference": "53853a35ebae5c41d7a7aef64e02363defaacb46",
                 "shasum": ""
             },
             "require": {
@@ -1558,7 +1558,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "razorbacks\\style\\": "php/"
+                    "razorbacks\\style\\": "php/src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1578,7 +1578,7 @@
                 "style",
                 "uark"
             ],
-            "time": "2017-06-30T19:39:21+00:00"
+            "time": "2017-07-12T19:56:24+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
