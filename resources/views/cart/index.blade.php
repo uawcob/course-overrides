@@ -22,7 +22,7 @@
     </table>
 
     @if(empty(session('cart')))
-        <a href="{{ route('courses.index') }}" class="btn btn-success">Add Some Classes</a>
+        <a href="{{ route('courses.index') }}" class="btn btn-success">Add Classes</a>
     @else
         <a href="{{ route('requests.create') }}" class="btn btn-success">Checkout</a>
     @endif

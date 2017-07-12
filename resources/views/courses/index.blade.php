@@ -52,7 +52,7 @@
         </thead>
     </table>
 
-    <a href="{{ route('cart.index') }}" class="btn btn-primary">Go to Cart</a>
+    <a href="{{ route('cart.index') }}" class="btn btn-success">Go to Cart</a>
 @endsection
 
 @push('scripts')
