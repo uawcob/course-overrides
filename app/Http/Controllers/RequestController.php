@@ -110,6 +110,8 @@ class RequestController extends Controller
         // refresh the cache
         $this->getRequests($cache = false);
 
+        flash('New override request submitted successfully!')->success();
+
         return redirect(route('requests.show', $req));
     }
 

@@ -3,6 +3,8 @@
 @section('content')
     <h1>Request</h1>
 
+    @include('flash::message')
+
     @unless(empty(session('cart')))
         @include('include.cart-items')
     @endunless

@@ -170,6 +170,7 @@ return [
         razorbacks\style\laravel\StyleServiceProvider::class,
         StudentAffairsUwm\Shibboleth\ShibbolethServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
         /*
          * Application Service Providers...
