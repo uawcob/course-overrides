@@ -13,6 +13,12 @@
             <h2 class="panel-title">Academic Plans</h2>
         </div>
         <div id="div-plans" class="panel-body">
+            <p>
+                These majors and minors are pulled from UAConnect.
+                If something is still wrong after refreshing,
+                then contact the Undergraduate Programs Office.
+                You may also note your intent to declare in the comment below.
+            </p>
             <div id="plans-fetch-error" class="alert alert-danger" role="alert" style="display:none">
                 Error: No plans found.
             </div>
