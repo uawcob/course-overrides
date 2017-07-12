@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Request;
 use Auth;
 use Mail;
+use App\User;
 
 class Handler extends ExceptionHandler
 {
@@ -35,10 +36,15 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        $user = Auth::user();
+        if ($user instanceof User) {
+            $user = json_encode($user->toArray(), JSON_PRETTY_PRINT);
+        }
+
         if ( Reporter::wants($exception) ) {
             $data = [
                 'exception' => $exception,
-                'user'      => Auth::user() . PHP_EOL . Request::ip(),
+                'user'      => Request::ip() . PHP_EOL . $user,
                 'request'   => Request::fullUrl() . PHP_EOL
                             . print_r(Request::all(), true),
             ];
