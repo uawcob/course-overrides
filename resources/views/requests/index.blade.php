@@ -3,6 +3,10 @@
 @section('content')
     <h1>Requests</h1>
 
+    @foreach ($notes as $note)
+        @include ('include.note')
+    @endforeach
+
     @if (empty(session('cart')))
         <p class="lead">
             <a href="{{ route('courses.index') }}" class="btn btn-success">Add Classes</a>

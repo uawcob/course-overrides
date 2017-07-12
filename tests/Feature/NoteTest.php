@@ -105,7 +105,8 @@ class NoteTest extends TestCase
             ['welcome', '/'],
             ['courses', '/courses'],
             ['cart',    '/cart'],
-            ['request', '/requests/create'],
+            ['request-create', '/requests/create'],
+            ['request-index', '/requests'],
         ];
     }
 

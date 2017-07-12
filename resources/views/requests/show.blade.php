@@ -5,6 +5,10 @@
 
     @include('flash::message')
 
+    @foreach ($notes as $note)
+        @include ('include.note')
+    @endforeach
+
     @unless(empty(session('cart')))
         @include('include.cart-items')
     @endunless

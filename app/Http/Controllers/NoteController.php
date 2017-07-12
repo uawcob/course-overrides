@@ -33,7 +33,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $contexts = Course::distinct()->pluck('code')->merge(Context::common());
+        $contexts = collect(Context::common())->merge(Course::distinct()->pluck('code'));
 
         return view('notes.create', compact('contexts'));
     }

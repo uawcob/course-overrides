@@ -26,7 +26,12 @@ class RequestController extends Controller
      */
     public function index()
     {
-        return view('requests.index', ['requests' => $this->getRequests()]);
+        $data = [
+            'requests' => $this->getRequests(),
+            'notes' => Note::forContext('request-index'),
+        ];
+
+        return view('requests.index', $data);
     }
 
     public function getRequests(bool $cache = true)
@@ -79,7 +84,7 @@ class RequestController extends Controller
         $data = [
             'courses' => current($data),
             'plans' => $this->plans->get(),
-            'notes' => Note::forContext(current($data)['code']->code, 'request'),
+            'notes' => Note::forContext(current($data)['code']->code, 'request-create'),
         ];
 
         return view('requests.create', $data);
@@ -132,6 +137,7 @@ class RequestController extends Controller
         $data = [
             'class' => $req->courses->first(),
             'request' => $req,
+            'notes' => Note::forContext('request-show'),
         ];
 
         return view('requests.show', $data);

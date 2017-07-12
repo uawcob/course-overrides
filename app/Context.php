@@ -21,7 +21,9 @@ class Context extends Model
             'welcome',
             'courses',
             'cart',
-            'request',
+            'request-create',
+            'request-show',
+            'request-index',
         ];
     }
 }
