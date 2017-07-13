@@ -100,6 +100,21 @@ class CourseController extends Controller
         return redirect(route('courses.show', $course));
     }
 
+    public function refresh(Request $request)
+    {
+        $semester = new Semester($request->semester, $request->year);
+
+        if (!$semester instanceof Semester) {
+            return response('invalid semester', 404);
+        }
+
+        $this->courses->refresh($semester->string());
+
+        $query = "?semester={$semester->term()}&year={$semester->year()}";
+
+        return redirect(route('courses.term').$query);
+    }
+
     /**
      * Display the specified resource.
      *
