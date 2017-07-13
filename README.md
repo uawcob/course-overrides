@@ -11,10 +11,16 @@ Staff advisors and administrators must belong to a privileged security group in
 active directory. Find the Shibboleth entitlement name that matches the group
 and set the environment variable:
 
-    OVERRIDE_ADMIN_ENTITLEMENT='urn:mace:uark.edu:ADGroups:Walton College:Security Groups:WCOB-WebAdministrators'
+    OVERRIDE_ADMIN_GROUP="GACL\WCOB-UGPO-OverrideRequestAdmins"
+    OVERRIDE_ADMIN_ENTITLEMENT="urn:mace:uark.edu:ADGroups:Walton College:Security Groups:WCOB-UGPO-OverrideRequestAdmins"
 
 If you don't know the mapping, then you can find it in the `$_SERVER` variable
 after authenticating.
+
+The database migrations include [a view][8] and [user permissions][9] that were
+created exclusively for Microsoft SQL Server. If using a different DBMS, then
+you can skip those migrations. The purpose of these migrations is to create an
+administrative view with an editable column for notes on request processing.
 
 ## Development
 
@@ -42,3 +48,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 [5]:https://codeclimate.com/github/uawcob/course-overrides/badges/gpa.svg
 [6]:https://codeclimate.com/github/uawcob/course-overrides
 [7]:./tests/docker/MockApi/Dockerfile
+[8]:./database/migrations/2017_07_13_195711_create_view_requests.php
+[9]:./database/migrations/2017_07_13_202224_add_user_permissions.php
