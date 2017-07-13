@@ -1,3 +1,4 @@
+CREATE VIEW dbo.vwRequests AS
 SELECT r.id
 	,u.first_name
 	,u.last_name
