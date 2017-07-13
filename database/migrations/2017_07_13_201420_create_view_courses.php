@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserPermissions extends Migration
+class CreateViewCourses extends Migration
 {
     /**
      * Run the migrations.
@@ -17,12 +17,9 @@ class AddUserPermissions extends Migration
             return;
         }
 
-        $group = config('admin.group');
-
-        DB::statement("CREATE USER [$group]");
-        DB::statement("ALTER ROLE db_datareader ADD MEMBER [$group]");
-        DB::statement("GRANT UPDATE ON dbo.vwRequests (inclass) TO [$group]");
-        DB::statement("GRANT INSERT,UPDATE,DELETE ON dbo.vwCourses TO [$group]");
+        $sql = database_path('sql/view-courses.sql');
+        $sql = file_get_contents($sql);
+        DB::statement($sql);
     }
 
     /**
@@ -36,8 +33,6 @@ class AddUserPermissions extends Migration
             return;
         }
 
-        $group = config('admin.group');
-
-        DB::statement("DROP USER [$group]");
+        DB::statement('DROP VIEW vwCourses');
     }
 }

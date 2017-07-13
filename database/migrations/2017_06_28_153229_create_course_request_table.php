@@ -23,8 +23,7 @@ class CreateCourseRequestTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->foreign('course_id')
                 ->references('id')
-                ->on('courses')
-                ->onDelete('cascade');
+                ->on('courses');
 
             $table->primary(['request_id', 'course_id']);
 
