@@ -3,6 +3,20 @@ SELECT r.id
 	,u.last_name
 	,u.student_id
 	,u.email
+	,(
+		SELECT CONCAT(p.name, ', ') AS [text()]
+		FROM dbo.plans p
+		WHERE type = 'major'
+		 AND p.user_id = u.id
+		FOR XML PATH ('')
+	) majors
+	,(
+		SELECT CONCAT(p.name, ', ') AS [text()]
+		FROM dbo.plans p
+		WHERE type = 'minor'
+		 AND p.user_id = u.id
+		FOR XML PATH ('')
+	) minors
 	,r.created_at
 	,s.course
 	,LEFT(s.sections,LEN(s.sections)-1) AS section_preference
