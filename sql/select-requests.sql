@@ -23,6 +23,7 @@ SELECT r.id
 	,CASE WHEN r.enrolled = 1 THEN 'enrolled' ELSE 'no' END AS 'enrolled'
 	,CASE WHEN r.required = 1 THEN 'required' ELSE 'no' END AS 'required'
 	,r.comment
+	,r.inclass
 FROM dbo.requests r
 JOIN dbo.users u
   ON u.id = r.user_id
