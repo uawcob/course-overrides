@@ -28,6 +28,7 @@ Create the environment variables file from the template.
     cp .env.example .env
 
 Set all the values in `.env` accordingly.
+Leave `APP_KEY` blank because it will be set by the deploy script later.
 
 You may request API credentials for razorback courses and plans from
 Mike Akerman in UITS, or someone from the UAConnect development team.
@@ -42,15 +43,11 @@ and set the environment variable:
 If you don't know the mapping, then you can find it in the `$_SERVER` variable
 after authenticating.
 
-Enable the application environment for production.
-
-    APP_ENV=production
-
 It's recommended to use redis for the caching and session layer.
-Pull the [docker][11] image and set the `host:6379:port` accordingly.
+Pull the [docker][11] image and set the `host:port:6379` accordingly.
 
     docker pull redis
-    docker run --name override-redis --publish 127.0.0.1:6379:6789 --detach redis
+    docker run --name override-redis --publish 127.0.0.1:6789:6379 --detach redis
 
 In this example, the variables would be set:
 
