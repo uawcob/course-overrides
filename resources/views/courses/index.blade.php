@@ -7,8 +7,9 @@
         There are multiple sections for some courses.
         Select all sections for which you would be willing to accept an override.
         When you are finished,
-        then review your <a href="{{ route('cart.index') }}">cart</a>,
-        and proceed to checkout.
+        then you can review your <a href="{{ route('cart.index') }}">cart</a>
+        or proceed directly to <a href="{{ route('requests.create') }}">checkout</a>.
+        You can always come back here later and add more classes if you need.
     </p>
 
     @unless (empty($notes))
@@ -52,7 +53,13 @@
         </thead>
     </table>
 
-    <a href="{{ route('cart.index') }}" class="btn btn-success">Go to Cart</a>
+    <a href="{{ route('cart.index') }}" class="btn btn-primary">Go to Cart</a>
+    @if (empty(session('cart')))
+        <style>
+            .btn-checkout {display: none}
+        </style>
+    @endif
+    <a href="{{ route('requests.create') }}" class="btn btn-success btn-checkout">Checkout</a>
 @endsection
 
 @push('scripts')
@@ -86,6 +93,7 @@ function addCourseAjaxEventListener(tag)
             data: {'_token': '{{ csrf_token() }}'},
             url: btn.data('url'),
             success: function(data) {
+                $('.btn-checkout').css("display", "inline-block");
                 $('#courses-table')
                     .DataTable()
                     .row(btn.parents(tag)[0])

@@ -3,6 +3,12 @@
 @section('content')
     <h1>Cart</h1>
 
+    <p class="lead">
+        Here you can remove any classes you don't want in your cart.
+        When you are happy with your selections, then
+        proceed to <a href="{{ route('requests.create') }}">checkout</a>.
+    </p>
+
     @unless (empty($notes))
         @foreach ($notes as $note)
             @include ('include.note')
@@ -21,11 +27,10 @@
         </thead>
     </table>
 
-    @if(empty(session('cart')))
-        <a href="{{ route('courses.index') }}" class="btn btn-success">Add Classes</a>
-    @else
+    <a href="{{ route('courses.index') }}" class="btn btn-primary">Add Classes</a>
+    @unless(empty(session('cart')))
         <a href="{{ route('requests.create') }}" class="btn btn-success">Checkout</a>
-    @endif
+    @endunless
 @endsection
 
 @push('scripts')

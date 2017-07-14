@@ -25,11 +25,11 @@
 @endsection
 
 @section('navbar')
-    @unless (Auth::guest())
+    @if (Auth::check() && (App\Schedule::isOpen() || Auth::user()->isAdmin()))
         <li><a href="{{ route('courses.index') }}">Search</a></li>
         <li><a href="{{ route('cart.index') }}">Cart</a></li>
         <li><a href="{{ route('requests.index') }}">My Requests</a></li>
-    @endunless
+    @endif
 @endsection
 
 @section('scripts')

@@ -4,6 +4,17 @@
     <h1>Welcome</h1>
     <p class="lead">This is the class override request system for the Sam M. Walton College of Business.</p>
 
+    @if (App\Schedule::isOpen())
+        <div class="alert alert-success">
+            The override request system is open.
+            @if (Auth::guest())
+                <a href="{{ route('shibboleth-login') }}" class="btn btn-success">Login</a>
+            @else
+                <a href="{{ route('courses.index') }}" class="btn btn-success">Add Classes</a>
+            @endif
+        </div>
+    @endif
+
     @unless (empty($notes))
         @foreach ($notes as $note)
             @include ('include.note')

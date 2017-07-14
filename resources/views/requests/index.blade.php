@@ -7,13 +7,9 @@
         @include ('include.note')
     @endforeach
 
-    @if (empty(session('cart')))
-        <p class="lead">
-            <a href="{{ route('courses.index') }}" class="btn btn-success">Add Classes</a>
-        </p>
-    @else
+    @unless (empty(session('cart')))
         @include('include.cart-items')
-    @endif
+    @endunless
 
     <table class="table table-bordered datatable" id="requests-table">
         <thead>
@@ -25,6 +21,10 @@
             </tr>
         </thead>
     </table>
+
+    <p>
+        <a href="{{ route('courses.index') }}" class="btn btn-success">Add Classes</a>
+    </p>
 @endsection
 
 @push('scripts')

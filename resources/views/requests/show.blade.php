@@ -54,6 +54,5 @@
     </div>
     @endunless
 
-    <p>Created {{ $request->created_at }}</p>
-    <p>Updated {{ $request->updated_at }}</p>
+    <p>Created {{ $request->created_at->timezone('America/Chicago') }}</p>
 @endsection

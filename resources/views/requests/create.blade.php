@@ -3,6 +3,15 @@
 @section('content')
     <h1>Create Request</h1>
 
+    <p class="lead">
+        You will create a separate request for each course in your cart.
+        If you chose multiple sections for the same course, then they will be
+        automatically grouped together in the same request wherein you will
+        prioritize your section preference.
+        If you have more courses in your cart, then you will be able to complete
+        a request for those after submitting this one.
+    </p>
+
     @foreach ($notes as $note)
         @include ('include.note')
     @endforeach
