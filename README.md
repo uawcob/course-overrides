@@ -22,6 +22,10 @@ Clone this repository or download the zip archive.
     git clone https://github.com/uawcob/course-overrides.git
 
 Point the server document root at the `public` folder.
+Set write permissions for the web server user to the storage and cache folders.
+
+    sudo chown :www-data -R storage/ bootstrap/cache/
+    sudo chmod g+w -R storage/ bootstrap/cache/
 
 Create the environment variables file from the template.
 
