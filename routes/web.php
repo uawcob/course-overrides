@@ -14,6 +14,8 @@
 Route::get('/', 'WelcomeController@index');
 
 Route::group(['middleware' => ['auth', 'open']], function(){
+    Route::name('graduation.show')->get('/graduation', 'GraduationController@show');
+
     Route::name('courses.term')->get('/courses/term', 'CourseController@term')->middleware('admin');
     Route::name('courses.refresh')->get('/courses/refresh', 'CourseController@refresh')->middleware('admin');
     Route::name('courses.data')->get('/courses/data', 'CourseController@data');
