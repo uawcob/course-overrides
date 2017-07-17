@@ -18,6 +18,7 @@ SELECT r.id
 		 AND p.user_id = u.id
 		FOR XML PATH ('')
 	) minors
+	,u.graduation_strm
 	,s.course
 	,LEFT(s.sections,LEN(s.sections)-1) AS section_preference
 	,CASE WHEN r.enrolled = 1 THEN 'enrolled' ELSE 'no' END AS 'enrolled'
