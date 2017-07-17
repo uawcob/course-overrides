@@ -16,11 +16,12 @@ class GraduationTest extends TestCase
     {
         openSchedule();
 
-        $user = create(User::class, ['graduation_strm' => 'Fall 2017']);
+        $user = create(User::class, ['graduation_strm' => '1179']);
 
         $response = $this
             ->signIn($user)
             ->get('/graduation')
+            ->assertSee('1179')
             ->assertSee('Fall 2017')
         ;
     }

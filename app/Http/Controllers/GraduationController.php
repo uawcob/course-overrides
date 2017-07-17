@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
+use App\Semester;
+use Exception;
 
 class GraduationController extends Controller
 {
@@ -16,7 +18,17 @@ class GraduationController extends Controller
      */
     public function show()
     {
-        return Auth::user()->graduation_strm;
+        $strm = Auth::user()->graduation_strm;
+
+        $data = [
+            'graduation_strm' => $strm,
+        ];
+
+        if (!empty($strm)) {
+            $data['canonical'] = (Semester::createFromStrm($strm))->canonical();
+        }
+
+        return response()->json($data);
     }
 
     /**
