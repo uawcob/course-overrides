@@ -5,6 +5,7 @@
 
     <form class="form-horizontal" method="POST"
         action="{{ route('graduation.update') }}"
+        id="formUpdateGraduation"
     >
         {{ csrf_field() }}
         <div class="form-group">

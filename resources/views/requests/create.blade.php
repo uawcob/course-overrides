@@ -56,6 +56,7 @@
         </div>
         <div class="panel-footer">
             <button class="btn btn-default" onclick="editGraduation()">Edit</button>
+            <button class="btn btn-danger" onclick="showGraduation()" id="btnCancelEditGraduation" style="display:none">Cancel</button>
         </div>
     </div>
 
@@ -145,6 +146,8 @@
             });
         }
     });
+
+    listenForGraduationUpdateForm();
   } );
 function refreshPlans(){
     var divPlans = $('#div-plans');
@@ -176,6 +179,8 @@ function editGraduation()
             url: '{{ route('graduation.edit') }}',
             success: function (data) {
                 $('#div-graduation-area').html(data);
+                listenForGraduationUpdateForm();
+                $('#btnCancelEditGraduation').show(200);
             },
             error: function (data) {
                 console.log(data);
@@ -183,6 +188,48 @@ function editGraduation()
             complete: function() {
                 divGraduation.slideDown();
             }
+        });
+    });
+}
+
+function showGraduation()
+{
+    var divGraduation = $('#div-graduation');
+
+    divGraduation.slideUp(400, function(){
+        $.ajax({
+            url: '{{ route('graduation.show') }}',
+            success: function (data) {
+                $('#div-graduation-area').html(data.canonical);
+                $('#btnCancelEditGraduation').hide(200);
+            },
+            error: function (data) {
+                console.log(data);
+            },
+            complete: function() {
+                divGraduation.slideDown();
+            }
+        });
+    });
+}
+
+function listenForGraduationUpdateForm()
+{
+    var frm = $('#formUpdateGraduation');
+    frm.submit(function (e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                showGraduation();
+            },
+            error: function (data) {
+                console.log(data);
+            },
         });
     });
 }
