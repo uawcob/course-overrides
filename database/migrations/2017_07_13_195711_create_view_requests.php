@@ -18,7 +18,7 @@ class CreateViewRequests extends Migration
             return;
         }
 
-        $sql = database_path('sql/select-requests.sql');
+        $sql = database_path('sql/view-requests.sql');
         $sql = file_get_contents($sql);
         DB::statement($sql);
     }
