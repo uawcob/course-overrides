@@ -39,7 +39,7 @@ class GraduationController extends Controller
      */
     public function edit()
     {
-        //
+        return view('graduation.edit');
     }
 
     /**

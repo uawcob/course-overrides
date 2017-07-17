@@ -41,6 +41,24 @@
     </div>
     @endunless
 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Graduation Date</h2>
+        </div>
+        <div id="div-graduation" class="panel-body">
+            <div id="div-graduation-area">
+                @if (empty(Auth::user()->graduation_strm))
+                    @include('graduation.edit')
+                @else
+                    {{ (App\Semester::createFromStrm(Auth::user()->graduation_strm))->canonical() }}
+                @endif
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-default" onclick="editGraduation()">Edit</button>
+        </div>
+    </div>
+
     @if (empty($courses))
         <a href="{{ route('courses.index') }}" class="btn btn-success">Add Some Classes</a>
     @else
@@ -144,6 +162,26 @@ function refreshPlans(){
             },
             complete: function() {
                 divPlans.slideDown();
+            }
+        });
+    });
+}
+
+function editGraduation()
+{
+    var divGraduation = $('#div-graduation');
+
+    divGraduation.slideUp(400, function(){
+        $.ajax({
+            url: '{{ route('graduation.edit') }}',
+            success: function (data) {
+                $('#div-graduation-area').html(data);
+            },
+            error: function (data) {
+                console.log(data);
+            },
+            complete: function() {
+                divGraduation.slideDown();
             }
         });
     });
