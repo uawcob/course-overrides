@@ -51,7 +51,18 @@ class GraduationController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $semester = new Semester($request->term, $request->year);
+
+        $user = Auth::user();
+        $user->graduation_strm = "$semester";
+        $user->save();
+
+        $data = [
+            'graduation_strm' => "$semester",
+            'canonical' => $semester->canonical(),
+        ];
+
+        return response()->json($data);
     }
 
     /**

@@ -18,8 +18,33 @@ class GraduationTest extends TestCase
 
         $user = create(User::class, ['graduation_strm' => '1179']);
 
-        $response = $this
+        $this
             ->signIn($user)
+            ->get('/graduation')
+            ->assertSee('1179')
+            ->assertSee('Fall 2017')
+        ;
+    }
+
+    public function test_updates_graduation_strm()
+    {
+        openSchedule();
+
+        $this
+            ->signIn()
+            ->get('/graduation')
+            ->assertDontSee('1179')
+            ->assertDontSee('Fall 2017')
+        ;
+
+        $this
+            ->post('/graduation', ['year' => '2017', 'term' => 'fall'])
+            ->assertStatus(200)
+            ->assertSee('1179')
+            ->assertSee('Fall 2017')
+        ;
+
+        $this
             ->get('/graduation')
             ->assertSee('1179')
             ->assertSee('Fall 2017')
