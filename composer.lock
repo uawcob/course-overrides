@@ -1986,16 +1986,16 @@
         },
         {
             "name": "razorbacks/style",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/razorbacks/style.git",
-                "reference": "9673a3231af3d34a8486a07f46ca55e483938ec1"
+                "reference": "ca97792ecba35711423680c02b892a06c174749a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/razorbacks/style/zipball/9673a3231af3d34a8486a07f46ca55e483938ec1",
-                "reference": "9673a3231af3d34a8486a07f46ca55e483938ec1",
+                "url": "https://api.github.com/repos/razorbacks/style/zipball/ca97792ecba35711423680c02b892a06c174749a",
+                "reference": "ca97792ecba35711423680c02b892a06c174749a",
                 "shasum": ""
             },
             "require": {
@@ -2035,7 +2035,7 @@
                 "style",
                 "uark"
             ],
-            "time": "2017-07-12T23:06:37+00:00"
+            "time": "2017-07-18T19:49:07+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
