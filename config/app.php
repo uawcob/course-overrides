@@ -171,6 +171,7 @@ return [
         StudentAffairsUwm\Shibboleth\ShibbolethServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Appstract\Opcache\OpcacheServiceProvider::class,
 
         /*
          * Application Service Providers...
