@@ -66,6 +66,9 @@ created exclusively for Microsoft SQL Server. If using a different DBMS, then
 you can skip those migrations. The purpose of these migrations is to create an
 administrative view with an editable column for notes on request processing.
 
+If you are running a Linux server connecting to MS SQL Server, then you might
+be interested in the `php-sybase` package with [these configurations][15].
+
 Finally, there is a short [deploy script][14] to finish installation.
 
     ./deploy.bash
@@ -103,3 +106,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 [12]:https://github.com/razorbacks/ubuntu-authentication/tree/master/shibboleth
 [13]:https://getcomposer.org/
 [14]:./deploy.bash
+[15]:https://stackoverflow.com/a/32555727/4233593
