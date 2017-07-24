@@ -21,11 +21,7 @@ class CoursesRepository
                 $link = '<button id="btn-cart-add-%u" class="btn-cart btn btn-success" data-url="%s">Add</button>';
                 return sprintf($link, $course->id, route('cart.add', $course));
             })
-            ->editColumn('title', function (Course $course) {
-                $link = '<a href="%s">%s</a>';
-                return sprintf($link, route('courses.show', $course), e($course->title));
-            })
-            ->rawColumns(['add', 'title'])
+            ->rawColumns(['add'])
             ->make(true);
         });
     }
