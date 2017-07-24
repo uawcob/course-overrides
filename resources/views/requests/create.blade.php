@@ -127,7 +127,8 @@
                     Include the most important details (i.e. athlete-name of sport, etc.)
                     in the first 10 words if possible.
                 </p>
-                <textarea class="form-control" rows="10" name="comment"></textarea>
+                <span id="remainingC"></span>
+                <textarea class="form-control" rows="10" name="comment" maxlength="250"></textarea>
             </div>
         </div>
 
@@ -148,6 +149,14 @@
     });
 
     listenForGraduationUpdateForm();
+
+    $('textarea[name=comment]').keyup(function(){
+        if(this.value.length > $(this).attr('maxlength')){
+            return false;
+        }
+        $("#remainingC").html("Remaining characters : " +($(this).attr('maxlength') - this.value.length));
+    });
+
   } );
 function refreshPlans(){
     var divPlans = $('#div-plans');
