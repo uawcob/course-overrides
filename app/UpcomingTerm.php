@@ -65,4 +65,20 @@ class UpcomingTerm
 
         return $options;
     }
+
+    public static function getGraduationYearOptions(string $date, int $count = 6) : string
+    {
+        if ($count < 1) {
+            throw new \Exception("Graduation year count must be more than zero.");
+        }
+
+        $year = static::get($date)['year'];
+
+        $options = '';
+        while ($count--) {
+            $options .= "<option>$year</option>";
+            $year++;
+        }
+        return $options;
+    }
 }

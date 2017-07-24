@@ -48,4 +48,13 @@ class UpcomingTermTest extends TestCase
         $actual = UpcomingTerm::getTermOptions($date);
         $this->assertEquals($expected, $actual);
     }
+
+    public function test_gets_upcoming_years_options()
+    {
+        $expected = '<option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option>';
+
+        $actual = UpcomingTerm::getGraduationYearOptions('2016-12-29');
+
+        $this->assertSame($expected, $actual);
+    }
 }

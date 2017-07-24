@@ -20,10 +20,9 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="year">Year:</label>
             <div class="col-sm-10">
-                <input id="year" name="year" class="form-control" required
-                    type="number" min="{{ date('Y') }}"
-                    value="{{ App\UpcomingTerm::get(date('Y-m-d'))['year'] }}"
-                >
+                <select id="year" class="form-control" name="year" required>
+                    {!! App\UpcomingTerm::getGraduationYearOptions(date('Y-m-d')) !!}
+                </select>
             </div>
         </div>
 
