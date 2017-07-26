@@ -67,7 +67,6 @@
 $(function() {
     $('#courses-table').DataTable({
         responsive: true,
-        pageLength: 100,
         ajax: '{!! $route !!}',
         columns: [
             { data: 'code', name: 'code' },
