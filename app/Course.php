@@ -15,6 +15,7 @@ class Course extends Model
         'title',
         'time',
         'semester',
+        'enabled',
     ];
 
     public function semester(Semester $semester)

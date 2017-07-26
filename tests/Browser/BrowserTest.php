@@ -163,4 +163,26 @@ class BrowserTest extends DuskTestCase
             ;
         });
     }
+
+    public function test_disabled_courses_are_hidden()
+    {
+        openSchedule();
+
+        $this->browse(function (Browser $browser) {
+
+            $enabled = create(Course::class);
+            $disabled = create(Course::class, ['enabled' => false]);
+
+            $user = create(User::class);
+
+            $browser
+                ->loginAs($user)
+                ->visit('/courses')
+                ->whenAvailable('#courses-table_wrapper', function ($datatable) use ($enabled, $disabled) {
+                    $datatable->assertSee($enabled->title);
+                    $datatable->assertDontSee($disabled->title);
+                })
+            ;
+        });
+    }
 }
