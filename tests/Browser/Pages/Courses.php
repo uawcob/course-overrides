@@ -48,7 +48,7 @@ class Courses extends BasePage
                 $datatable
                     ->assertSee($this->course->code)
                     ->press("#btn-cart-add-{$this->course->id}")
-                    ->waitUntilMissing("#btn-cart-add-{$this->course->id}", 1)
+                    ->waitFor("#btn-cart-add-{$this->course->id}.btn-cart-remove")
                 ;
             })
         ;

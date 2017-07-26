@@ -22,8 +22,8 @@ class CoursesRepository
                 ->get()
             )
             ->addColumn('add', function (Course $course) {
-                $link = '<button id="btn-cart-add-%u" class="btn-cart btn btn-success" data-url="%s">Add</button>';
-                return sprintf($link, $course->id, route('cart.add', $course));
+                $link = '<button id="btn-cart-add-%u" class="btn-cart btn btn-cart-add btn-success" data-url="%s" data-add="1" data-courseid="%u">Add</button>';
+                return sprintf($link, $course->id, route('cart.add', $course), $course->id);
             })
             ->rawColumns(['add'])
             ->make(true);

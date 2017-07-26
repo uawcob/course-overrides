@@ -95,11 +95,18 @@ function addCourseAjaxEventListener(tag)
             url: btn.data('url'),
             success: function(data) {
                 $('.btn-checkout').css("display", "inline-block");
-                $('#courses-table')
-                    .DataTable()
-                    .row(btn.parents(tag)[0])
-                    .remove()
-                    .draw();
+
+                if (btn.data('add')) {
+                    btn.data('add', 0);
+                    btn.data('url', '/cart/remove/'+btn.data('courseid'));
+                    btn.removeClass("btn-success").addClass("btn-danger btn-cart-remove");
+                    btn.text('Remove');
+                } else {
+                    btn.data('add', 1);
+                    btn.data('url', '/cart/add/'+btn.data('courseid'));
+                    btn.removeClass("btn-danger").addClass("btn-success btn-cart-add");
+                    btn.text('Add');
+                }
             }
         });
     });

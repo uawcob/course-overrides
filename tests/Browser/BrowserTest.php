@@ -82,9 +82,10 @@ class BrowserTest extends DuskTestCase
                     ->whenAvailable('#courses-table_wrapper', function($datatable)use($course){
                         $datatable
                             ->assertSee($course->code)
-                            ->press('Add')
-                            ->waitUntilMissing('.btn-cart', 1)
-                            ->assertDontSee($course->code)
+                            ->assertSeeIn("#btn-cart-add-$course->id", 'Add')
+                            ->press("#btn-cart-add-$course->id")
+                            ->waitFor("#btn-cart-add-$course->id.btn-cart-remove")
+                            ->assertSeeIn("#btn-cart-add-$course->id", 'Remove')
                         ;
                     })
                     ->clickLink('Cart')
@@ -145,13 +146,11 @@ class BrowserTest extends DuskTestCase
                         $datatable
                             ->assertSee($course1->section)
                             ->press("#btn-cart-add-{$course1->id}")
-                            ->waitUntilMissing("#btn-cart-add-{$course1->id}", 1)
-                            ->assertDontSee($course1->section)
+                            ->waitFor("#btn-cart-add-$course1->id.btn-cart-remove")
 
                             ->assertSee($course2->section)
                             ->press("#btn-cart-add-{$course2->id}")
-                            ->waitUntilMissing("#btn-cart-add-{$course2->id}", 1)
-                            ->assertDontSee($course2->section)
+                            ->waitFor("#btn-cart-add-$course2->id.btn-cart-remove")
                         ;
                     })
                     ->visit('/requests/create')
