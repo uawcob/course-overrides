@@ -23,6 +23,7 @@ class AddUserPermissions extends Migration
         DB::statement("ALTER ROLE db_datareader ADD MEMBER [$group]");
         DB::statement("GRANT UPDATE ON dbo.vwRequests (inclass) TO [$group]");
         DB::statement("GRANT INSERT,UPDATE,DELETE ON dbo.vwCourses TO [$group]");
+        DB::statement("GRANT DELETE ON dbo.requests TO [$group]");
     }
 
     /**
