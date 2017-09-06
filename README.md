@@ -51,7 +51,7 @@ It's recommended to use redis for the caching and session layer.
 Pull the [docker][11] image and set the `host:port:6379` accordingly.
 
     docker pull redis
-    docker run --name override-redis --publish 127.0.0.1:6789:6379 --detach redis
+    docker run --name override-redis --restart=always --publish 127.0.0.1:6789:6379 --detach redis
 
 In this example, the variables would be set:
 
