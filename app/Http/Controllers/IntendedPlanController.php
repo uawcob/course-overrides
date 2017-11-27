@@ -19,7 +19,7 @@ class IntendedPlanController extends Controller
      */
     public function index()
     {
-        //
+        return IntendedPlan::all();
     }
 
     /**

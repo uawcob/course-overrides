@@ -42,4 +42,20 @@ class IntendedPlanTest extends TestCase
             ->assertSee($iplan->name)
         ;
     }
+
+    public function test_can_view_intended_plans_index()
+    {
+        $iplans = create(IntendedPlan::class, [], 10);
+
+        openSchedule();
+
+        $response = $this
+            ->signIn()
+            ->get('/intended-plans')
+        ;
+
+        foreach ($iplans as $iplan) {
+            $response->assertSee($iplan->name);
+        }
+    }
 }
