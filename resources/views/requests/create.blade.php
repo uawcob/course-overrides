@@ -24,18 +24,30 @@
             <h2 class="panel-title">Academic Plans</h2>
         </div>
         <div id="div-plans" class="panel-body">
-            <p>
-                These majors and minors are pulled from UAConnect.
-                If something is still wrong after refreshing,
-                then contact the Undergraduate Programs Office.
-                You may also note your intent to declare in the comment below.
-            </p>
+            <h3>Official Plans</h3>
             <div id="plans-fetch-error" class="alert alert-danger" role="alert" style="display:none">
                 Error: No plans found.
             </div>
             <ul id="ul-plans">
                 @include('include.plans')
             </ul>
+            <small>
+                These are your official majors and minors declared in UAConnect.
+                If something is wrong, then contact the Undergraduate Programs Office.
+            </small>
+
+            <h3>Intended Plans</h3>
+            <ul id="ul-intended-plans">
+                @foreach (Auth::user()->intendedPlans()->get() as $intendedPlan)
+                    <li>{{ $intendedPlan->name }}</li>
+                @endforeach
+            </ul>
+            <div class="form-group">
+             <label for="sel-intended-plans">Add an intended plan:</label>
+             <select class="form-control" id="sel-intended-plans">
+             </select>
+            </div>
+            <button type="button" class="btn btn-success" onclick="fetchIntendedPlans()">Add</button>
         </div>
         <div class="panel-footer">
             <button class="btn btn-default" onclick="refreshPlans()">Refresh</button>
@@ -159,6 +171,7 @@
         $("#remainingC").html("Remaining characters : " +($(this).attr('maxlength') - this.value.length));
     });
 
+    $('#sel-intended-plans').load('/intended-plans/options');
   } );
 function refreshPlans(){
     var divPlans = $('#div-plans');
@@ -243,6 +256,26 @@ function listenForGraduationUpdateForm()
             },
         });
     });
+}
+
+function fetchIntendedPlans()
+{
+    $.ajax({
+        url: '/my/intended-plans',
+        success: populateIntendedPlans,
+        error: function (data) {
+            console.log(data);
+        },
+    });
+}
+
+function populateIntendedPlans(data)
+{
+    var items = [];
+    $.each(data, function (index, option) {
+        items.push(`<li>${option.name}</li>`);
+    });
+    $('#ul-intended-plans').html(items.join(''));
 }
 </script>
 @endpush
