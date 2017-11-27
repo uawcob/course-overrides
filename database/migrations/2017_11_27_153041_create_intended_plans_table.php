@@ -19,6 +19,7 @@ class CreateIntendedPlansTable extends Migration
             $table->softDeletes();
             $table->string('name');
             $table->string('category');
+            $table->string('abbr', 5);
 
             $table->unique(['name', 'category']);
         });

@@ -18,16 +18,16 @@ SELECT r.id
          AND p.user_id = u.id
         FOR XML PATH ('')
     ) minors
-	,(
-        SELECT CONCAT(ip.name, ', ') AS [text()]
+    ,(
+        SELECT CONCAT(ip.abbr, ip.name, ', ') AS [text()]
         FROM dbo.intended_plans ip
-		JOIN dbo.intended_plan_user ipu
-		  ON ip.id = ipu.intended_plan_id
-		JOIN dbo.users us
-		  ON ipu.user_id = us.id
-		WHERE us.id = u.id
+        JOIN dbo.intended_plan_user ipu
+          ON ip.id = ipu.intended_plan_id
+        JOIN dbo.users us
+          ON ipu.user_id = us.id
+        WHERE us.id = u.id
         FOR XML PATH ('')
-	) intended_plans
+    ) intended_plans
     ,u.graduation_strm
     ,s.course
     ,LEFT(s.sections,LEN(s.sections)-1) AS section_preference

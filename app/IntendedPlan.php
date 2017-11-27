@@ -16,6 +16,7 @@ class IntendedPlan extends Model
     protected $fillable = [
         'name',
         'category',
+        'abbr',
     ];
 
     public function users()

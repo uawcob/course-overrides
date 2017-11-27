@@ -64,26 +64,32 @@ class IntendedPlanTest extends TestCase
         IntendedPlan::create([
             'name' => 'Economics—Business Economics',
             'category' => 'Majors',
+            'abbr' => '(M)',
         ]);
         IntendedPlan::create([
             'name' => 'Finance—Investments/Banking',
             'category' => 'Minors for Business Majors',
+            'abbr' => '(mB)',
         ]);
         IntendedPlan::create([
             'name' => 'Information Systems',
             'category' => 'Minors for Non-Business Majors',
+            'abbr' => '(mN)',
         ]);
         IntendedPlan::create([
             'name' => 'Economics—International ECON and Business',
             'category' => 'Majors',
+            'abbr' => '(M)',
         ]);
         IntendedPlan::create([
             'name' => 'Finance—Real Estate/Insurance',
             'category' => 'Minors for Business Majors',
+            'abbr' => '(mB)',
         ]);
         IntendedPlan::create([
             'name' => 'Enterprise Systems',
             'category' => 'Minors for Non-Business Majors',
+            'abbr' => '(mN)',
         ]);
 
         $options = <<<OPTIONS
