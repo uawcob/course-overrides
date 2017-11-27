@@ -48,3 +48,10 @@ $factory->define(App\Note::class, function (Faker\Generator $faker) {
         'sensitivity' => $faker->regexify('(success|info|warning|danger)'),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\IntendedPlan::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->unique()->sentence(2),
+    ];
+});
