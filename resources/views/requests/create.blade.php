@@ -48,10 +48,10 @@
             </ul>
             <div class="form-group">
              <label for="sel-intended-plans">Add an intended plan:</label>
-             <select class="form-control" id="sel-intended-plans">
+             <select class="form-control" id="sel-intended-plans" name="sel-intended-plans">
              </select>
             </div>
-            <button type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
+            <button id='btn-add-intended-plan' type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
         </div>
         <div class="panel-footer">
             <button class="btn btn-default" onclick="refreshPlans()">Refresh</button>
@@ -279,7 +279,7 @@ function populateIntendedPlans(data)
     $.each(data, function (index, option) {
         const action = `onclick="deleteIntendedPlan(${option.id})"`;
         const icon = '<i class="fa fa-trash" aria-hidden="true"></i>';
-        const button = `<button aria-label="Delete" ${action} type="button" class="btn btn-danger">${icon}</button>`;
+        const button = `<button aria-label="Delete" id="btn-del-iplan-${option.id}" ${action} type="button" class="btn btn-danger">${icon}</button>`;
         items.push(`<li>${button} ${option.name}</li>`);
     });
     $('#ul-intended-plans').html(items.join(''));
