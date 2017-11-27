@@ -53,5 +53,10 @@ $factory->define(App\Note::class, function (Faker\Generator $faker) {
 $factory->define(App\IntendedPlan::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->unique()->sentence(2),
+        'category' => $faker->randomElement([
+            'Majors',
+            'Minors for Business Majors',
+            'Minors for Non-Business Majors',
+        ]),
     ];
 });
