@@ -17,8 +17,10 @@ class CreateIntendedPlansTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('category');
+
+            $table->unique(['name', 'category']);
         });
     }
 
