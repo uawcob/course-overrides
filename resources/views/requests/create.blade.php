@@ -1,5 +1,13 @@
 @extends('layout')
 
+@push('head')
+<style>
+#ul-intended-plans li {
+    padding: 5px;
+}
+</style>
+@endpush
+
 @section('content')
     <h1>Create Request</h1>
 
@@ -38,9 +46,6 @@
 
             <h3>Intended Plans</h3>
             <ul id="ul-intended-plans">
-                @foreach (Auth::user()->intendedPlans()->get() as $intendedPlan)
-                    <li>{{ $intendedPlan->name }}</li>
-                @endforeach
             </ul>
             <div class="form-group">
              <label for="sel-intended-plans">Add an intended plan:</label>
@@ -171,6 +176,7 @@
         $("#remainingC").html("Remaining characters : " +($(this).attr('maxlength') - this.value.length));
     });
 
+    fetchIntendedPlans();
     $('#sel-intended-plans').load('/intended-plans/options');
   } );
 function refreshPlans(){
@@ -273,9 +279,27 @@ function populateIntendedPlans(data)
 {
     var items = [];
     $.each(data, function (index, option) {
-        items.push(`<li>${option.name}</li>`);
+        const action = `onclick="deleteIntendedPlan(${option.id})"`;
+        const icon = '<i class="fa fa-trash" aria-hidden="true"></i>';
+        const button = `<button aria-label="Delete" ${action} type="button" class="btn btn-danger">${icon}</button>`;
+        items.push(`<li>${button} ${option.name}</li>`);
     });
     $('#ul-intended-plans').html(items.join(''));
+}
+
+function deleteIntendedPlan(id)
+{
+    $.ajax({
+        url: `/my/intended-plans/${id}`,
+        type: 'DELETE',
+        data: {
+            _token: '{{ csrf_token() }}',
+        },
+        success: fetchIntendedPlans,
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        },
+    });
 }
 
 function addIntendedPlan()
