@@ -47,7 +47,7 @@
              <select class="form-control" id="sel-intended-plans">
              </select>
             </div>
-            <button type="button" class="btn btn-success" onclick="fetchIntendedPlans()">Add</button>
+            <button type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
         </div>
         <div class="panel-footer">
             <button class="btn btn-default" onclick="refreshPlans()">Refresh</button>
@@ -276,6 +276,22 @@ function populateIntendedPlans(data)
         items.push(`<li>${option.name}</li>`);
     });
     $('#ul-intended-plans').html(items.join(''));
+}
+
+function addIntendedPlan()
+{
+    const id = $('#sel-intended-plans').val();
+    $.ajax({
+        url: `/my/intended-plans/${id}`,
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+        },
+        success: fetchIntendedPlans,
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        },
+    });
 }
 </script>
 @endpush
