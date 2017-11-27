@@ -26,7 +26,6 @@
         @include ('include.note')
     @endforeach
 
-    @unless (empty($plans))
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="panel-title">Academic Plans</h2>
@@ -58,7 +57,6 @@
             <button class="btn btn-default" onclick="refreshPlans()">Refresh</button>
         </div>
     </div>
-    @endunless
 
     <div class="panel panel-{{ $errors->has('graduation_strm') ? 'danger' : 'default' }}">
         <div class="panel-heading">
