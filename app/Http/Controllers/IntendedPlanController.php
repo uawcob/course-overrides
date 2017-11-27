@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class IntendedPlanController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(IntendedPlan::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
