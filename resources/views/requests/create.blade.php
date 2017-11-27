@@ -280,7 +280,7 @@ function populateIntendedPlans(data)
         const action = `onclick="deleteIntendedPlan(${option.id})"`;
         const icon = '<i class="fa fa-trash" aria-hidden="true"></i>';
         const button = `<button aria-label="Delete" id="btn-del-iplan-${option.id}" ${action} type="button" class="btn btn-danger">${icon}</button>`;
-        items.push(`<li>${button} ${option.name}</li>`);
+        items.push(`<li>${button} ${option.category}: ${option.name}</li>`);
     });
     $('#ul-intended-plans').html(items.join(''));
 }
