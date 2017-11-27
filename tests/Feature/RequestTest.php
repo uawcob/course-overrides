@@ -13,14 +13,39 @@ class RequestTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function test_makes_request_for_course()
+    public function test_request_requires_graduation_date()
     {
         openSchedule();
 
         $course = create(Course::class);
 
-        $response = $this
+        $this
             ->signIn()
+            ->withSession([
+                "cart.{$course->id}" => $course,
+            ])
+            ->post('/requests', [
+                'id' => [
+                    '1' => $course->id,
+                ],
+                'required' => '1',
+                'enrolled' => '0',
+                'comment' => 'my justification',
+            ])
+            ->assertRedirect('/requests/create')
+            ->assertSessionHasErrors(['graduation_strm'])
+        ;
+    }
+
+    public function test_makes_request_for_course()
+    {
+        openSchedule();
+
+        $user = create(User::class, ['graduation_strm' => '1179']);
+        $course = create(Course::class);
+
+        $response = $this
+            ->signIn($user)
             ->withSession([
                 "cart.{$course->id}" => $course,
             ])

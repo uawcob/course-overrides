@@ -3,6 +3,8 @@
 @section('content')
     <h1>Create Request</h1>
 
+    @include('flash::message')
+
     <p class="lead">
         You will create a separate request for each course in your cart.
         If you chose multiple sections for the same course, then they will be
@@ -41,7 +43,7 @@
     </div>
     @endunless
 
-    <div class="panel panel-default">
+    <div class="panel panel-{{ $errors->has('graduation_strm') ? 'danger' : 'default' }}">
         <div class="panel-heading">
             <h2 class="panel-title">Graduation Date</h2>
         </div>

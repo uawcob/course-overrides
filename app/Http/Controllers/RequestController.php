@@ -8,6 +8,7 @@ use DB;
 use App\PlansRepository;
 use Auth;
 use App\Note;
+use Validator;
 
 class RequestController extends Controller
 {
@@ -98,6 +99,21 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make([
+            'graduation_strm' => Auth::user()->graduation_strm,
+        ], [
+            'graduation_strm' => 'required',
+        ], [
+            'graduation_strm' => 'Graduation date is required.'
+        ]);
+
+        if ($validator->fails()) {
+            flash('Graduation date is required.')->error();
+            return redirect(route('requests.create'))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $req = Req::make($request->all());
 
         $request->user()->requests()->save($req);
