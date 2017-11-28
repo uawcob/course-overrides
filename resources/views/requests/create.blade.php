@@ -39,13 +39,19 @@
                 @include('include.plans')
             </ul>
             <small>
-                These are your official majors and minors declared in UAConnect.
-                If something is wrong, then contact the Undergraduate Programs Office.
+                These are your official majors and minors as declared in UAConnect.
+                If this is incorrect or if any information is missing,
+                then select your intended major(s) and/or minor(s) below.
+                To officially update your plan, please go to the Undergraduate Programs Office in WCOB 328.
             </small>
 
             <h3>Intended Plans</h3>
             <ul id="ul-intended-plans">
             </ul>
+            <small>
+                Select your business major(s) and minor(s) from the list below.
+                Click the <kbd>Add</kbd> button after each selection to list additional majors or minors.
+            </small>
             <div class="form-group">
              <label for="sel-intended-plans">Add an intended plan:</label>
              <select class="form-control" id="sel-intended-plans" name="sel-intended-plans">
