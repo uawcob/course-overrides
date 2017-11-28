@@ -6,6 +6,9 @@ env:
 php:
   - 7.1
   - 7.0
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y jq
 install:
   - composer install
   - cp .env.travis .env
@@ -22,4 +25,4 @@ script:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 after_failure:
-  - ./tests/Browser/screenshots/base64.bash
+  - ./tests/Browser/screenshots/upload-to-imgur.bash
