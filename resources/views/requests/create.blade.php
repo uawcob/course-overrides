@@ -1,5 +1,13 @@
 @extends('layout')
 
+@push('head')
+<style>
+#ul-intended-plans li {
+    padding: 5px;
+}
+</style>
+@endpush
+
 @section('content')
     <h1>Create Request</h1>
 
@@ -18,30 +26,37 @@
         @include ('include.note')
     @endforeach
 
-    @unless (empty($plans))
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="panel-title">Academic Plans</h2>
         </div>
         <div id="div-plans" class="panel-body">
-            <p>
-                These majors and minors are pulled from UAConnect.
-                If something is still wrong after refreshing,
-                then contact the Undergraduate Programs Office.
-                You may also note your intent to declare in the comment below.
-            </p>
+            <h3>Official Plans</h3>
             <div id="plans-fetch-error" class="alert alert-danger" role="alert" style="display:none">
                 Error: No plans found.
             </div>
             <ul id="ul-plans">
                 @include('include.plans')
             </ul>
+            <small>
+                These are your official majors and minors declared in UAConnect.
+                If something is wrong, then contact the Undergraduate Programs Office.
+            </small>
+
+            <h3>Intended Plans</h3>
+            <ul id="ul-intended-plans">
+            </ul>
+            <div class="form-group">
+             <label for="sel-intended-plans">Add an intended plan:</label>
+             <select class="form-control" id="sel-intended-plans" name="sel-intended-plans">
+             </select>
+            </div>
+            <button id='btn-add-intended-plan' type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
         </div>
         <div class="panel-footer">
             <button class="btn btn-default" onclick="refreshPlans()">Refresh</button>
         </div>
     </div>
-    @endunless
 
     <div class="panel panel-{{ $errors->has('graduation_strm') ? 'danger' : 'default' }}">
         <div class="panel-heading">
@@ -159,6 +174,8 @@
         $("#remainingC").html("Remaining characters : " +($(this).attr('maxlength') - this.value.length));
     });
 
+    fetchIntendedPlans();
+    $('#sel-intended-plans').load('/intended-plans/options');
   } );
 function refreshPlans(){
     var divPlans = $('#div-plans');
@@ -242,6 +259,60 @@ function listenForGraduationUpdateForm()
                 console.log(data);
             },
         });
+    });
+}
+
+function fetchIntendedPlans()
+{
+    $.ajax({
+        url: '/my/intended-plans',
+        success: populateIntendedPlans,
+        error: function (data) {
+            console.log(data);
+        },
+    });
+}
+
+function populateIntendedPlans(data)
+{
+    var items = [];
+    $.each(data, function (index, option) {
+        const action = `onclick="deleteIntendedPlan(${option.id})"`;
+        const icon = '<i class="fa fa-trash" aria-hidden="true"></i>';
+        const button = `<button aria-label="Delete" id="btn-del-iplan-${option.id}" ${action} type="button" class="btn btn-danger">${icon}</button>`;
+        items.push(`<li>${button} ${option.category}: ${option.name}</li>`);
+    });
+    $('#ul-intended-plans').html(items.join(''));
+}
+
+function deleteIntendedPlan(id)
+{
+    $.ajax({
+        url: `/my/intended-plans/${id}`,
+        type: 'DELETE',
+        data: {
+            _token: '{{ csrf_token() }}',
+        },
+        success: fetchIntendedPlans,
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        },
+    });
+}
+
+function addIntendedPlan()
+{
+    const id = $('#sel-intended-plans').val();
+    $.ajax({
+        url: `/my/intended-plans/${id}`,
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+        },
+        success: fetchIntendedPlans,
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        },
     });
 }
 </script>

@@ -48,3 +48,30 @@ $factory->define(App\Note::class, function (Faker\Generator $faker) {
         'sensitivity' => $faker->regexify('(success|info|warning|danger)'),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\IntendedPlan::class, function (Faker\Generator $faker) {
+    $category = $faker->randomElement([
+        'Majors',
+        'Minors for Business Majors',
+        'Minors for Non-Business Majors',
+    ]);
+
+    $getAbbr = function($category){
+        if ($category === 'Majors') {
+            return '(M)';
+        }
+        if ($category === 'Minors for Business Majors') {
+            return '(mB)';
+        }
+        if ($category === 'Minors for Non-Business Majors') {
+            return '(mN)';
+        }
+    };
+
+    return [
+        'name' => $faker->unique()->sentence(2),
+        'category' => $category,
+        'abbr' => $getAbbr($category),
+    ];
+});

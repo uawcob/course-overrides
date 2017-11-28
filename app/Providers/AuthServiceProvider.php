@@ -7,12 +7,14 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\{
     Course,
     Request,
-    Note
+    Note,
+    IntendedPlan
 };
 use App\Policies\{
     CoursePolicy,
     RequestPolicy,
-    NotePolicy
+    NotePolicy,
+    IntendedPlanPolicy
 };
 
 class AuthServiceProvider extends ServiceProvider
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Course::class => CoursePolicy::class,
         Request::class => RequestPolicy::class,
         Note::class => NotePolicy::class,
+        IntendedPlan::class => IntendedPlanPolicy::class,
     ];
 
     /**
