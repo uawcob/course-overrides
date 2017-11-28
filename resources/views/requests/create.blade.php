@@ -187,9 +187,9 @@ function refreshPlans(){
             success: function (data) {
                 $('#ul-plans').html(data);
             },
-            error: function (data) {
+            error: function (xhr, status, error) {
                 $('#plans-fetch-error').show();
-                console.log(data);
+                console.error(xhr.responseText);
             },
             complete: function() {
                 divPlans.slideDown();
@@ -210,8 +210,8 @@ function editGraduation()
                 listenForGraduationUpdateForm();
                 $('#btnCancelEditGraduation').show(200);
             },
-            error: function (data) {
-                console.log(data);
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
             },
             complete: function() {
                 divGraduation.slideDown();
@@ -231,8 +231,8 @@ function showGraduation()
                 $('#div-graduation-area').html(data.canonical);
                 $('#btnCancelEditGraduation').hide(200);
             },
-            error: function (data) {
-                console.log(data);
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
             },
             complete: function() {
                 divGraduation.slideDown();
@@ -255,8 +255,8 @@ function listenForGraduationUpdateForm()
             success: function (data) {
                 showGraduation();
             },
-            error: function (data) {
-                console.log(data);
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
             },
         });
     });
@@ -267,8 +267,8 @@ function fetchIntendedPlans()
     $.ajax({
         url: '/my/intended-plans',
         success: populateIntendedPlans,
-        error: function (data) {
-            console.log(data);
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
         },
     });
 }
