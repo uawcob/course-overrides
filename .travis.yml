@@ -20,8 +20,8 @@ before_script:
     - php -S localhost:8943 ./tests/docker/MockApi/srv/index.php > /dev/null 2>&1 &
     - php artisan serve > /dev/null 2>&1 &
 script:
-  - ./vendor/bin/phpunit --coverage-clover=coverage.xml
-  - php artisan dusk
+  - ./vendor/bin/phpunit --debug --coverage-clover=coverage.xml
+  - php artisan dusk --debug --filter '/[^Tests\\Browser\\IntendedPlanTest::test_can_add_and_remove_intended_plans]/'
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 after_failure:
