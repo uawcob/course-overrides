@@ -45,4 +45,33 @@ class IntendedPlanUserTest extends TestCase
             ->assertJsonMissing([['id' => $iplan->id]])
         ;
     }
+
+    public function test_user_cannot_add_duplicate_intended_plan()
+    {
+        $iplan = create(IntendedPlan::class);
+        openSchedule();
+        $this->signIn();
+
+        $this
+            ->get('/my/intended-plans')
+            ->assertExactJson([])
+        ;
+
+        $this
+            ->post("/my/intended-plans/{$iplan->id}")
+            ->assertStatus(201)
+        ;
+
+        $this
+            ->post("/my/intended-plans/{$iplan->id}")
+            ->assertStatus(201)
+        ;
+
+        $result = $this
+            ->get('/my/intended-plans')
+            ->decodeResponseJson()
+        ;
+
+        $this->assertCount(1, $result);
+    }
 }
