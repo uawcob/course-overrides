@@ -21,7 +21,7 @@ before_script:
     - php artisan serve > /dev/null 2>&1 &
 script:
   - ./vendor/bin/phpunit --debug --coverage-clover=coverage.xml
-  - php artisan dusk --debug --filter '/[^Tests\\Browser\\IntendedPlanTest::test_can_add_and_remove_intended_plans]/'
+  - php artisan dusk --debug
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 after_failure:

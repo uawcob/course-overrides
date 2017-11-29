@@ -39,19 +39,25 @@
                 @include('include.plans')
             </ul>
             <small>
-                These are your official majors and minors declared in UAConnect.
-                If something is wrong, then contact the Undergraduate Programs Office.
+                These are your official majors and minors as declared in UAConnect.
+                If this is incorrect or if any information is missing,
+                then select your intended major(s) and/or minor(s) below.
+                To officially update your plan, please go to the Undergraduate Programs Office in WCOB 328.
             </small>
 
             <h3>Intended Plans</h3>
             <ul id="ul-intended-plans">
             </ul>
-            <div class="form-group">
-             <label for="sel-intended-plans">Add an intended plan:</label>
-             <select class="form-control" id="sel-intended-plans" name="sel-intended-plans">
-             </select>
+            <div>
+                <button id="show-add-intended-plans" type="button" class="btn btn-success" onclick="$('#add-intended-plans').show()">Add an intended plan.</button>
             </div>
-            <button id='btn-add-intended-plan' type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
+            <div id="add-intended-plans" style="display:none">
+                <small>
+                    Select your business major(s) and minor(s) from the list below.
+                    Click the <kbd>Add</kbd> button after each selection to list additional majors or minors.
+                </small>
+                {!! App\IntendedPlan::selectOptions() !!}
+            </div>
         </div>
         <div class="panel-footer">
             <button class="btn btn-default" onclick="refreshPlans()">Refresh</button>
@@ -175,7 +181,6 @@
     });
 
     fetchIntendedPlans();
-    $('#sel-intended-plans').load('/intended-plans/options');
   } );
 function refreshPlans(){
     var divPlans = $('#div-plans');
@@ -300,9 +305,9 @@ function deleteIntendedPlan(id)
     });
 }
 
-function addIntendedPlan()
+function addIntendedPlan(select)
 {
-    const id = $('#sel-intended-plans').val();
+    const id = $(`#sel-intended-plans-${select}`).val();
     $.ajax({
         url: `/my/intended-plans/${id}`,
         type: 'POST',

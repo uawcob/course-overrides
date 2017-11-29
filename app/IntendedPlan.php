@@ -29,4 +29,11 @@ class IntendedPlan extends Model
     {
         return 'Y-m-d H:i:s';
     }
+
+    public static function selectOptions() : string
+    {
+        return view('include.intended-plans', [
+            'intendedPlanOptions' => IntendedPlan::all()->groupBy('category'),
+        ]);
+    }
 }
