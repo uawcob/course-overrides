@@ -52,12 +52,7 @@
                 Select your business major(s) and minor(s) from the list below.
                 Click the <kbd>Add</kbd> button after each selection to list additional majors or minors.
             </small>
-            <div class="form-group">
-             <label for="sel-intended-plans">Add an intended plan:</label>
-             <select class="form-control" id="sel-intended-plans" name="sel-intended-plans">
-             </select>
-            </div>
-            <button id='btn-add-intended-plan' type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
+            {!! App\IntendedPlan::selectOptions() !!}
         </div>
         <div class="panel-footer">
             <button class="btn btn-default" onclick="refreshPlans()">Refresh</button>
@@ -181,7 +176,6 @@
     });
 
     fetchIntendedPlans();
-    $('#sel-intended-plans').load('/intended-plans/options');
   } );
 function refreshPlans(){
     var divPlans = $('#div-plans');
@@ -306,9 +300,9 @@ function deleteIntendedPlan(id)
     });
 }
 
-function addIntendedPlan()
+function addIntendedPlan(select)
 {
-    const id = $('#sel-intended-plans').val();
+    const id = $(`#sel-intended-plans-${select}`).val();
     $.ajax({
         url: `/my/intended-plans/${id}`,
         type: 'POST',

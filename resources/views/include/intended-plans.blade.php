@@ -10,7 +10,7 @@
                     @endforeach
                 </select>
             </div>
-            <button id='btn-add-intended-plan-{{ $kebabcat }}' type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
+            <button id='btn-add-intended-plan-{{ $kebabcat }}' type="button" class="btn btn-success" onclick="addIntendedPlan('{{ $kebabcat }}')">Add</button>
         </div>
     </div>
 @endforeach

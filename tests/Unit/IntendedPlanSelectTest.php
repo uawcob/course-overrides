@@ -54,7 +54,7 @@ class IntendedPlanSelectTest extends TestCase
                                             <option value="4">Economics—International ECON and Business</option>
                                     </select>
             </div>
-            <button id='btn-add-intended-plan-majors' type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
+            <button id='btn-add-intended-plan-majors' type="button" class="btn btn-success" onclick="addIntendedPlan('majors')">Add</button>
         </div>
     </div>
         <div class="panel panel-default">
@@ -66,7 +66,7 @@ class IntendedPlanSelectTest extends TestCase
                                             <option value="5">Finance—Real Estate/Insurance</option>
                                     </select>
             </div>
-            <button id='btn-add-intended-plan-minors-for-business-majors' type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
+            <button id='btn-add-intended-plan-minors-for-business-majors' type="button" class="btn btn-success" onclick="addIntendedPlan('minors-for-business-majors')">Add</button>
         </div>
     </div>
         <div class="panel panel-default">
@@ -78,7 +78,7 @@ class IntendedPlanSelectTest extends TestCase
                                             <option value="6">Enterprise Systems</option>
                                     </select>
             </div>
-            <button id='btn-add-intended-plan-minors-for-non-business-majors' type="button" class="btn btn-success" onclick="addIntendedPlan()">Add</button>
+            <button id='btn-add-intended-plan-minors-for-non-business-majors' type="button" class="btn btn-success" onclick="addIntendedPlan('minors-for-non-business-majors')">Add</button>
         </div>
     </div>
 
