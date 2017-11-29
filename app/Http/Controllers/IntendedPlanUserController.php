@@ -28,7 +28,7 @@ class IntendedPlanUserController extends Controller
     public function store(IntendedPlan $intendedPlan)
     {
         Auth::user()->intendedPlans()->attach($intendedPlan);
-        return response()->json(null, 204);
+        return response()->json(null, 201);
     }
 
     /**

@@ -27,7 +27,7 @@ class IntendedPlanUserTest extends TestCase
 
         $this
             ->post("/my/intended-plans/{$iplan->id}")
-            ->assertStatus(204)
+            ->assertStatus(201)
         ;
 
         $this
