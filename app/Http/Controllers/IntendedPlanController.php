@@ -23,18 +23,6 @@ class IntendedPlanController extends Controller
     }
 
     /**
-     * Show the index of intended plans in HTML form select option groups.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function options()
-    {
-        $options = $this->index()->groupBy('category');
-
-        return view('include.intended-plans', ['intendedPlanOptions' => $options]);
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

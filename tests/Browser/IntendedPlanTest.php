@@ -25,6 +25,7 @@ class IntendedPlanTest extends DuskTestCase
     {
         create(IntendedPlan::class, [], 10);
         $iplan = create(IntendedPlan::class);
+        $iplan->kebabcat = kebab_case(camel_case($iplan->category));
 
         openSchedule();
         $this->browse(function (Browser $browser) use ($iplan) {
@@ -39,9 +40,11 @@ class IntendedPlanTest extends DuskTestCase
                     })
                     ->visit('/requests/create')
                     ->assertPathIs('/requests/create')
-                    ->assertVisible('#sel-intended-plans')
-                    ->select('sel-intended-plans', $iplan->id)
-                    ->press('#btn-add-intended-plan')
+                    ->assertMissing('#add-intended-plans')
+                    ->press("#show-add-intended-plans")
+                    ->assertVisible('#add-intended-plans')
+                    ->select("sel-intended-plans-{$iplan->kebabcat}", $iplan->id)
+                    ->press("#btn-add-intended-plan-{$iplan->kebabcat}")
                     ->waitFor('#ul-intended-plans li')
                     ->assertSeeIn('#ul-intended-plans', $iplan->name)
                     ->press("#btn-del-iplan-{$iplan->id}")
