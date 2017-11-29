@@ -49,7 +49,7 @@
             <ul id="ul-intended-plans">
             </ul>
             <div>
-                <button type="button" class="btn btn-success" onclick="$('#add-intended-plans').show()">Add an intended plan.</button>
+                <button id="show-add-intended-plans" type="button" class="btn btn-success" onclick="$('#add-intended-plans').show()">Add an intended plan.</button>
             </div>
             <div id="add-intended-plans" style="display:none">
                 <small>
