@@ -49,6 +49,13 @@ class UpcomingTermTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    public function test_returns_default_term_options()
+    {
+        $expected = '<option disabled selected></option><option>Spring</option><option>Summer</option><option>Fall</option>';
+        $actual = UpcomingTerm::getTermOptions();
+        $this->assertEquals($expected, $actual);
+    }
+
     public function test_gets_upcoming_years_options()
     {
         $expected = '<option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option>';

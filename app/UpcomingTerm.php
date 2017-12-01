@@ -43,20 +43,24 @@ class UpcomingTerm
         return $return;
     }
 
-    public static function getTermOptions(string $date) : string
+    public static function getTermOptions(string $date = null) : string
     {
-        $date = strtolower($date);
-
-        if (in_array($date, ['spring', 'summer', 'fall'])) {
-            $selected = $date;
+        if (is_null($date)) {
+            $options = '<option disabled selected></option>';
         } else {
-            $selected = static::get($date)['term'];
+            $date = strtolower($date);
+
+            if (in_array($date, ['spring', 'summer', 'fall'])) {
+                $selected = $date;
+            } else {
+                $selected = static::get($date)['term'];
+            }
+
+            $options = '';
         }
 
-        $options = '';
-
         foreach (['Spring', 'Summer', 'Fall'] as $term) {
-            if (strtolower($term) === $selected) {
+            if (strtolower($term) === ($selected ?? null)) {
                 $options .= "<option selected>$term</option>";
             } else {
                 $options .= "<option>$term</option>";
