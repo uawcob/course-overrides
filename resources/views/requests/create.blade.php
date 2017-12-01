@@ -5,6 +5,9 @@
 #ul-intended-plans li {
     padding: 5px;
 }
+.request-steps {
+    font-size: xx-large;
+}
 </style>
 @endpush
 
@@ -25,6 +28,8 @@
     @foreach ($notes as $note)
         @include ('include.note')
     @endforeach
+
+    <div class="request-steps text-danger" aria-hidden="true">Step 1</div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -64,6 +69,8 @@
         </div>
     </div>
 
+    <div class="request-steps text-danger" aria-hidden="true">Step 2</div>
+
     <div class="panel panel-{{ $errors->has('graduation_strm') ? 'danger' : 'default' }}">
         <div class="panel-heading">
             <h2 class="panel-title">Graduation Date</h2>
@@ -82,6 +89,8 @@
             <button class="btn btn-danger" onclick="showGraduation()" id="btnCancelEditGraduation" style="display:none">Cancel</button>
         </div>
     </div>
+
+    <div class="request-steps text-danger" aria-hidden="true">Step 3</div>
 
     @if (empty($courses))
         <a href="{{ route('courses.index') }}" class="btn btn-success">Add Some Classes</a>
