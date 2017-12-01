@@ -78,7 +78,7 @@ class UpcomingTerm
 
         $year = static::get($date)['year'];
 
-        $options = '';
+        $options = '<option disabled selected></option>';
         while ($count--) {
             $options .= "<option>$year</option>";
             $year++;
