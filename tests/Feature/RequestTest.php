@@ -105,4 +105,19 @@ class RequestTest extends TestCase
             ->assertSee($cr->course->title)
         ;
     }
+
+    public function test_user_cannot_delete_request()
+    {
+        $this->withExceptionHandling();
+
+        openSchedule();
+
+        $cr = create(CourseRequest::class);
+
+        $this
+            ->signIn($cr->request->user)
+            ->delete("/requests/{$cr->request->id}")
+            ->assertStatus(403)
+        ;
+    }
 }

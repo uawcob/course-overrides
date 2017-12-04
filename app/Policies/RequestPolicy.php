@@ -54,6 +54,6 @@ class RequestPolicy
      */
     public function delete(User $user, Request $request)
     {
-        return $request->user->id === $user->id;
+        return false;
     }
 }
