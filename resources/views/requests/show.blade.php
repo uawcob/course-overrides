@@ -1,6 +1,16 @@
 @extends('layout')
 
 @section('content')
+    <div class="pull-right">
+        @can('delete', $request)
+            <form action="{{ route('requests.destroy', $request) }}" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash" aria-hidden="true"></i></button>
+            </form>
+        @endcan
+    </div>
+
     <h1>Request</h1>
 
     @include('flash::message')

@@ -75,3 +75,20 @@ $factory->define(App\IntendedPlan::class, function (Faker\Generator $faker) {
         'abbr' => $getAbbr($category),
     ];
 });
+
+$factory->define(App\Request::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => factory(App\User::class)->create()->id,
+        'enrolled' => $faker->boolean,
+        'required' => $faker->boolean,
+        'comment' => $faker->sentence,
+    ];
+});
+
+$factory->define(App\CourseRequest::class, function (Faker\Generator $faker) {
+    return [
+        'course_id' => factory(App\Course::class)->create()->id,
+        'request_id' => factory(App\Request::class)->create()->id,
+        'priority' => 1,
+    ];
+});

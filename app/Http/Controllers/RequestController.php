@@ -190,6 +190,11 @@ class RequestController extends Controller
      */
     public function destroy(Req $req)
     {
-        //
+        $req->delete();
+
+        // refresh the cache
+        $this->getRequests($cache = false);
+
+        return 'Request Deleted';
     }
 }
