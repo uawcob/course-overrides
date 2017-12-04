@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 use App\Course;
+use App\CourseRequest;
 
 class RequestTest extends TestCase
 {
@@ -89,6 +90,19 @@ class RequestTest extends TestCase
             ->assertSee((string)$course1->number)
             ->assertSee((string)$course2->number)
             ->assertDontSee((string)$course3->number)
+        ;
+    }
+
+    public function test_user_can_view_request()
+    {
+        openSchedule();
+
+        $cr = create(CourseRequest::class);
+
+        $this
+            ->signIn($cr->request->user)
+            ->get("/requests/{$cr->request->id}")
+            ->assertSee($cr->course->title)
         ;
     }
 }
