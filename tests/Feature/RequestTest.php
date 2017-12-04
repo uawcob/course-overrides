@@ -120,4 +120,17 @@ class RequestTest extends TestCase
             ->assertStatus(403)
         ;
     }
+
+    public function test_admin_can_delete_request()
+    {
+        openSchedule();
+
+        $cr = create(CourseRequest::class);
+
+        $this
+            ->signInAdmin()
+            ->delete("/requests/{$cr->request->id}")
+            ->assertSee('Request Deleted')
+        ;
+    }
 }
