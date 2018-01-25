@@ -84,6 +84,14 @@ Then set the environment variable for your endpoint.
 
     RAZORBACK_COURSES_API=http://localhost:8888
 
+Run unit and integration tests:
+
+    ./vendor/bin/phpunit
+
+Run browser tests:
+
+    php artisan dusk
+
 <p align="center">
     <a href="https://laravel.com/">
         <img src="https://laravel.com/assets/img/components/logo-laravel.svg" />
