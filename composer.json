@@ -9,6 +9,7 @@
         "appstract/laravel-opcache": "^1.2",
         "doctrine/dbal": "^2.5",
         "guzzlehttp/guzzle": "^6.2",
+        "jpuck/laravel-exception-mailer": "^1.0",
         "kitetail/zttp": "^0.1.0",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.4.*",

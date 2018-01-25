@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fabb23a6758e241f33449a7cf9ddbffa",
+    "content-hash": "985671b6e5b4e768a4ff006900208099",
     "packages": [
         {
             "name": "appstract/laravel-opcache",
@@ -941,6 +941,50 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "jpuck/laravel-exception-mailer",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jpuck/laravel-exception-mailer.git",
+                "reference": "076deb1d4eee57deedf073482d46402a0da5b743"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jpuck/laravel-exception-mailer/zipball/076deb1d4eee57deedf073482d46402a0da5b743",
+                "reference": "076deb1d4eee57deedf073482d46402a0da5b743",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.4.* || 5.5.*",
+                "php": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "jpuck\\laravel\\exception\\mailer\\Provider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "jpuck\\laravel\\exception\\mailer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jeff Puckett",
+                    "email": "jeff@jeffpuckett.com"
+                }
+            ],
+            "description": "Simple email reporter for exceptions in laravel.",
+            "time": "2018-01-12T18:38:12+00:00"
         },
         {
             "name": "kitetail/zttp",

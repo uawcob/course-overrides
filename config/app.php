@@ -172,6 +172,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Appstract\Opcache\OpcacheServiceProvider::class,
+        jpuck\laravel\exception\mailer\Provider::class,
 
         /*
          * Application Service Providers...
